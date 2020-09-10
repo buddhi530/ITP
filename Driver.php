@@ -1,0 +1,373 @@
+<?php
+include 'connection.php';
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 3 | General Form Elements</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+
+        <script>
+
+            function submitForm() {
+
+            var form_data = new FormData(document.getElementById("myForm"));
+            form_data.append("label", "WEBUPLOAD");
+            $.ajax({
+            url: "driver1.php",
+                    type: "POST",
+                    data: form_data,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false   // tell jQuery not to set contentType
+            }).done(function (data) {
+            console.log(data);
+            $("#example2").load(window.location + " #example2");
+            $('#dnic').val("");
+            $('#dname').val("");
+            $('#daddress').val("");
+            $('#dphone').val("");
+            $('#dlicense').val("");
+            $('#rnic').val("");
+            $('#rname').val("");
+            $('#raddress').val("");
+            $('#rphone').val("");
+            $('#rlicense').val("");
+            MessageManager.show(data);
+            });
+            return false;
+            }
+
+            var MessageManager = {
+            show: function (content) {
+            $('#ajaxmsg').html(content);
+            setTimeout(function () {
+            $('#ajaxmsg').html('');
+            }, 3000);
+            }
+            };
+            window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+            });
+            }, 4000);
+            function supplier_check(str) {
+
+            document.getElementById("txtHint").innerHTML = "";
+            if (str == "") {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+            }
+            if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            // document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            MessageManager.show(xmlhttp.responseText);
+            if (xmlhttp.responseText) {
+            document.getElementById("submit1").disabled = false;
+            } else {
+            document.getElementById("submit1").disabled = false;
+            }
+            }
+            }
+            xmlhttp.open("GET", "ajax_add_supplier.php?id=" + str, true);
+            xmlhttp.send();
+            }
+
+
+        </script>
+
+        <script>
+            function myFunction() {
+            document.getElementById("myForm").reset();
+            }
+        </script>
+
+
+
+
+    </head>
+    <body>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Driver & Rep Information</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Driver details</li>
+                            </ol>
+                        </div>
+                    </div>
+<!--                </div> /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Enter Driver & Rep details</h3>
+                        </div>
+                        <form name="myForm" id="myForm" action="" method="POST" enctype="multipart/form-datam" onsubmit="return submitForm();">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- left column -->
+                                  
+                                        <!-- general form elements -->
+
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+
+                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="examplesname">Driver NIC</label>
+                                            <input type="text" class="form-control" name="dnic"  id="dnic" placeholder="Enter Driver NIC" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesphone">Driver Name</label>
+                                            <input type="text" class="form-control" id="dname" name="dname" placeholder="Enter Driver Name" autocomplete="off" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesaddress">Driver Address</label>
+                                            <input type="text" class="form-control" id="daddress" name="daddress" placeholder="Enter Driver Address" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesfax">Driver Phone</label>
+                                            <input type="text" class="form-control" id="dphone" name="dphone" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits"  placeholder="Enter Driver Fax" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesemai1">Driving License number</label>
+                                            <input type="text" class="form-control" id="dlicence" name="dlicence"  placeholder="Enter Driving License number" autocomplete="off">
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+
+
+
+ <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="examplesname">Driver rep NIC</label>
+                                            <input type="text" class="form-control" name="rnic"  id="rnic" placeholder="Enter Driver rep  NIC" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesphone">Driver rep Name</label>
+                                            <input type="text" class="form-control" id="rname" name="rname"  placeholder="Enter Driver rep  Name" autocomplete="off" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesaddress">Driver rep Address</label>
+                                            <input type="text" class="form-control" id="raddress" name="raddress" placeholder="Enter Driver rep  Address" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesfax">Driver rep Phone</label>
+                                            <input type="text" class="form-control" id="rphone" name="rphone" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits"  placeholder="Enter Driver rep Fax" autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="examplesemai1">Driving License number</label>
+                                            <input type="text" class="form-control" id="rlicence" name="rlicence"  placeholder="Enter Driving License number" autocomplete="off">
+                                        </div>
+
+                                    </div>
+
+                        
+
+
+                                
+                         
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
+                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
+                                <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+
+
+
+                    <br>
+                    <br>
+
+
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Registered Driver & Rep Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+
+
+                                    <?php
+                                    echo "<tr><th><center>Driver NIC</center></th><th><center> Driver Name </center></th><th><center> Driver Address </center></th><th><center> Driver Phone </center></th><th><center>Driving license Num</center></th><th><center> Rep NIC </center></th><th><center> Rep Name </center></th>
+					<th><center> Rep Address </center></th><th><center> Rep Phone </center></th><th><center> Driving license Num </center></th><th width='1%'><center> Actions</center></th>
+					</tr></tfoot>
+                                        </thead>
+                                        
+                                        <tbody>";
+
+
+                                    $credit_limit1 = 0;
+
+                                    $sql = "SELECT id,dnic,dname,daddress,dphone,dlicense,rnic,rname,raddress,rphone,rlicense FROM driver WHERE  status = '1' ORDER BY dname ASC";
+                                    $result = mysqli_query($con, $sql);
+                                    while ($arraySomething1 = mysqli_fetch_array($result)) {
+                                        $id = $arraySomething1['id'];
+                                        $dnic1 = $arraySomething1['dnic'];
+                                        $dname1 = $arraySomething1['dname'];
+                                        $daddress1 = $arraySomething1['daddress'];
+                                        $dphone1 = $arraySomething1['dphone'];
+                                        $dlicense1 = $arraySomething1['dlicense'];
+                                        $rnic1 = $arraySomething1['rnic'];
+                                        $rname1 = $arraySomething1['rname'];
+                                        $raddress1 = $arraySomething1['raddress'];
+                                        $rphone1 = $arraySomething1['rphone'];
+                                        $rlicense1 = $arraySomething1['rlicense'];
+
+                                        if ($dphone1 == 0) {
+                                            $dphone1 = "";
+                                        }
+                                        if ($rphone1 == 0) {
+                                            $rphone1 = "";
+                                        }
+                                       
+                                        }
+//                                        $id1 = $id + 1000;
+                                        echo "<tr><td> <center>S" . $dnic1 . " </center></td> <td> &nbsp" . $dname1 . " </td><td> &nbsp" . $daddress1 . " </td><td>" . $dphone1 . "</td><td> <center>" . $dlicense1 . "</center> </td>
+                                                                <td> &nbsp" . $rnic1 . " </td><td> &nbsp" . $rname1 . " </td><td> &nbsp" . $raddress1 . " </td><td> &nbsp" . $rphone1 . " </td><td> &nbsp" . $rlicense1 . " </td>";
+
+
+                                        echo "<td> <div class='btn-group'>
+                              <a href='edit_driver.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                        <a href='delete_driver.php?r=$id' button type='button' class='btn btn-info'>Delete</button>
+                       
+                     
+                      </div></td>";
+                                    
+
+
+
+                                    echo "</tbody>
+                                                                                 ";
+                                    ?>                   
+
+
+                                    </tbody>
+
+                            </table>
+
+                        </div>  </div>  
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+
+
+
+            </section>
+        </div>    
+        <!-- /wrapper-->
+
+
+
+
+<!-- Form Element sizes -->
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTEfor demo purposes -->
+    <script src="dist/js/demo.js"></script>
+
+</body>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script src="plugins/moment/moment.min.js"></script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- page script -->
+<script type="text/javascript"></script>
+
+             <script>
+            $(function () {
+              
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
+            });
+        </script>
+
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+
+
+
+
+
+
