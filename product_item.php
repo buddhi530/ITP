@@ -40,7 +40,7 @@ include 'connection.php';
     <script>
 
         function submitForm() {
-
+ //alert('hi');
             var form_data = new FormData(document.getElementById("myform"));
             form_data.append("label", "WEBUPLOAD");
             $.ajax({
@@ -59,7 +59,7 @@ include 'connection.php';
                 $('#sellingprice').val("");
 
 
-                MessageManager.show(data);
+                alert(data);
 
             });
             return false;
@@ -79,7 +79,7 @@ include 'connection.php';
                 $(this).remove();
             });
         }, 4000);
-    </script>   
+    </script>  
 
 
     <body>
@@ -111,7 +111,7 @@ include 'connection.php';
                         <div class="card-header">
                             <h3 class="card-title">Select the Item details</h3>
                         </div>
-                        <form name="myForm" id="myForm" action="" method="POST" enctype="multipart/form-datam" onsubmit="return submitForm();" >
+                        <form name="myForm" id="myform" action="" method="POST" enctype="multipart/form-datam" onsubmit="return submitForm();" >
                             <div class="card-body">
                                 <div class="row">
                            
@@ -140,7 +140,7 @@ include 'connection.php';
 
                                         <div class="form-group">
                                             <label for="examplebr">Minimum Selling Price(LKR)<font color='red'> *</font></label>
-                                            <input type="text" class="form-control" id="msp" name="msp"  placeholder="Minimum Selling Price" autocomplete="off">
+                                            <input type="number" class="form-control" id="msp" name="msp"  placeholder="Minimum Selling Price" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -171,7 +171,7 @@ include 'connection.php';
 
                                         <div class="form-group">
                                             <label for="examplebr">Cash Price(LKR)<font color='red'> *</font></label>
-                                            <input type="text" class="form-control" id="cash" name="cash"  placeholder="Cash Price" autocomplete="off">
+                                            <input type="number" class="form-control" id="cash" name="cash"  placeholder="Cash Price" autocomplete="off">
                                         </div>
 
                                     </div>
@@ -203,7 +203,7 @@ include 'connection.php';
 
                                         <div class="form-group">
                                             <label for="examplebr">Credit Price(LKR)<font color='red'> *</font></label>
-                                            <input type="text" class="form-control" id="credit" name="credit"  placeholder="Credit Price" autocomplete="off">
+                                            <input type="number" class="form-control" id="credit" name="credit"  placeholder="Credit Price" autocomplete="off">
                                         </div>
                                     </div>      
 
@@ -250,7 +250,7 @@ include 'connection.php';
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
 
-                                <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
+                            
                             </div>
 
 
@@ -276,7 +276,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Item name </center></th><th><center> min sale price </center></th><th><center> cash price </center></th><th><center> credit price </center></th><th><center>item stock</center></th>
+                                    echo "<tr><th><center> Item name </center></th><th><center> min sale price </center></th><th><center> cash price </center></th><th><center> credit price </center></th>
 					<th width='1%'><center> Actions</center></th>
 					</tr>
                                       
@@ -284,7 +284,7 @@ include 'connection.php';
                                  
                                         <tbody>";
 
-                                    $sql = "SELECT id,cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4,stock FROM product_item WHERE  status = '1'  ";
+                                    $sql = "SELECT id,cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4 FROM product_item WHERE  status = '1'  ";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
@@ -296,7 +296,7 @@ include 'connection.php';
                                         $cat3 = $arraySomething1['cat3'];
                                         $credit = $arraySomething1['credit_price'];
                                         $cat4 = $arraySomething1['cat4'];
-                                        $count = $arraySomething1['stock'];
+                               
 
 
                                         $sql1 = "select type from category_one where id ='$cat1'  ";
@@ -325,12 +325,12 @@ include 'connection.php';
 
 
                                         echo "<tr> <td>" . $cat11 . " " . $cat22 . " " . $cat33 . " " . $cat44 . " </td><td> <center>&nbsp" . $msp . " </center></td><td><center>" . $cash . "</center></td><td> <center>" . $credit . "</center> </td>
-                                                                <td><center> &nbsp" . $count . " </center></td>";
+                                                                ";
 
 
                                         echo "<td> <div class='btn-group'>
                               <a href=''><button type='button' class='btn btn-info'>Edit</button></a>
-                        <a href=''><button type='button' class='btn btn-info'>Delete</button>
+                        <a href=''><button type='button' class='btn btn-warning'>Delete</button>
                        
                      
                       </div></td>";
@@ -669,3 +669,7 @@ include 'connection.php';
     </div>
     <!-- /.sidebar -->
   </aside>
+        
+        
+        
+

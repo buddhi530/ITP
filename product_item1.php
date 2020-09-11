@@ -12,9 +12,9 @@ $cash = $_POST['cash'];
 $cat3 = $_POST['cat3'];
 $credit = $_POST['credit'];
 $cat4 = $_POST['cat4'];
-$count =$_POST['count'];
 
-$sql = "insert into product_item (cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4,stock) values ('$cat1','$msp','$cat2','$cash','$cat3','$credit','$cat4','$count')";
+
+$sql = "insert into product_item (cat1,cat2,cat3,cat4,min_sale_price,cash_price,credit_price) values ('$cat1','$cat2','$cat3','$cat4','$msp','$cash','$credit')";
 if(mysqli_query($con,$sql))
 {
     echo "<div class='callout callout-success'><center>DATA  INSERT SUCCESSULLY !</center><div>";

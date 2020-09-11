@@ -96,7 +96,7 @@ include 'connection.php';
       
           
             <li class="nav-item">
-            <a href="" class="nav-link">
+                <a href="Dashboard_main.php" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                Dashboard
@@ -257,19 +257,19 @@ include 'connection.php';
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="supplier_register.php" class="nav-link">
+                  <a href="expenses_cat1.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Expenses Category</p>
                 </a>
               </li>
               <li class="nav-item">
-                  <a href="" class="nav-link">
+                  <a href="expenses_type.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Expenses type</p>
                 </a>
               </li>
                <li class="nav-item">
-                  <a href="" class="nav-link">
+                   <a href="expenses_main.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Insert Expenses</p>
                 </a>

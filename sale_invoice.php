@@ -420,16 +420,16 @@ function calc_total()
                                
                             </div>
 
-                        
+                   
                     </div>
-</form>
+   </form>  
                     </div>
+  
+                    </div>
+                 </section>     
+                    </div>
+            
 
-                    </div>
-            </section>
-                    </div>
-            
-            
 
 
 

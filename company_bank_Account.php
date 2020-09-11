@@ -1,3 +1,4 @@
+
 <?php
 include 'connection.php';
 ?>
@@ -34,7 +35,7 @@ include 'connection.php';
         var form_data = new FormData(document.getElementById("myForm"));
         form_data.append("label", "WEBUPLOAD");
         $.ajax({
-        url: "expenses_cat1a.php",
+        url: "company_bank_Account01.php",
                 type: "POST",
                 data: form_data,
                 processData: false, // tell jQuery not to process the data
@@ -43,7 +44,7 @@ include 'connection.php';
         console.log(data);
         $("#example1").load(window.location + " #example1");
         $("#example2").load(window.location + " #example2");
-        $('#type').val("");
+        $('#extra').val("");
         MessageManager.show(data);
         });
         return false;
@@ -80,12 +81,12 @@ include 'connection.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Add Expenses Main Category</h1>
+                            <h1>Add Company's Bank Account (Own Accounts)</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Expenses_category_01</li>
+                                <li class="breadcrumb-item active">Product_category_04</li>
                             </ol>
                         </div>
                     </div>
@@ -97,25 +98,54 @@ include 'connection.php';
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Enter Name for a Main Expense</h3>
+                            <h3 class="card-title">Enter Account Details</h3>
                         </div>
                         <form name="myForm" id="myForm" action="" method="POST" enctype="multipart/form-datam" onsubmit="return submitForm();">
                             <div class="card-body">
 
+                                
+                                <div class="row">
                                 <!-- left column -->
-                                <div class="col-md-12">
-                                    <!-- general form elements -->
-
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-
-
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="examplesname">Expenses Main Category</label>
+                                        <label for="examplesname">Account Name</label>
                                         <input type="hidden" class="form-control" name="id"  id="id">
-                                        <input type="text" class="form-control" name="type"  id="type" placeholder="Type" autocomplete="off">
+                                        <input type="text" class="form-control" name="accname"  id="accname" placeholder="Account Name" autocomplete="off">
                                     </div>
                                 </div>
+                                
+                                <div class="col-md-4">
+                               <div class="form-group">
+                                            <label>Bank <font color='red'> *</font></label>
+
+                                            <select class="form-control select2" style="width: 100%;" name="bank" id="bank">
+                                                <option selected="selected"  name="bank" id="bank">SELECT BANK </option>
+                                                <option>ALLIANCE FINANCE COMPANY PLC</option>
+                                                <option>AMANA BANK PLC</option>
+                                                <option>BANK OF CEYLON</option>
+                                                <option>CITY BANK</option>
+                                                <option>COMMERCIAL BANK</option>
+                                                <option>DFCC WARDANA BANK</option>
+                                                <option>HDFC BANK</option>
+                                                <option>LB FINANCE PLC</option>
+                                                <option>NATIONS TRUST BANK</option>
+                                                <option>SAMPATH BANK</option>
+                                                 <option>VALIABLE FINANCE PLC</option>
+                                                
+                                                
+
+                                            </select>
+                                        </div>
+                                     </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="examplesname">Account No</label>
+                                        <input type="hidden" class="form-control" name="id"  id="id">
+                                        <input type="text" class="form-control" name="accno"  id="accno" placeholder="Account No" autocomplete="off">
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
@@ -123,18 +153,20 @@ include 'connection.php';
                                 
                             </div>
 
-                        </form>
+                       
                     </div>
-              
+               </form>
 
-
+                    </div>
                     <br>
+                    
+                    
 
 
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Expenses Category details</h3>
+                            <h3 class="card-title">All Bank Account's details(own company)</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -144,32 +176,34 @@ include 'connection.php';
 
                                 <thead>
                                     <?php
-                                    echo '<tr><th><center> Category type</center></th>
+                                    echo '<tr><th><center>Owner</center></th><th><center>Bank</center></th><th><center>Account NO</center></th>
                                     <th width="10%"><center> Action</center></th>
 					</tr>
                                     </thead>
                                
                                  <tbody>';
-                                    $sql = "select id,type from expenses_category where status ='1'";
+                                    $sql = "select id,accname,bank,accno from bank_accounts where status ='1'";
                                     $result = mysqli_query($con, $sql);
 
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
 
                                         $id = $arraySomething1['id'];
-                                        $type1 = $arraySomething1['type'];
+                                        $accname = $arraySomething1['accname'];
+                                          $bank = $arraySomething1['bank'];
+                                            $accno = $arraySomething1['accno'];
 
 
 
 
-                                        echo "<tr><td>&nbsp " . $type1 . "</td>";
+                                        echo "<tr><td> $accname </td><td> $bank </td><td> $accno </td>";
 
                                         echo"<td> <div class='btn-group'>
                               
-                           <center>   <button type='button' class='btn btn-warning'>Delete</button></div></td></center></tr>";
+                           <center>   <button type='button' class='btn btn-warning'>Delete</button></center></div></td></tr>";
                                     }
 
-                                    echo "</tbody>
-                               ";
+                                    echo "</tbody>    ";
+                           
                                   ?>                   
                                     </tbody>
 
@@ -184,15 +218,10 @@ include 'connection.php';
                     <!--    final-->
                        </section>
                 </div>
-         
+       
+        <!--echo ek dnnne php athule liyn handa table body ek eliyen close krnnt puluwn awlk na-->
        
     </body>
-    
-    
-
-    
-    
-    
     <!-- Form Element sizes -->
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -237,10 +266,6 @@ include 'connection.php';
             });
         </script>
 
-
-        
-        
-        
 <?php
 
 /* 
@@ -248,4 +273,14 @@ include 'connection.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
+
+
+
+
+
+
+
 

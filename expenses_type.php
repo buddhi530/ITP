@@ -124,8 +124,7 @@ include 'connection.php';
 
                                                     <?php
                                                 }
-//mekadi <?php ekn strt krnne } php wlt aithi tag ekk hind nttm ek html kiyl hithal error ekk anw .udadit php ek close krl tiynw et psee
-//tiynne html code ekk.ek hind tm aye php tag ekn strt krnne
+
                                                 ?>
 
 
@@ -145,7 +144,7 @@ include 'connection.php';
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
                                 <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
-                                <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
+                               
                             </div>
 
                         </form>
@@ -184,10 +183,14 @@ include 'connection.php';
                                         $category = $arraySomething1['category'];
                                          $type = $arraySomething1['type'];
 
+                                           $sql1 = "select type from expenses_category where id ='$category'  ";
+                                        $result1 = mysqli_query($con, $sql1);
+                                        while ($row1 = mysqli_fetch_array($result1)) {
+                                            $category = $row1['type'];
+                                        }
 
 
-
-                                        echo "<tr><td>&nbsp " . $category . "</td><td>&nbsp " . $type . "</td>";
+                                        echo "<tr><td>$category </td><td>  $type</td>";
 
                                         echo"<td> <div class='btn-group'>
                               
