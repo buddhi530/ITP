@@ -93,7 +93,7 @@ include 'connection.php';
             }
             }
             }
-            xmlhttp.open("GET", "ajax_add_supplier.php?id=" + str, true);
+            xmlhttp.open("GET", "" + str, true);
             xmlhttp.send();
             }
 
@@ -105,9 +105,22 @@ include 'connection.php';
                 document.getElementById("myForm").reset();
             }
         </script>
+        <script type="text/javascript">
+function phonenumber(inputtxt)
+{
+  var phoneno = /^\d{10}$/;
+  if(inputtxt.value.match(phoneno))
+  {
+      return true;
+  }
+  else
+  {
+     alert("Not a valid Phone Number");
+     return false;
+  }
+  }
 
-
-
+</script>
 
     </head>
     <body>
@@ -158,9 +171,9 @@ include 'connection.php';
                                             <label>Customer Type<font color='red'> *</font></label>
                                             <select class="form-control select2" style="width: 100%;" name="type" id="type" >
                                                 <option selected="salutation" >CUSTOMER TYPE</option>
-                                                <option>CASH/CREDIT CUSTOMER</option>
-                                                <option>CASH CUSTOMER</option>
-                                                <option>CREDIT CUSTOMER</option>
+                                                 <option value="3"> CASH/CREDIT CUSTOMER </OPTION>
+                 <option value="1"> CASH CUSTOMER</OPTION>  
+                 <option value="0"> CREDIT CUSTOMER </OPTION> 
 
 
                                             </select>
@@ -169,12 +182,12 @@ include 'connection.php';
                                             <label>Contact Person Salutation</label>
                                             <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
                                                 <option selected="salutation" >Contact Person Salutation</option>
-                                                <option>Mr</option>
-                                                <option>Mrs</option>
-                                                <option>Miss</option>
-                                                <option>Dr</option>
-                                                <option>Ms</option>
-
+                                                  <option value="MR"> Mr</OPTION>  
+                 <option value="MRS"> Mrs </OPTION>
+                 <option value="MISS"> Miss </OPTION>
+                 <option value="MS"> Ms </OPTION>
+                 <option value="DR"> Dr </OPTION>
+                 <option value="VEN"> Ven </OPTION>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -203,8 +216,8 @@ include 'connection.php';
                                                     <label>Price below MSP<font color='red'> *</font></label>
                                                     <select class="form-control select2" style="width: 100%;" name="msp" id="msp" >
                                                         <option selected="salutation" >Price below MSP</option>
-                                                        <option>YES</option>
-                                                        <option>NO</option>
+                                                        <option value='1'>YES</option>
+                                                        <option value='0'>NO</option>
 
                                                     </select>
                                                 </div>
@@ -230,11 +243,11 @@ include 'connection.php';
 
                                         <div class="form-group">
                                             <label for="examplecphone">Mobile</label>
-                                            <input type="text" class="form-control" id="mobile" name="mobile"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Contact Person Mobile" autocomplete="off">
+                                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Dpattern=igits" placeholder="Enter Contact Person Mobile" autocomplete="off">
                                         </div>
                                         <div class="form-group">
                                             <label for="examplecphone">Home Contact</label>
-                                            <input type="text" class="form-control" id="recidence" name="recidence"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Contact Person Mobile" autocomplete="off">
+                                            <input type="text" class="form-control" id="recidence" name="recidence"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Dpattern=igits" placeholder="Enter Contact Person Mobile" autocomplete="off">
                                         </div>
                                         <!--                                        <div class="form-group">
                                                                                     <label for="exampleccountry">Contact Person Country</label>
@@ -321,7 +334,7 @@ include 'connection.php';
 
                                         echo "<td> <div class='btn-group'>
                               <a href='edit_supplier.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
-                        <a href='delete_supplier.php?r=$id' button type='button' class='btn btn-info'>Delete</button>
+                        <a href='delete_customer.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
                        
                      
                       </div></td>";

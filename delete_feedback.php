@@ -42,7 +42,7 @@ include 'connection.php';
 
             <div class="col-md-6">
                 <div class="box box-default">
-                    <form action = "delete_vehicle.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
+                    <form action = "delete_feedback.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
                                 <input type='hidden' name='r' value='<?php echo $id ?>'>
@@ -50,12 +50,12 @@ include 'connection.php';
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="callout callout-danger">
-                                <h4 class="modal-title">Are you sure you want to remove this vehicle ?</h4>
+                                <h4 class="modal-title">Are you sure you want to remove this Feedback ?</h4>
 
-                                <p>This will lead to remove the vehicle details after your confirmation. All transactions, combined with this vehicle will be removed and system won't be able to roll-back these transactions in future.</p>
+                                <p>This will lead to remove the feedback after your confirmation. All transactions, combined with this customer will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
-                                    <a href='vehicle.php'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                    <a href='feedback_customer.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
                                     <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
                                 </div>
                             </div>
@@ -80,15 +80,13 @@ include 'connection.php';
 if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
     $id = $_POST['r'];
 
-    $sql = "UPDATE vehicle SET status='0' WHERE id='$id' ";
+    $sql = "UPDATE feedback SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-//        $sql11 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER REMOVED ID :$id ')";
-//                                                                    mysqli_query($con, $sql11);
 
-        echo "<script>window.location = 'vehicle.php?msg=VEHICLE HAS BEEN REMOVED ! ';</script>";
+        echo "<script>window.location = 'feedback_customer.php?msg=FEEDBACK HAS BEEN REMOVED ! ';</script>";
     } else {
-        echo "<script>window.location = 'vehicle.php?msge=ROMVING VEHICLE FAILED ! CONTACT ADMINISTRATOR ';</script>";
+        echo "<script>window.location = 'feedback_customer.php?msge=ROMVING FEEDBACK FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }
 }
 //

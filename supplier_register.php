@@ -141,12 +141,7 @@ include 'connection.php';
                                 <div class="row">
                                     <!-- left column -->
                                     <div class="col-md-6">
-                                        <!-- general form elements -->
-
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-
-
+                                    
                                         <div class="form-group">
                                             <label for="examplesname">Supplier Name</label>
                                             <input type="text" class="form-control" name="companyname"  id="companyname" placeholder="Enter Supplier Name" autocomplete="off">
@@ -206,12 +201,11 @@ include 'connection.php';
                                             <label>Salutation</label>
                                             <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
                                                 <option selected="salutation" >Contact Person Salutation</option>
-                                                <option>Mr</option>
-                                                <option>Mrs</option>
-                                                <option>Miss</option>
-                                                <option>Dr</option>
-                                                <option>Ms</option>
-                                                <option>Rev</option>
+                                      <option value="Mr">Mr</option>
+                                                <option value="Mrs">Mrs</option>
+                                                <option value="Miss">Miss</option>
+                                                <option value="Dr">Dr</option>
+                                                <option value="Ms">Ms</option>
                                             </select>
                                         </div>
 
@@ -486,8 +480,7 @@ include 'connection.php';
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
-                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
-                                <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
+                        
                             </div>
                         </form>
                     </div>
@@ -628,262 +621,7 @@ include 'connection.php';
                 });
             });
         </script>
-        
-        <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">ShanazMGT</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-      
-          
-            <li class="nav-item">
-                <a href="Dashboard_main.php" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-               Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">REGISTRATION</li>
-         
-      
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Customers
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="customer_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Individual Customers</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="company_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Company Customer</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Suppliers
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="supplier_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Supplier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Suppliers Bank Account</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-       
-          
-          
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Item - Products
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="product_category01.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 01</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category02.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 02</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category03.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 03</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category04.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 04</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_item.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generate Item</p>
-                </a>
-              </li>
-         
-            </ul>
-          </li>
-          
-          
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Item - Raw
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="row_category01.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 01</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category02.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 02</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category03.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 03</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category04.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 04</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generate Item</p>
-                </a>
-              </li>
-         
-            </ul>
-          </li>
-          
-          
-                    <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Expenses
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="supplier_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Expenses Category</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Expenses type</p>
-                </a>
-              </li>
-               <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Insert Expenses</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="nav-header">SALES</li>
-           <li class="nav-header">PAYMENTS</li>
-            <li class="nav-header">GRN</li>
-             <li class="nav-header">VEHICLE DETAILS</li>
-             <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Vehicle
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="vehicle.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Vehicles</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="Driver.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Drivers</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-          
-          
-        
-    
-      
-        
-          
-         
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-        
-        
-
+   
 <?php
 
 /* 

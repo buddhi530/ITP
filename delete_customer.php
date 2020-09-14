@@ -42,7 +42,7 @@ include 'connection.php';
 
             <div class="col-md-6">
                 <div class="box box-default">
-                    <form action = "delete_vehicle.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
+                    <form action = "delete_customer.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
                                 <input type='hidden' name='r' value='<?php echo $id ?>'>
@@ -80,15 +80,15 @@ include 'connection.php';
 if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
     $id = $_POST['r'];
 
-    $sql = "UPDATE vehicle SET status='0' WHERE id='$id' ";
+    $sql = "UPDATE company_customer SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
 //        $sql11 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER REMOVED ID :$id ')";
 //                                                                    mysqli_query($con, $sql11);
 
-        echo "<script>window.location = 'vehicle.php?msg=VEHICLE HAS BEEN REMOVED ! ';</script>";
+        echo "<script>window.location = 'customer_register.php?msg=CUSTOMER HAS BEEN REMOVED ! ';</script>";
     } else {
-        echo "<script>window.location = 'vehicle.php?msge=ROMVING VEHICLE FAILED ! CONTACT ADMINISTRATOR ';</script>";
+        echo "<script>window.location = 'customer_register.php?msge=ROMVING CUSTOMER FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }
 }
 //

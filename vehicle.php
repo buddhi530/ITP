@@ -226,7 +226,7 @@ include 'connection.php';
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Driver Sup Name <font color='red'> *</font></label>
+                                                    <label>Driver Rep Name <font color='red'> *</font></label>
                                                     <select class="form-control select2" style="width: 100%;" name="sname" id="sname" >
                                                         <option selected="" >SELECT REP NAME</option>
                                                         <?php

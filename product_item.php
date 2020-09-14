@@ -276,7 +276,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Item name </center></th><th><center> min sale price </center></th><th><center> cash price </center></th><th><center> credit price </center></th>
+                                    echo "<tr><th><center> Item name </center></th><th><center> min sale price </center></th><th><center> cash price </center></th><th><center> credit price </center></th><th><center> stock </center></th>
 					<th width='1%'><center> Actions</center></th>
 					</tr>
                                       
@@ -284,7 +284,7 @@ include 'connection.php';
                                  
                                         <tbody>";
 
-                                    $sql = "SELECT id,cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4 FROM product_item WHERE  status = '1'  ";
+                                    $sql = "SELECT id,cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4,stock FROM product_item WHERE  status = '1'  ";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
@@ -296,7 +296,7 @@ include 'connection.php';
                                         $cat3 = $arraySomething1['cat3'];
                                         $credit = $arraySomething1['credit_price'];
                                         $cat4 = $arraySomething1['cat4'];
-                               
+                                        $stock = $arraySomething1['stock'];
 
 
                                         $sql1 = "select type from category_one where id ='$cat1'  ";
@@ -325,7 +325,7 @@ include 'connection.php';
 
 
                                         echo "<tr> <td>" . $cat11 . " " . $cat22 . " " . $cat33 . " " . $cat44 . " </td><td> <center>&nbsp" . $msp . " </center></td><td><center>" . $cash . "</center></td><td> <center>" . $credit . "</center> </td>
-                                                                ";
+                                                         <td> <center>" . $stock . "</center> </td>";
 
 
                                         echo "<td> <div class='btn-group'>
