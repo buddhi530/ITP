@@ -29,8 +29,12 @@ include 'connection.php';
 
 
     <body>
+        
+              <?php
+        include 'sidebar.php';
+        ?>
         <?php
-        if (isset($_GET['r'])) {   //methanin id ek eha page ek gena ek wenne id ekk awe nttm disply wenne na delete mg eka  close wenne form ek yatin
+        if (isset($_GET['r'])) {  
             $id = $_GET['r'];
             ?> <br><br><br><br><br><br><br>
 
@@ -77,7 +81,7 @@ include 'connection.php';
     <?php
 }
 
-if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
+if (isset($_POST['delete'])) { 
     $id = $_POST['r'];
 
     $sql = "UPDATE feedback SET status='0' WHERE id='$id' ";
@@ -86,7 +90,7 @@ if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama issee
 
         echo "<script>window.location = 'feedback_customer.php?msg=FEEDBACK HAS BEEN REMOVED ! ';</script>";
     } else {
-        echo "<script>window.location = 'feedback_customer.php?msge=ROMVING FEEDBACK FAILED ! CONTACT ADMINISTRATOR ';</script>";
+        echo "<script>window.location = 'feedback_customer.php?msge=REMOVING FEEDBACK FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }
 }
 //
@@ -100,6 +104,3 @@ if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama issee
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>  
-
-<!--input type = hidden ekedi value ekt get eken gena id ek pass wenw .et psse eke form eke action ekn kiynw delete_supplier ektm ynna kiyn et psse ynw palleha
-if isset kiyn ekt ethanidi tm name ekedi r kiyn ek catch kr gnne-->

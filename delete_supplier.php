@@ -1,19 +1,18 @@
 
 <?php
 include 'connection.php';
-//include 'header.php';
+
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+       <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
@@ -24,19 +23,50 @@ include 'connection.php';
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
 
     </head>
 
 
     <body>
+        
+             <?php
+        include 'sidebar.php';
+        ?>
+        
         <?php
-        if (isset($_GET['r'])) {   //methanin id ek eha page ek gena ek wenne id ekk awe nttm disply wenne na delete mg eka  close wenne form ek yatin
+        if (isset($_GET['r'])) {  
             $id = $_GET['r'];
             ?> <br><br><br><br><br><br><br>
 
-        <body class="hold-transition skin-blue sidebar-mini"> 
+        <body class="hold-transition skin-blue sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"> 
 
 
+       
+            
         <center> 
 
 
@@ -77,14 +107,11 @@ include 'connection.php';
     <?php
 }
 
-if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
-    $id = $_POST['r'];
+if (isset($_POST['delete'])) { 
 
     $sql = "UPDATE supplier SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-//        $sql11 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER REMOVED ID :$id ')";
-//                                                                    mysqli_query($con, $sql11);
 
         echo "<script>window.location = 'supplier_register.php?msg=SUPPLIER HAS BEEN REMOVED ! ';</script>";
     } else {
@@ -103,5 +130,27 @@ if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama issee
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>  
 
-<!--input type = hidden ekedi value ekt get eken gena id ek pass wenw .et psse eke form eke action ekn kiynw delete_supplier ektm ynna kiyn et psse ynw palleha
-if isset kiyn ekt ethanidi tm name ekedi r kiyn ek catch kr gnne-->
+<script src="plugins/moment/moment.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script type="text/javascript"></script>
+
+    <script>
+                            $(function () {
+
+                                $('#example2').DataTable({
+                                    "paging": true,
+                                    "lengthChange": true,
+                                    "searching": true,
+                                    "ordering": true,
+                                    "info": true,
+                                    "autoWidth": false,
+                                    "responsive": true,
+                                });
+                            });
+    </script>

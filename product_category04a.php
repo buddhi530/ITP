@@ -13,28 +13,27 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $sql = "insert into category_four(extra) values ('$extra')";
    
    if(mysqli_query($con, $sql))
-   {
-        echo "<div class='callout callout-success'><center>CATEGORY 04 INSERT SUCCESSULLY !</center><div>";
-   }
- else {
-     echo "<div class='callout callout-danger'><center>CATEGORY 04 INSERT HAS BEEN FAILED ! CONTACT ADMINISTRATOR</center><div>";  
-   }
-}
-
+    {
+                           echo ' <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Success !</h5>
+                  Category-04 has been Registered Successfully !
+                </div>';
+                           
+                       }
+                        else 
+                        {
+                            echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed !</h5>
+                  Category-04 Registration has been Failed !
+                </div>';
+                            
+                        }
+                    }
+     
 ?>
-
-
-
-
-
-
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+     
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 include 'connection.php';
+//include 'header.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 
@@ -163,9 +164,9 @@ function calc_total()
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+      <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -177,55 +178,47 @@ function calc_total()
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
-<!-- daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    </head>
-    
-    
-    
-    <!-- daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-    
-    
-    
-    <body>
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
+
+        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+               
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -242,13 +235,14 @@ function calc_total()
             </section>
 
             <section class="content">
+                  <form method="POST" action="sale_invoice_proc.php">
                 <div class="container-fluid">
-
+ 
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Enter Sales Details</h3>
                         </div>
-                        <form name="myForm" id="myForm" action="" method="POST" enctype="multipart/form-datam" onsubmit="return submitForm();">
+                        
                             <div class="card-body">
 
                                 <!-- left column -->
@@ -257,17 +251,24 @@ function calc_total()
                                 <div class="col-md-4">
                                  
 
-                                
+                             
                                     
                                      <div class="form-group">
                                             <label>Customer <font color='red'> *</font></label>
                                             <select class="form-control select2" style="width: 100%;" name="customer" id="customer" >
-                                                <option selected="" >SELECT Customer</option>
+                                                <option value='' >SELECT CUSTOMER</option>
                                                  <?php
-                                              $sql1 = mysqli_query($con,"SELECT id,company_name FROM company_customer WHERE status='1' ORDER BY company_name  ASC");
+                                              $sql1 = mysqli_query($con,"SELECT id,company_name FROM company_customer WHERE status='1' and type_customer='2' ORDER BY company_name  ASC");
                                               while ($row = mysqli_fetch_array($sql1)) {
                                                       ?>
                                                       <option value=" <?php echo $row['id'] ?> "> <?php echo $row['company_name'] ?> </option>;
+                                              <?php }
+                                              ?>
+                                                      <?php
+                                              $sql1 = mysqli_query($con,"SELECT id,person_name FROM company_customer WHERE status='1' and type_customer='0' ORDER BY company_name  ASC");
+                                              while ($row = mysqli_fetch_array($sql1)) {
+                                                      ?>
+                                                      <option value=" <?php echo $row['id'] ?> "> <?php echo $row['person_name'] ?> </option>;
                                               <?php }
                                               ?>
                                                 
@@ -281,8 +282,8 @@ function calc_total()
                                     
                                    <div class="form-group">
                   <label>Date:</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                    <div class="input-group date"  id="reservationdate" data-target-input="nearest">
+                        <input type="text" name='date' class="form-control datetimepicker-input" data-target="#reservationdate"/>
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -297,10 +298,21 @@ function calc_total()
                                          <div class="col-md-2">
                               
                                  <label>Sales Type<font color='red'> *</font></label>
-                                 <select class="form-control select2" style="width: 100%;" id="stype" name="stype">
-                    <option selected="selected" id="stype" name="stype">SELECT SALES TYPE</option>
+                                 <select name="sale_type" class="form-control select2" style="width: 100%;" id="stype" name="stype" required="">
+                    <option value=''>SELECT SALES TYPE</option>
                    <option value="CREDIT-SALE"> CREDIT SALE </OPTION>
                 <option value="CASH-SALE"> CASH SALE </OPTION>
+                   
+                  </select>
+                                </div>
+                                    
+                                    <div class="col-md-2">
+                              
+                                 <label>Invoice Type<font color='red'> *</font></label>
+                                 <select  class="form-control select2" style="width: 100%;" id="stype" name="invoice_type" required="">
+                    <option VALUE='' >INVOICE TYPE</option>
+                   <option value="VAT"> TAX INVOICE </OPTION>
+                <option value="NON-VAT"> NON-TAX INVOICE </OPTION>
                    
                   </select>
                                 </div>
@@ -313,7 +325,7 @@ function calc_total()
                                   <div class="form-group">
                                             <label>Driver <font color='red'> *</font></label>
                                             <select class="form-control select2" style="width: 100%;" name="driver" id="driver" >
-                                                <option selected="" >SELECT Driver</option>
+                                                <option value="" >SELECT Driver</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,dname FROM driver WHERE status='1' ORDER BY dname ASC");
                                               while ($row = mysqli_fetch_array($sql1)) {
@@ -332,7 +344,7 @@ function calc_total()
                                     <div class="form-group">
                                          <label>Vehicle <font color='red'> *</font></label>
                                             <select class="form-control select2" style="width: 100%;" name="vehicle" id="vehicle" >
-                                                <option selected="" >SELECT VEHICLE</option>
+                                                <option value="" >SELECT VEHICLE</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,registration_num FROM vehicle WHERE status='1' ");
                                               while ($row = mysqli_fetch_array($sql1)) {
@@ -349,8 +361,8 @@ function calc_total()
              
                                                <div class="form-group">
                                          <label>Sales Rep <font color='red'> *</font></label>
-                                            <select class="form-control select2" style="width: 100%;" name="rep" id="rep" >
-                                                <option selected="" >SELECT SALES REP</option>
+                                            <select class="form-control select2" style="width: 100%;" name="porter" id="rep" >
+                                                <option value="" >SELECT SALES REP</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,rname FROM driver WHERE status='1' ");
                                               while ($row = mysqli_fetch_array($sql1)) {
@@ -418,15 +430,12 @@ function calc_total()
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Generate Order </button>
                                 <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
-                               
+                          
                             </div>
+</div>    </form>    
+                     
+       
 
-                   
-                    </div>
-   </form>  
-                    </div>
-  
-                    </div>
                  </section>     
                     </div>
             
@@ -450,7 +459,7 @@ function calc_total()
 <script>
   $(function () {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    $('.select2').select2();
 
     //Initialize Select2 Elements
     $('.select2bs4').select2({
@@ -499,7 +508,7 @@ function calc_total()
 
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
@@ -606,258 +615,5 @@ function calc_total()
 </script>
 
 
-
-
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">ShanazMGT</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Developer</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-      
-          
-            <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-               Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">REGISTRATION</li>
-         
-      
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Customers
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="customer_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Individual Customers</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="company_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Company Customer</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Suppliers
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="supplier_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Supplier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Suppliers Bank Account</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-       
-          
-          
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Item - Products
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="product_category01.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 01</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category02.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 02</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category03.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 03</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_category04.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product category 04</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="product_item.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generate Item</p>
-                </a>
-              </li>
-         
-            </ul>
-          </li>
-          
-          
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Item - Raw
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="row_category01.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 01</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category02.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 02</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category03.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 03</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="row_category04.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Raw category 04</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generate Item</p>
-                </a>
-              </li>
-         
-            </ul>
-          </li>
-          
-          
-                    <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Expenses
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="supplier_register.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Expenses Category</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Expenses type</p>
-                </a>
-              </li>
-               <li class="nav-item">
-                  <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Insert Expenses</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="nav-header">SALES</li>
-           <li class="nav-header">PAYMENTS</li>
-            <li class="nav-header">GRN</li>
-             <li class="nav-header">VEHICLE DETAILS</li>
-             <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Vehicle
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="vehicle.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Vehicles</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="Driver.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Drivers</p>
-                </a>
-              </li>
-           
-            </ul>
-          </li>
-           <li class="nav-header">ALL REPORTS</li>
-          
-        
-    
-      
-        
-          
-         
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
 
 

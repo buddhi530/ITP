@@ -1,7 +1,7 @@
 
 <?php
 include 'connection.php';
-//include 'header.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,14 +28,21 @@ include 'connection.php';
     </head>
 
 
-    <body>
+ 
         <?php
-        if (isset($_GET['r'])) {   //methanin id ek eha page ek gena ek wenne id ekk awe nttm disply wenne na delete mg eka  close wenne form ek yatin
+        if (isset($_GET['r'])) {  
             $id = $_GET['r'];
-            ?> <br><br><br><br><br><br><br>
+            ?> 
 
         <body class="hold-transition skin-blue sidebar-mini"> 
 
+            
+            
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
 
         <center> 
 
@@ -50,9 +57,9 @@ include 'connection.php';
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="callout callout-danger">
-                                <h4 class="modal-title">Are you sure you want to remove this vehicle ?</h4>
+                                <h4 class="modal-title">Are you sure you want to remove this customer ?</h4>
 
-                                <p>This will lead to remove the vehicle details after your confirmation. All transactions, combined with this vehicle will be removed and system won't be able to roll-back these transactions in future.</p>
+                                <p>This will lead to remove the customer details after your confirmation. All transactions, combined with this customer will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
                                     <a href='vehicle.php'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
@@ -77,14 +84,13 @@ include 'connection.php';
     <?php
 }
 
-if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
     $sql = "UPDATE company_customer SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-//        $sql11 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER REMOVED ID :$id ')";
-//                                                                    mysqli_query($con, $sql11);
+
 
         echo "<script>window.location = 'customer_register.php?msg=CUSTOMER HAS BEEN REMOVED ! ';</script>";
     } else {
@@ -102,6 +108,6 @@ if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama issee
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>  
+  
+       
 
-<!--input type = hidden ekedi value ekt get eken gena id ek pass wenw .et psse eke form eke action ekn kiynw delete_supplier ektm ynna kiyn et psse ynw palleha
-if isset kiyn ekt ethanidi tm name ekedi r kiyn ek catch kr gnne-->

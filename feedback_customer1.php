@@ -9,19 +9,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pay_done = $_POST['pay_done'];
      $pay_type = $_POST['pay_type'];
 
-    $description = $_POST['description'];
+    $description = strtoupper($_POST['description']);
    
     
 
   
     
     
-      $sql = "INSERT INTO feedback(recieved_date,pay_done,pay_type,description) VALUES 
-			('$recieved_date','$pay_done','$pay_type','$description')";
-                       if(mysqli_query($con, $sql))
-                            echo "<div class='callout callout-success'><center>CUSTOMER REGISTERED SUCCESSULLY !</center><div>";
+      $sql = "INSERT INTO feedback(invoice_id,recieved_date,pay_done,pay_type,description) VALUES 
+			('$invoice_num','$recieved_date','$pay_done','$pay_type','$description')";
+      
+      $sql1 = "UPDATE invoice SET feedback='1' where id='$invoice_num'";
+      
+                       if(mysqli_query($con, $sql)){
+                           mysqli_query($con, $sql1);
+                            
+                           echo ' <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Success !</h5>
+                  Feedback has been Registered Successfully !
+                </div>';
+                           
+                       }
                         else 
-                            echo "<div class='callout callout-danger'><center>CUSTOMER REGISTRATION HAS BEEN FAILED ! CONTACT ADMINISTRATOR</center><div>";
-}
+                        {
+                            echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed !</h5>
+                  Feedback Registration has been Failed !
+                </div>';
+                            
+                        }
+                    }
+     
+?>
+     
+
+
+
+
+
 
 ?>

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $description = $_POST["des"];
      
     
-       $sql = "INSERT INTO production_grn (grn_date,description,user) VALUES"
+       $sql = "INSERT INTO raw_grn (grn_date,description,user) VALUES"
     . " ('$date','$description','$user')";   
     if(mysqli_query($con, $sql)){
         

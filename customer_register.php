@@ -1,15 +1,13 @@
-
-
-
 <?php
 include 'connection.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+       <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,77 +23,72 @@ include 'connection.php';
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
 
         <script>
 
             function submitForm() {
 
-            var form_data = new FormData(document.getElementById("myForm"));
-            form_data.append("label", "WEBUPLOAD");
-            $.ajax({
-            url: "customer_register1.php",
+                var form_data = new FormData(document.getElementById("myForm"));
+                form_data.append("label", "WEBUPLOAD");
+                $.ajax({
+                    url: "customer_register1.php",
                     type: "POST",
                     data: form_data,
                     processData: false, // tell jQuery not to process the data
                     contentType: false   // tell jQuery not to set contentType
-            }).done(function (data) {
-            console.log(data);
-            $("#example2").load(window.location + " #example2");
-            $('#cname').val("");
-            $('#br').val("");
-            $('#address').val("");
-            $('#cmobile').val("");
-            $('#email').val("");
-            $('#phone').val("");
-            $('#fax').val("");
-            $('#vat').val("");
-            $('#companyname').val("");
-            $('#msp').val("");
-            MessageManager.show(data);
-            });
-            return false;
+                }).done(function (data) {
+                    console.log(data);
+                    $("#example2").load(window.location + " #example2");
+                    $('#nic').val("");
+                    $('#name').val("");
+                    $('#email').val("");
+                    $('#mobile').val("");
+                    $('#recidence').val("");
+                    MessageManager.show(data);
+                });
+                return false;
             }
 
             var MessageManager = {
-            show: function (content) {
-            $('#ajaxmsg').html(content);
-            setTimeout(function () {
-            $('#ajaxmsg').html('');
-            }, 3000);
-            }
+                show: function (content) {
+                    $('#ajaxmsg').html(content);
+                    setTimeout(function () {
+                        $('#ajaxmsg').html('');
+                    }, 3000);
+                }
             };
             window.setTimeout(function () {
-            $(".alert").fadeTo(500, 0).slideUp(500, function () {
-            $(this).remove();
-            });
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
             }, 4000);
-            function supplier_check(str) {
-
-            document.getElementById("txtHint").innerHTML = "";
-            if (str == "") {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-            }
-            if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            } else { // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            // document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-            MessageManager.show(xmlhttp.responseText);
-            if (xmlhttp.responseText) {
-            document.getElementById("submit1").disabled = false;
-            } else {
-            document.getElementById("submit1").disabled = false;
-            }
-            }
-            }
-            xmlhttp.open("GET", "" + str, true);
-            xmlhttp.send();
-            }
+            
+            
+           
 
 
         </script>
@@ -106,29 +99,36 @@ include 'connection.php';
             }
         </script>
         <script type="text/javascript">
-function phonenumber(inputtxt)
-{
-  var phoneno = /^\d{10}$/;
-  if(inputtxt.value.match(phoneno))
-  {
-      return true;
-  }
-  else
-  {
-     alert("Not a valid Phone Number");
-     return false;
-  }
-  }
+            function phonenumber(inputtxt)
+            {
+                var phoneno = /^\d{10}$/;
+                if (inputtxt.value.match(phoneno))
+                {
+                    return true;
+                } else
+                {
+                    alert("Not a valid Phone Number");
+                    return false;
+                }
+            }
 
-</script>
+        </script>
 
     </head>
-    <body>
+     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-        <!-- Content Wrapper. Contains page content -->
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
+
+      
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                <div id='ajaxmsg'>
+                    </div>
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -170,10 +170,10 @@ function phonenumber(inputtxt)
                                         <div class="form-group">
                                             <label>Customer Type<font color='red'> *</font></label>
                                             <select class="form-control select2" style="width: 100%;" name="type" id="type" >
-                                                <option selected="salutation" >CUSTOMER TYPE</option>
-                                                 <option value="3"> CASH/CREDIT CUSTOMER </OPTION>
-                 <option value="1"> CASH CUSTOMER</OPTION>  
-                 <option value="0"> CREDIT CUSTOMER </OPTION> 
+                                                <option value=''>CUSTOMER TYPE</option>
+                                                <option value="CASH/CREDIT CUSTOMER"> CASH/CREDIT CUSTOMER </OPTION>
+                                                <option value="CASH CUSTOMER"> CASH CUSTOMER</OPTION>  
+                                                <option value="CREDIT CUSTOMER"> CREDIT CUSTOMER </OPTION> 
 
 
                                             </select>
@@ -181,13 +181,13 @@ function phonenumber(inputtxt)
                                         <div class="form-group">
                                             <label>Contact Person Salutation</label>
                                             <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
-                                                <option selected="salutation" >Contact Person Salutation</option>
-                                                  <option value="MR"> Mr</OPTION>  
-                 <option value="MRS"> Mrs </OPTION>
-                 <option value="MISS"> Miss </OPTION>
-                 <option value="MS"> Ms </OPTION>
-                 <option value="DR"> Dr </OPTION>
-                 <option value="VEN"> Ven </OPTION>
+                                                <option value=''>SALUTATION</option>
+                                                <option value="MR"> Mr</OPTION>  
+                                                <option value="MRS"> Mrs </OPTION>
+                                                <option value="MISS"> Miss </OPTION>
+                                                <option value="MS"> Ms </OPTION>
+                                                <option value="DR"> Dr </OPTION>
+                                                <option value="VEN"> Ven </OPTION>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -216,8 +216,8 @@ function phonenumber(inputtxt)
                                                     <label>Price below MSP<font color='red'> *</font></label>
                                                     <select class="form-control select2" style="width: 100%;" name="msp" id="msp" >
                                                         <option selected="salutation" >Price below MSP</option>
-                                                        <option value='1'>YES</option>
-                                                        <option value='0'>NO</option>
+                                                        <option value='YES'>YES</option>
+                                                        <option value='NO'>NO</option>
 
                                                     </select>
                                                 </div>
@@ -249,11 +249,6 @@ function phonenumber(inputtxt)
                                             <label for="examplecphone">Home Contact</label>
                                             <input type="text" class="form-control" id="recidence" name="recidence"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Dpattern=igits" placeholder="Enter Contact Person Mobile" autocomplete="off">
                                         </div>
-                                        <!--                                        <div class="form-group">
-                                                                                    <label for="exampleccountry">Contact Person Country</label>
-                                                                                    <input type="text" class="form-control" id="country"  name="country" placeholder="Enter Contact Person Country" autocomplete="off">
-                                                                                </div>-->
-
 
 
                                     </div>
@@ -265,8 +260,8 @@ function phonenumber(inputtxt)
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
-                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
-                                <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
+                              
+
                             </div>
                         </form>
                     </div>
@@ -303,7 +298,7 @@ function phonenumber(inputtxt)
 
 
 
-                                    $sql = "SELECT id,nic,company_name,company_email,type_customer,company_address,company_phone,salutation,person_mobile FROM company_customer WHERE  status = '1' ORDER BY company_name ASC";
+                                    $sql = "SELECT id,nic,person_name,company_name,company_email,type_customer,company_address,company_phone,salutation,person_mobile FROM company_customer WHERE  status = '1' ORDER BY company_name ASC";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
@@ -311,7 +306,7 @@ function phonenumber(inputtxt)
                                         $email1 = $arraySomething1['company_email'];
                                         $address1 = $arraySomething1['company_address'];
                                         $salutation1 = $arraySomething1['salutation'];
-                                        $name1 = $arraySomething1['company_name'];
+                                        $name1 = $arraySomething1['person_name'];
                                         $mobile1 = $arraySomething1['person_mobile'];
                                         $type = $arraySomething1['type_customer'];
 
@@ -333,7 +328,7 @@ function phonenumber(inputtxt)
                                                                 <td> &nbsp" . $email1 . " </td>";
 
                                         echo "<td> <div class='btn-group'>
-                              <a href='edit_supplier.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                              <a href='edit_customer.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
                         <a href='delete_customer.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
                        
                      
@@ -368,7 +363,7 @@ function phonenumber(inputtxt)
 
         <!-- Form Element sizes -->
         <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
+      
         <!-- Bootstrap 4 -->
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- bs-custom-file-input -->
@@ -396,18 +391,18 @@ function phonenumber(inputtxt)
     <script type="text/javascript"></script>
 
     <script>
-                           $(function () {
+                            $(function () {
 
-                               $('#example2').DataTable({
-                                   "paging": true,
-                                   "lengthChange": true,
-                                   "searching": true,
-                                   "ordering": true,
-                                   "info": true,
-                                   "autoWidth": false,
-                                   "responsive": true,
-                               });
-                           });
+                                $('#example2').DataTable({
+                                    "paging": true,
+                                    "lengthChange": true,
+                                    "searching": true,
+                                    "ordering": true,
+                                    "info": true,
+                                    "autoWidth": false,
+                                    "responsive": true,
+                                });
+                            });
     </script>
 
 <?php

@@ -1,12 +1,13 @@
 <?php
 include 'connection.php';
+//include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,6 +36,16 @@ include 'connection.php';
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
 
     <script>
@@ -82,12 +93,20 @@ include 'connection.php';
     </script>   
 
 
-    <body>
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                
+                <div id='ajaxmsg'>
+                    </div>
+                
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -105,6 +124,10 @@ include 'connection.php';
 
             <!-- Main content -->
             <section class="content">
+                
+                  <div id='ajaxmsg'>
+                    </div>
+                
                 <div class="container-fluid">
 
                     <div class="card card-primary">
@@ -132,8 +155,7 @@ include 'connection.php';
 
                                                     <?php
                                                 }
-//mekadi <?php ekn strt krnne } php wlt aithi tag ekk hind nttm ek html kiyl hithal error ekk anw .udadit php ek close krl tiynw et psee
-                                                //tiynne html code ekk.ek hind tm aye php tag ekn strt krnne
+
                                                 ?>
                                             </select>
                                         </div>
@@ -162,8 +184,7 @@ include 'connection.php';
 
                                                     <?php
                                                 }
-//mekadi <?php ekn strt krnne } php wlt aithi tag ekk hind nttm ek html kiyl hithal error ekk anw .udadit php ek close krl tiynw et psee
-//tiynne html code ekk.ek hind tm aye php tag ekn strt krnne
+
                                                 ?>
 
 
@@ -192,8 +213,7 @@ include 'connection.php';
 
                                                     <?php
                                                 }
-//mekadi <?php ekn strt krnne } php wlt aithi tag ekk hind nttm ek html kiyl hithal error ekk anw .udadit php ek close krl tiynw et psee
-//tiynne html code ekk.ek hind tm aye php tag ekn strt krnne
+
                                                 ?>
 
                                             </select>
@@ -223,8 +243,7 @@ include 'connection.php';
 
                                                     <?php
                                                 }
-//mekadi <?php ekn strt krnne } php wlt aithi tag ekk hind nttm ek html kiyl hithal error ekk anw .udadit php ek close krl tiynw et psee
-                                                //tiynne html code ekk.ek hind tm aye php tag ekn strt krnne
+
                                                 ?>
 
 
@@ -270,7 +289,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Item name </center></th><th><center> min sale price </center></th><th><center> cash price </center></th><th><center> credit price </center></th><th><center>item stock</center></th>
+                                    echo "<tr><th><center> Item name </center></th><th><center> Reorder Level </center></th>
 					<th width='1%'><center> Actions</center></th>
 					</tr>
                                       
@@ -278,53 +297,53 @@ include 'connection.php';
                                  
                                         <tbody>";
 
-                                    $sql = "SELECT id,cat1,min_sale_price,cat2,cash_price,cat3,credit_price,cat4,stock FROM product_item WHERE  status = '1'  ";
+                                    $sql = "SELECT id,cat1,cat2,cat3,cat4,reorder FROM row_item WHERE  status = '1'  ";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
                                         $cat1 = $arraySomething1['cat1'];
-                                        $msp = $arraySomething1['min_sale_price'];
+                                   
                                         $cat2 = $arraySomething1['cat2'];
-                                        $cash = $arraySomething1['cash_price'];
+                         
 
                                         $cat3 = $arraySomething1['cat3'];
-                                        $credit = $arraySomething1['credit_price'];
+                             
                                         $cat4 = $arraySomething1['cat4'];
-                                        $count = $arraySomething1['stock'];
+                                        $reorder = $arraySomething1['reorder'];
 
 
-                                        $sql1 = "select type from category_one where id ='$cat1'  ";
+                                        $sql1 = "select type from row_one where id ='$cat1'  ";
                                         $result1 = mysqli_query($con, $sql1);
                                         while ($row1 = mysqli_fetch_array($result1)) {
-                                            $cat11 = $row1['type'];
+                                            $cat10 = $row1['type'];
                                         }
 
-                                        $sql22 = "select brand from category_two where id ='$cat2'  ";
+                                        $sql22 = "select brand from row_two where id ='$cat2'  ";
                                         $result2 = mysqli_query($con, $sql22);
                                         while ($row2 = mysqli_fetch_array($result2)) {
-                                            $cat22 = $row2['brand'];
+                                            $cat20 = $row2['brand'];
                                         }
 
-                                        $sql33 = "select model from category_three where id ='$cat3'  ";
+                                        $sql33 = "select model from row_three where id ='$cat3'  ";
                                         $result3 = mysqli_query($con, $sql33);
                                         while ($row3 = mysqli_fetch_array($result3)) {
-                                            $cat33 = $row3['model'];
+                                            $cat30 = $row3['model'];
                                         }
 
-                                        $sql44 = "select extra from category_four where id ='$cat4'  ";
+                                        $sql44 = "select extra from row_four where id ='$cat4'  ";
                                         $result4 = mysqli_query($con, $sql44);
                                         while ($row4 = mysqli_fetch_array($result4)) {
-                                            $cat44 = $row4['extra'];
+                                            $cat40 = $row4['extra'];
                                         }
 
 
-                                        echo "<tr> <td>" . $cat11 . " " . $cat22 . " " . $cat33 . " " . $cat44 . " </td><td> <center>&nbsp" . $msp . " </center></td><td><center>" . $cash . "</center></td><td> <center>" . $credit . "</center> </td>
-                                                                <td><center> &nbsp" . $count . " </center></td>";
+                                        echo "<tr> <td>" . $cat10 . " " . $cat20 . " " . $cat30 . " " . $cat40 . " </td><td> <center>&nbsp" . $reorder . " </center></td>
+                                                                ";
 
 
                                         echo "<td> <div class='btn-group'>
                               <a href=''><button type='button' class='btn btn-info'>Edit</button></a>
-                        <a href=''><button type='button' class='btn btn-warning'>Delete</button>
+                        
                        
                      
                       </div></td>";
@@ -353,7 +372,7 @@ include 'connection.php';
         
         <!-- Form Element sizes -->
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- bs-custom-file-input -->
@@ -411,6 +430,4 @@ include 'connection.php';
                 });
             });
         </script>
- 
-   
  

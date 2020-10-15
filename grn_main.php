@@ -1,6 +1,7 @@
 <?php
 
 include 'connection.php';
+include 'header.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 

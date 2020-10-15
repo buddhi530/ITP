@@ -26,9 +26,23 @@ include 'connection.php';
                         $sql = "INSERT INTO supplier(company_name,br_no,vat_no,company_phone,company_fax,company_address,person_name,person_mobile,salutation,company_email,country) VALUES 
 			('$companyname','$br','$vat','$com_phone','$fax','$com_address','$pname','$pmobile','$salutation','$com_email','$country')";
                        if(mysqli_query($con, $sql))
-                            echo "<div class='callout callout-success'><center>CUSTOMER REGISTERED SUCCESSULLY !</center><div>";
+                       {
+                           echo ' <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Success!</h5>
+                  Supplier has been Registered Successfully !
+                </div>';
+                           
+                       }
                         else 
-                            echo "<div class='callout callout-danger'><center>CUSTOMER REGISTRATION HAS BEEN FAILED ! CONTACT ADMINISTRATOR</center><div>";
+                        {
+                            echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed!</h5>
+                  Supplier Registration has been  Failed !
+                </div>';
+                            
+                        }
                     }
      
 

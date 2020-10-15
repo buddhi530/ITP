@@ -1,7 +1,8 @@
 
 <?php
 include 'connection.php';
-//include 'header.php';
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,18 +30,26 @@ include 'connection.php';
 
 
     <body>
+        
+           
+             <?php
+        include 'sidebar.php';
+        ?>
+        
+        
+        
         <?php
-        if (isset($_GET['r'])) {   //methanin id ek eha page ek gena ek wenne id ekk awe nttm disply wenne na delete mg eka  close wenne form ek yatin
+        if (isset($_GET['r'])) {  
             $id = $_GET['r'];
             ?> <br><br><br><br><br><br><br>
 
-        <body class="hold-transition skin-blue sidebar-mini"> 
+        <body class="hold-transition skin-blue sidebar-mini "> 
 
 
         <center> 
 
 
-            <div class="col-md-6">
+            <div class="col-md-6" >
                 <div class="box box-default">
                     <form action = "delete_vehicle.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
@@ -48,7 +57,7 @@ include 'connection.php';
                                 <input type='hidden' name='r' value='<?php echo $id ?>'>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
+                        <div class="box-body" >
                             <div class="callout callout-danger">
                                 <h4 class="modal-title">Are you sure you want to remove this vehicle ?</h4>
 
@@ -77,14 +86,13 @@ include 'connection.php';
     <?php
 }
 
-if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama isseet ekin awit sql ekt anwa.isset kiyn ek tibun nttm pge ek load wuna gmnm delete wenw
+if (isset($_POST['delete'])) { 
     $id = $_POST['r'];
 
     $sql = "UPDATE vehicle SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-//        $sql11 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER REMOVED ID :$id ')";
-//                                                                    mysqli_query($con, $sql11);
+//       
 
         echo "<script>window.location = 'vehicle.php?msg=VEHICLE HAS BEEN REMOVED ! ';</script>";
     } else {
@@ -103,5 +111,3 @@ if (isset($_POST['delete'])) { //form eke name ek 'delete' kiyn ek ebuhama issee
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>  
 
-<!--input type = hidden ekedi value ekt get eken gena id ek pass wenw .et psse eke form eke action ekn kiynw delete_supplier ektm ynna kiyn et psse ynw palleha
-if isset kiyn ekt ethanidi tm name ekedi r kiyn ek catch kr gnne-->

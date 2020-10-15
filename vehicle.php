@@ -6,7 +6,7 @@ include 'connection.php';
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,33 +16,36 @@ include 'connection.php';
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-        
-       <!-- DataTables -->
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
-
-
-
-        <!-- daterange picker -->
-        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-        <!-- iCheck for checkboxes and radio inputs -->
-        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Bootstrap Color Picker -->
-        <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-        <!-- Tempusdominus Bbootstrap 4 -->
-        <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
         <!-- Select2 -->
         <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
         <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        
         <!-- Bootstrap4 Duallistbox -->
         <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/adminlte.min.css">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   
 
 
         <script>
@@ -86,33 +89,7 @@ include 'connection.php';
                     $(this).remove();
                 });
             }, 4000);
-            function supplier_check(str) {
-
-                document.getElementById("txtHint").innerHTML = "";
-                if (str == "") {
-                    document.getElementById("txtHint").innerHTML = "";
-                    return;
-                }
-                if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } else { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        // document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-                        MessageManager.show(xmlhttp.responseText);
-                        if (xmlhttp.responseText) {
-                            document.getElementById("submit1").disabled = false;
-                        } else {
-                            document.getElementById("submit1").disabled = false;
-                        }
-                    }
-                }
-                xmlhttp.open("GET", "ajax_add_supplier.php?id=" + str, true);
-                xmlhttp.send();
-            }
+            
 
 
         </script>
@@ -120,12 +97,20 @@ include 'connection.php';
 
 
     </head>
-    <body>
+   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                 <div id='ajaxmsg'>
+                    </div>
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -165,9 +150,9 @@ include 'connection.php';
 
                                             <select class="form-control select2" style="width: 100%;" name="type" id="type">
                                                 <option selected="selected"  name="type" id="type">SELECT VEHICLE TYPE</option>
-                                                <option>LORRY</option>
-                                                <option>BIKE</option>
-                                                <option>THREE-WHELLER</option>
+                                                <option value="LORRY">LORRY</option>
+                                                <option VALUE="BIKE">BIKE</option>
+                                                <option value="THREE-WHELLER">THREE-WHELLER</option>
 
                                             </select>
                                         </div>
@@ -273,15 +258,6 @@ include 'connection.php';
                                             </div>
                                         </div>
 
-
-
-                                        <!--                                        <div class="form-group">
-                                                                                    <label for="exampleccountry">Contact Person Country</label>
-                                                                                    <input type="text" class="form-control" id="country"  name="country" placeholder="Enter Contact Person Country" autocomplete="off">
-                                                                                </div>-->
-
-
-
                                     </div>
                                 </div>
 
@@ -291,7 +267,7 @@ include 'connection.php';
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
-                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
+                             
 
                             </div>
                         </form>
@@ -341,8 +317,21 @@ include 'connection.php';
                                         $insu_company1 = $arraySomething1['insurance_company'];
               
                                     
+                                        $sql16 = "SELECT dname FROM driver WHERE  id = ' $dname1'";
+                                    $result16 = mysqli_query($con, $sql16);
+                                    while ($arraySomething1 = mysqli_fetch_array($result16)) {
+                                        $driver_name = $arraySomething1['dname'];
+                                    }
+                                    
+                                    
+                                      $sql16 = "SELECT dname FROM driver WHERE  id = ' $sname1'";
+                                    $result16 = mysqli_query($con, $sql16);
+                                    while ($arraySomething1 = mysqli_fetch_array($result16)) {
+                                        $rep_name = $arraySomething1['dname'];
+                                    }
+                                        
 //                                        $id1 = $id + 1000;
-                                    echo "<tr><td> <center>S" . $type1 . " </center></td><td> &nbsp" . $dname1 . " </td><td> &nbsp" . $sname1 . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
+                                    echo "<tr><td> <center>$type1</center></td><td> &nbsp" .$driver_name . " </td><td> &nbsp" . $rep_name . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
                                                                 <td> &nbsp" . $insu_date1 . " </td><td> &nbsp" . $reg_num1 . " </td>";
 
 
@@ -394,7 +383,7 @@ include 'connection.php';
 
 
         <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
+     
         <!-- Bootstrap 4 -->
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Select2 -->

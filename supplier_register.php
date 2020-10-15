@@ -1,12 +1,13 @@
 <?php
 include 'connection.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+       <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,6 +22,30 @@ include 'connection.php';
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
         <script>
@@ -97,22 +122,24 @@ include 'connection.php';
 
         </script>
 
-        <script>
-            function myFunction() {
-            document.getElementById("myForm").reset();
-            }
-        </script>
-
+       
 
 
 
     </head>
-    <body>
+   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-        <!-- Content Wrapper. Contains page content -->
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                
+                <div id='ajaxmsg'>
+                    </div>
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -546,7 +573,7 @@ include 'connection.php';
 
                                         echo "<td> <div class='btn-group'>
                               <a href='edit_supplier.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
-                        <a href='delete_supplier.php?r=$id' button type='button' class='btn btn-info'>Delete</button>
+                        <a href='delete_supplier.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
                        
                      
                       </div></td>";
@@ -580,7 +607,7 @@ include 'connection.php';
 
 <!-- Form Element sizes -->
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- bs-custom-file-input -->

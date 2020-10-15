@@ -1,12 +1,54 @@
-<?php
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 3 | General Form Elements</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+
+
+
+        <!-- daterange picker -->
+        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- Bootstrap Color Picker -->
+        <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+        <!-- Tempusdominus Bbootstrap 4 -->
+        <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<script>
+    window.onload = function() { window.print(); }
+    </script>
+            <?php
 include 'connection.php';
-include 'header.php';
+
 $company = 1;
+$user = 1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
  if(isset($_POST["item_name"][0])){
      $customer = $_POST['customer'];
      $driver = $_POST['driver'];
+     $vat = $_POST['invoice_type'];
      if(!$driver){
          $driver = 0;
      }
@@ -35,8 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        {  
                             $item = $_POST["item_name"][$count];
                             $item_charge = $_POST["unit_price"][$count];
-                           // $serial = $_POST["serial"][$count];
-                          //  $description = $_POST["description"][$count];
                             $quantity = $_POST["quantity"][$count];
                            
                             //take aitem name 
@@ -155,12 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     
 <?php
-//include 'connection.php';
-//include 'header.php';
-// $user = $_SESSION['sess_user_id'];
-// $company = $_SESSION['sess_company'];
-// $code_invoice = $_SESSION['code_invoice'];
-// $sale_code = $_SESSION['code_sale'];
+
 $today = date('Y-m-d'); 
 $todaynow = date("Y-m-d h:i:sA");
 
@@ -182,7 +217,7 @@ $todaynow = date("Y-m-d h:i:sA");
                    
                         
                         
-                        $sql = "SELECT id,type_customer,company_name,company_phone,salutation,person,person_mobile,vat_no,company_address FROM company_customer WHERE id='$customer'";
+                        $sql = "SELECT id,type_customer,company_name,company_phone,salutation,person_name,person_mobile,vat_no,company_address FROM company_customer WHERE id='$customer'";
                             $result = mysqli_query($con, $sql);
                                 while ($arraySomething1 = mysqli_fetch_array($result)) {
                                     $id = $arraySomething1['id'];
@@ -190,7 +225,7 @@ $todaynow = date("Y-m-d h:i:sA");
                                     $type = $arraySomething1['type_customer'];
                                     $company_name = $arraySomething1['company_name'];
                                     $company_phone = $arraySomething1['company_phone'];
-                                    $name = $arraySomething1['person'];
+                                    $name = $arraySomething1['person_name'];
                                     $mobile = $arraySomething1['person_mobile'];
                                     $vat_no = $arraySomething1['vat_no'];
                                     $customer_address = $arraySomething1['company_address'];
@@ -203,16 +238,13 @@ $todaynow = date("Y-m-d h:i:sA");
                                             $customer_name = $name;
                                             $customer_phone = $mobile;
                                     } 
-                                    
-                                    if($vat_no>0){
-                                            $vat = "VAT";
-                                          
-                                    }
-                                   
+                               
+                                  
+                                //   echo $customer_name;
                                 }
                         
                         
-           //GENERATE INVOICE - START
+           
                         $net_amount = $item_total = 0;    
                         for($counter = 0; $counter < count($_POST["item_name"]); $counter++)
                         {  
@@ -231,43 +263,25 @@ $todaynow = date("Y-m-d h:i:sA");
                                $nbt_percentage = $arraySomething741['nbt'];
                                $vat_percentage = $arraySomething741['vat'];
                                }
-                            
-                // RETRIEVE VAT PERCENTAGES - END
-                  
-                    
-//                     $sql4 = "SELECT current_invoice FROM company WHERE id='$company' ";
-//                        $result4 = mysqli_query($con, $sql4);
-//                        while ($arraySomething4 = mysqli_fetch_array($result4)) {
-//                        $current_invoice = $arraySomething4['current_invoice'];
-//                        }
-//                     $current_invoice1 = $current_invoice + 1;
-//                     $current_invoice2 = $current_invoice1 + 100000;
-//                     $current_invoice_no = $code_invoice.$current_invoice2 ;
-                     $type = $_POST['sale_type'];
+              
+                     $type_s = $_POST['sale_type'];
                      
-                     if($type=="CREDIT-SALE")
+                     if($type_s=="CREDIT-SALE")
                      $invoice_name = "DELIVERY NOTE - CREDIT";
-                     if($type=="CASH-SALE")
+                     if($type_s=="CASH-SALE")
                      $invoice_name = "DELIVERY NOTE - CASH";
                      
                     
-                     //$net_amount1 = $net_amount - $return_amount;
+                  
                      
-                     $sql = "INSERT INTO invoice (net_amount,type,customer_id,invoice_type,tax_percentage_id,driver_id,porter_id,vehicle_id,date,user) VALUES"
-                            . " ('$net_amount','$type','$customer','$vat','$tax_percentage_id','$driver','$porter','$vehicle','$invoicedate', '$user')";
+                     $sql7895 = "INSERT INTO invoice (net_amount,type,customer_id,invoice_type,tax_percentage_id,driver_id,porter_id,vehicle_id,date,user) VALUES"
+                            . " ('$net_amount','$type_s','$customer','$vat','$tax_percentage_id','$driver','$porter','$vehicle','$invoicedate','$user')";
+                     mysqli_query($con, $sql7895);
+                     
                      
                      $delivery_last_id = mysqli_insert_id($con);
-//                         if(mysqli_query($con, $sql)){
-//                          
-//                             $sql1 = "UPDATE company SET current_invoice = '$current_invoice1' WHERE id='$company'";
-//                             mysqli_query($con, $sql1);
-//                             
-//
-//                         }  
-//                         else{
-//                             echo("Error description: " . mysqli_error($con));
-//                         }
-            //GENERATE INVOICE - END      
+                     $delivery_last_no = 10000 + $delivery_last_id;
+
                          
                          if($vat=="VAT"){
                              $invoice_name=$invoice_name." (TAX)";
@@ -277,7 +291,7 @@ $todaynow = date("Y-m-d h:i:sA");
        
  ?>                      
   <div class="row">    
- <div class="col-xs-12">
+ <div class="col-md-12">
                    <center>             
                            <table id="example3" class="table-condensed">
                                      <?php
@@ -290,28 +304,28 @@ $todaynow = date("Y-m-d h:i:sA");
 <u>
 </div>                   
    </div>
-
+<br><br>
 <h4 class="box-title"><center><?php echo $invoice_name; ?></center></h4></u>    
-
+<br>
 <div class="row">
-            <div class="col-xs-7">
+            <div class="col-md-6">
                                 
-                                    <table id="example3" class="table table-bordered table-condensed">
+                                    <table id="example3" class="table table-bordered ">
                                     <?php
-                                    echo "<tr><td>Customer</td><td align='right'>".$salutation." ".$customer_name."</td></tr>";
+                                    echo "<tr><td width='150px'>Customer</td><td align='right'>".$salutation." ".$customer_name."</td></tr>";
                                     echo "<tr><td>Contact</td><td align='right'>".$customer_phone."</td></tr>";
                                     echo "<tr><td>Address</td><td align='right'>".$customer_address."</td></tr>";
                                     ?>
                                     </table></div>
     
-            <div class="col-xs-5">                                 
+            <div class="col-md-6">                                 
                                  
-                                     <table class="table table-bordered table-condensed">
+                                     <table class="table table-bordered">
                                      <?php
-                                     echo "<tr><td>Order No</td><td align='right'>10000</td></tr>";
+                                     echo "<tr><td width='150px'>Order No</td><td align='right'>D".$delivery_last_no."</td></tr>";
                                      echo "<tr><td>Date </td><td align='right'>".$invoicedate."</td></tr>";
-                                     if($vat=="NON_VAT")
-                                     echo "<tr><td>Sales Type </td><td align='right'>".$type."</td></tr>";
+                                     if($vat=="NON-VAT")
+                                     echo "<tr><td>Sales Type </td><td align='right'>".$type_s."</td></tr>";
                                      if($vat=="VAT")
                                      echo "<tr><td>Customer VAT # </td><td align='right'>".$vat_no."</td></tr>";
                                      ?>
@@ -321,28 +335,24 @@ $todaynow = date("Y-m-d h:i:sA");
             
                 
          
-            echo '<table id="example1" class="table table-bordered ">';
+            echo '  <div class="col-md-12"><table id="example1" class="table table-bordered">';
 
                    $net_total = 0; $total_discount = 0; $vat_amount_total = $nbt_amount_total = 0;
-                       echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Description</center></th><th><center> Qty </center></th><th><center> Unit Price</center></th><th><center> Sub Total</center></th>
+                       echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Qty </center></th><th><center> Unit Price</center></th><th><center> Sub Total</center></th>
                                                    </tr></tfoot></thead><tbody>";
+                       
+                       $i = 0;
+                       
                         for($count = 0; $count < count($_POST["item_name"]); $count++)
                         {  
                             $item = $_POST["item_name"][$count];
                             $item_charge = $_POST["unit_price"][$count];
-                            //$serial = $_POST["serial"][$count];
-                            $description = $_POST["description"][$count];
                             $quantity = $_POST["quantity"][$count];
+                            $i++;
                            
-                            
-
-                         
-                       
-                        
-                        //DATA INSERTION TO CASH_BOOK - START  
-                              
+                          
                                  
-                          $sql74 = "SELECT min_sale_price,cash_price,credit_price FROM item WHERE id = '$item'";
+                          $sql74 = "SELECT min_sale_price,cash_price,credit_price FROM product_item WHERE id = '$item'";
                                $result74 = mysqli_query($con, $sql74);
                                    while ($arraySomething74 = mysqli_fetch_array($result74)) {
                                        $min_sale_price = $arraySomething74['min_sale_price'];
@@ -351,11 +361,11 @@ $todaynow = date("Y-m-d h:i:sA");
                                    }         
                         
                             // DISCOUNT CAL - START
-                            if($type=="CASH-SALE"){
+                            if($type_s=="CASH-SALE"){
                             $discount_per_item = $cash_price - $item_charge;
                             $price_to_show = $cash_price;
                             }
-                            if($type=="CREDIT-SALE"){
+                            if($type_s=="CREDIT-SALE"){
                             $discount_per_item = $credit_price - $item_charge;
                             $price_to_show = $credit_price;
                             }
@@ -421,16 +431,16 @@ $todaynow = date("Y-m-d h:i:sA");
                          $net_total = $net_total + $sub_total;
                          
                          //IF DISCOUNTED PRICE > UNIT PRICE
-                         if($price_to_show<=$item_charge){
-                           $price_to_show = $item_charge;
-                         }
+//                         if($price_to_show<=$item_charge){
+//                           $price_to_show = $item_charge;
+//                         }
                          
                          
-                         echo "<tr bgcolor='#80D8AD'><td width='1%'> </td><td>".$cat1_name." ".$cat2_name." ".$cat3_name." ".$cat4_name." </td><td align='right'>".$quantity."</td><td align='right'>".number_format($item_charge,2)."</td><td align='right'>".number_format($sub_total,2)."</td>";
+                         echo "<tr><td width='1%' align='center'>".$i." </td><td>".strtoupper($item_name)." </td><td align='right'>".$quantity."</td><td align='right'>".number_format($item_charge,2)."</td><td align='right'>".number_format($sub_total,2)."</td>";
 
                         }
                         
-                        
+                        }           
                             
                           $net_total_final = $net_total;
                           
@@ -443,26 +453,24 @@ $todaynow = date("Y-m-d h:i:sA");
                                 $nbt_per_item = ($net / 100) * $nbt_percentage;
                                 $vat_per_item = ($amount_with_nbt / 100) * $vat_percentage;
                                 
-//                                $nbt_for_all_items = $nbt_per_item * $quantity;
-//                                $nbt_amount_total = $nbt_amount_total + $nbt_for_all_items;
-                                
+                       
                                 $final_total = $net_total_final - ($nbt_per_item+$vat_per_item);
                                 
                             }
                             
                            //VAT NBT CALCULATE - END 
                             
-                            if($vat=="NON_VAT"){
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>Gross Total</b></td><td align='right'><b>".number_format($net_total,2)."</b></td>";
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>Net Total</b></td><td align='right'><b>".number_format($net_total_final,2)."</b></td>";
+                            if($vat=="NON-VAT"){
+                            echo "<tr><td colspan='4' align='right'><b>Gross Total</b></td><td align='right'><b>".number_format($net_total,2)."</b></td>";
+                            echo "<tr><td colspan='4' align='right'><b>Net Total</b></td><td align='right'><b>".number_format($net_total_final,2)."</b></td>";
                             }
                             if($vat=="VAT"){
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>Total</b></td><td align='right'><b>".number_format($net_total,2)."</b></td>";
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>Net Total</b></td><td align='right'><b>".number_format($final_total,2)."</b></td>";  
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'> </td><td align='right'><b> </b></td>";   
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>NBT ".$nbt_percentage."%</b></td><td align='right'><b>".number_format($nbt_per_item,2)."</b></td>";
-                            echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>VAT ".$vat_percentage."%</b></td><td align='right'><b>".number_format($vat_per_item,2)."</b></td>";
-                             echo "<tr bgcolor='#80D8AD'><td colspan='5' align='right'><b>Grand Total</b></td><td align='right'><b>".number_format($net_total_final,2)."</b></td>";
+                            echo "<tr><td colspan='4' align='right'><b>Total</b></td><td align='right'><b>".number_format($net_total,2)."</b></td>";
+                            echo "<tr><td colspan='4' align='right'><b>Net Total</b></td><td align='right'><b>".number_format($final_total,2)."</b></td>";  
+                            echo "<tr><td colspan='4' align='right'> </td><td align='right'><b> </b></td>";   
+                            echo "<tr><td colspan='4' align='right'><b>NBT ".$nbt_percentage."%</b></td><td align='right'><b>".number_format($nbt_per_item,2)."</b></td>";
+                            echo "<tr><td colspan='4' align='right'><b>VAT ".$vat_percentage."%</b></td><td align='right'><b>".number_format($vat_per_item,2)."</b></td>";
+                             echo "<tr><td colspan='4' align='right'><b>Grand Total</b></td><td align='right'><b>".number_format($net_total_final,2)."</b></td>";
                                 
                                 
                                 
@@ -523,47 +531,34 @@ $cheques_payable = $arraySomething4['cheques_payable'];
   <center>THANK YOU FOR YOUR BUSINESS !</center><br>
   
                         
-                                    
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<!-- page script -->
-<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-
-<script src="dist/js/demo.js"></script>
 </body>
 </html>    
 <?php 
-
+                        
     }
         else{
             echo $price_low_item;  
@@ -576,17 +571,12 @@ $cheques_payable = $arraySomething4['cheques_payable'];
         }
 
      }
-     else{
-        echo "Error3";  
-     }
+    
      
      
      
      }
-     else{
-    echo "Error1";
-   
-} 
+}
 
 
 ?>

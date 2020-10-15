@@ -1,6 +1,7 @@
 <?php
 
 include 'connection.php';
+//include 'header.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 
@@ -139,9 +140,7 @@ function calc_total()
         total += parseInt($(this).val());
     });
 	$('#sub_total').val(total.toFixed(2));
-//	tax_sum=total/100*$('#tax').val();
-//	$('#tax_amount').val(tax_sum.toFixed(2));
-//	$('#total_amount').val((tax_sum+total).toFixed(2));
+
 }
 //ADD REMOVE ROWS INVOICE - END
 
@@ -163,9 +162,19 @@ function calc_total()
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
- <div class="content-wrapper"
+  <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+               
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">

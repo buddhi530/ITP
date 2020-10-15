@@ -1,13 +1,14 @@
 
 <?php
 include 'connection.php';
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 3 | General Form Elements</title>
+        <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,6 +23,31 @@ include 'connection.php';
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        <!-- Select2 -->
+        <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+        
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   
 
 
         <script>
@@ -67,34 +93,8 @@ include 'connection.php';
                     $(this).remove();
                 });
             }, 4000);
-            function supplier_check(str) {
-
-                document.getElementById("txtHint").innerHTML = "";
-                if (str == "") {
-                    document.getElementById("txtHint").innerHTML = "";
-                    return;
-                }
-                if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } else { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        // document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-                        MessageManager.show(xmlhttp.responseText);
-                        if (xmlhttp.responseText) {
-                            document.getElementById("submit1").disabled = false;
-                        } else {
-                            document.getElementById("submit1").disabled = false;
-                        }
-                    }
-                }
-                xmlhttp.open("GET", "ajax_add_supplier.php?id=" + str, true);
-                xmlhttp.send();
-            }
-
+            
+           
 
         </script>
 
@@ -108,12 +108,20 @@ include 'connection.php';
 
 
     </head>
-    <body>
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                 <div id='ajaxmsg'>
+                    </div>
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -164,10 +172,7 @@ include 'connection.php';
                                             <label for="examplesfax">Company Fax</label>
                                             <input type="text" class="form-control" id="fax" name="fax" placeholder="Enter Company Fax" autocomplete="off">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="examplesemai1">Company Email</label>
-                                            <input type="email" class="form-control" id="email" name="email"  placeholder="Enter Company Email" autocomplete="off">
-                                        </div>
+                                     
 
                                     </div>
                                     <!-- /.card-body -->
@@ -206,7 +211,7 @@ include 'connection.php';
                                         <div class="form-group">
                                             <label>Contact Person Salutation</label>
                                             <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
-                                                <option selected="salutation" >Contact Person Salutation</option>
+                                                <option >Contact Person Salutation</option>
                                                 <option value="Mr">Mr</option>
                                                 <option value="Mrs">Mrs</option>
                                                 <option value="Miss">Miss</option>
@@ -222,15 +227,43 @@ include 'connection.php';
                                             <label for="examplecname">Contact Person Name</label>
                                             <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter Contact Person Name" autocomplete="off">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="examplecphone">Contact Person Mobile</label>
-                                            <input type="text" class="form-control" id="cmobile" name="cmobile"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Contact Person Mobile" autocomplete="off">
+                                        
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- select -->
+
+                                                <div class="form-group">
+                                                    <label for="examplebr">Contact Person mobile</label>
+                                                    <input type="text" class="form-control" id="cmobile" name="cmobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter mobile Number" autocomplete="off">
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label for="examplevat">Company Email</label>
+                                                    <input type="email" class="form-control" id="email" name ="email" placeholder="Enter company email " autocomplete="off">
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary float-right" onclick="myFunction()">Reset</button>
                                     </div>
+                                    
+                                    
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" id ="submit">Submit </button>
+                             
+
+                            </div>
+                                     </div> 
                                     </form>
-                                </div>
+</div>
+                    </div>
+                    
 
                                 <br>
                                 <br>
@@ -259,7 +292,7 @@ include 'connection.php';
 
 
 
-                                                $sql = "SELECT id,company_name,company_address,company_phone,company_fax,salutation,person_name,person_mobile,vat_no FROM company_customer WHERE  status = '1' ORDER BY company_name ASC";
+                                                $sql = "SELECT id,company_name,company_address,company_phone,company_fax,salutation,person_name,person_mobile,vat_no FROM company_customer WHERE  type_customer='2' and status = '1' ORDER BY company_name ASC";
                                                 $result = mysqli_query($con, $sql);
                                                 while ($arraySomething1 = mysqli_fetch_array($result)) {
                                                     $id = $arraySomething1['id'];
@@ -278,8 +311,8 @@ include 'connection.php';
 
 
                                                     echo "<td> <div class='btn-group'>
-                              <a href='edit_supplier.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
-                        <a href='delete_supplier.php?r=$id' button type='button' class='btn btn-info'>Delete</button>
+                              <a href='edit_company.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                        <a href='delete_company.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
                        
                      
                       </div></td>";
@@ -313,7 +346,7 @@ include 'connection.php';
 
                     <!-- Form Element sizes -->
                     <!-- jQuery -->
-                    <script src="plugins/jquery/jquery.min.js"></script>
+                  
                     <!-- Bootstrap 4 -->
                     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
                     <!-- bs-custom-file-input -->
