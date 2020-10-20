@@ -1,6 +1,13 @@
 <?php
-    include 'header.php';
+      include 'header.php';
     include 'connection.php';
+    
+    if ($pwreset== 'F') {
+    header("location: change_password.php");
+    exit();
+    }
+    else{
+      
     include 'sidebar.php';
 
 
@@ -89,6 +96,7 @@
 $position =  $_SESSION['sess_position'];
 if($position == 1 || $position == 2 || $position == 3 )
 {
+
 ?>
     
     <div class="content-wrapper">
@@ -227,4 +235,6 @@ else if($position == 4)
 
 
                 
-<?php } ?>
+<?php }
+
+    }?>

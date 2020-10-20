@@ -11,6 +11,22 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $model =$_POST['model'];
    
    
+       $sql="SELECT model FROM row_three WHERE model='$model'";
+    $result=mysqli_query($con,$sql);
+    $rowcount=mysqli_num_rows($result);
+    
+    
+     if($rowcount>0){
+         echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed!</h5>
+                  Raw Item already Registered !
+                </div>';
+        
+    }
+    else{
+   
+   
    $sql = "insert into row_three(model,user) values ('$model','$user')";
    
    if(mysqli_query($con, $sql))
@@ -32,7 +48,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
                             
                         }
                     }
-     
+}
 ?>
      
 

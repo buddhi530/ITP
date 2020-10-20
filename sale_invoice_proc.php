@@ -256,7 +256,7 @@ $todaynow = date("Y-m-d h:i:sA");
                         }
                     
                          // RETRIEVE VAT PERCENTAGES - START
-                            $sql741 = "SELECT id,nbt,vat FROM tax_percentages WHERE stat = '1'";
+                            $sql741 = "SELECT id,nbt,vat,user FROM tax_percentages WHERE stat = '1'";
                               $result741 = mysqli_query($con, $sql741);
                                while ($arraySomething741 = mysqli_fetch_array($result741)) {
                                $tax_percentage_id = $arraySomething741['id'];

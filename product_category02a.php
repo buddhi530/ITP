@@ -12,6 +12,23 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $brand =$_POST['brand'];
    
    
+        $sql="SELECT brand FROM category_two WHERE brand='$brand'";
+    $result=mysqli_query($con,$sql);
+    $rowcount=mysqli_num_rows($result);
+    
+    
+     if($rowcount>0){
+         echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed!</h5>
+                  Product Item already Registered !
+                </div>';
+        
+    }
+    else{
+   
+   
+   
    $sql = "insert into category_two(brand,user) values ('$brand','$user')";
    
    if(mysqli_query($con, $sql))
@@ -35,5 +52,5 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
                     }
 
 
-
+}
 ?>

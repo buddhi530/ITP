@@ -60,7 +60,7 @@ include 'connection.php';
             $id = $_GET['r'];
 
 
-            $sql = "SELECT id,name,password,phone,email,position FROM users WHERE id='$id' ";
+            $sql = "SELECT id,name,employee_name,password,phone,email,position FROM users WHERE id='$id' ";
             $result = mysqli_query($con, $sql);
             while ($arraySomething1 = mysqli_fetch_array($result)) {
 
@@ -70,6 +70,7 @@ include 'connection.php';
                 
                 $password = $arraySomething1['password'];
                 $position = $arraySomething1['position'];
+                 $ename = $arraySomething1['employee_name'];
             }
             ?>
 
@@ -169,6 +170,17 @@ include 'connection.php';
 
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                                <!-- select -->
+
+                                                <div class="form-group">
+                                                    <label for="examplesemai1">Employee Name</label>
+                                                    <input type="text" class="form-control" id="ename" name="ename" value='<?php echo $ename ?>' placeholder="Enter Employee  Name" autocomplete="off">
+                                                </div>
+
+
+
+                                            </div>
 
 
 
@@ -196,9 +208,11 @@ include 'connection.php';
                         $email = $_POST['email'];
                         $phone = $_POST['mobile'];
                         $position = $_POST['position'];
+                        $ename = $_POST['ename'];
+                        
 
 
-                        $sql = "UPDATE users SET name='$name',password='$pw1', phone='$phone',email='$email',position='$position' WHERE id='$id'";
+                        $sql = "UPDATE users SET name='$name',employee_name='$ename',password='$pw1', phone='$phone',email='$email',position='$position' WHERE id='$id'";
                         if (mysqli_query($con, $sql)) {
                             $message = "USER DETAILS UPDATED !";
                             echo "<script type='text/javascript'>alert('$message');window.location.href='add_user.php';</script>";

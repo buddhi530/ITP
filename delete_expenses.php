@@ -49,7 +49,7 @@ include 'header.php';
 
             <div class="col-md-6">
                 <div class="box box-default">
-                    <form action = "delete_expenses.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
+                    <form action = "delete_expenses.php"  method="POST" >
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
                                 <input type='hidden' name='r' value='<?php echo $id ?>'>
@@ -62,7 +62,7 @@ include 'header.php';
                                 <p>This will lead to remove the Expenses details after your confirmation. All transactions, combined with this Expenses will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
-                                    <a href='expenses_main.php'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                    <a href='expenses_cat1.php'><button  class="btn btn-info float-left" >Cancel</button></a>
                                     <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
                                 </div>
                             </div>

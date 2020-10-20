@@ -17,6 +17,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rlicence = $_POST['rlicence'];
     
   
+    $sql="SELECT dname FROM driver WHERE dnic='$dnic'";
+    $result=mysqli_query($con,$sql);
+    $rowcount=mysqli_num_rows($result);
+    
+    if($rowcount>0){
+         echo ' <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Failed!</h5>
+                  Customer already Registered !
+                </div>';
+        
+    }
+ else {
+        
     
     
       $sql = "INSERT INTO driver(dnic,dname,daddress,dphone,dlicense,rnic,rname,raddress,rphone,rlicense,user) VALUES 
@@ -39,6 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>';
                             
                         }
-}
+}}
 
 ?>

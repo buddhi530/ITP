@@ -90,11 +90,6 @@ include 'connection.php';
         
     </script> 
 
-    <script>
-        function myFunction() {
-        document.getElementById("myForm").reset();
-        }
-    </script>
     
     
    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

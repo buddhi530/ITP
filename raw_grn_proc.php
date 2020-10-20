@@ -1,4 +1,8 @@
+<?php
+include 'header.php';
+include 'connection.php';
 
+?>
 
 <script>
     window.onload = function () {
@@ -6,19 +10,24 @@
     }
 </script>
 <?php
-include 'connection.php';
-include 'header.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $company = 1;
+   
     if (isset($_POST["item_name"][0])) {
 
         $date = $_POST["grndate"];
-        $user = 1;
         $description = $_POST["des"];
+        $invoice_no = $_POST["supinvoicenum"];
+        $supplier = $_POST["sname"];
+        
+        
+        //CALCULATE GRN TOTAL - START
+        $sub_total = $_POST["sub_total"];
+        
+         //CALCULATE GRN TOTAL - END
 
 
-        $sql = "INSERT INTO raw_grn (grn_date,description,user) VALUES"
-                . " ('$date','$description','$user')";
+        $sql = "INSERT INTO row_grn (supplier,grn_date,description,amount,user,supplier_invoice_no) VALUES"
+                . " ('$supplier','$date','$description','$sub_total','$user','$invoice_no')";
         if (mysqli_query($con, $sql)) {
 
 
@@ -30,29 +39,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for ($count = 0; $count < count($_POST["item_name"]); $count++) {
                 $item = $_POST["item_name"][$count];
                 $qty = $_POST["qty"][$count];
-                $price= $_POST["sub_total"][$count];
+                $price= $_POST["unit_price"][$count];
 
 
-                $sql25 = "SELECT stock_stores FROM raw_item WHERE id = '$item'";
+                $sql25 = "SELECT stock_stores FROM row_item WHERE id = '$item'";
                 $result25 = mysqli_query($con, $sql25);
                 while ($arraySomething25 = mysqli_fetch_array($result25)) {
-                    $stock_shop = $arraySomething25['stock'];
+                    $stock_shop = $arraySomething25['stock_stores'];
                 }
                 $new_stock_shop = $stock_shop + $qty;
 
-                $sql18 = "UPDATE raw_item SET stock = '$new_stock_shop' WHERE id='$item'";
+                $sql18 = "UPDATE row_item SET stock = '$new_stock_shop' WHERE id='$item'";
                 mysqli_query($con, $sql18);
 
-
-
-
-
-                $sql = "INSERT INTO raw_grn_items (raw_item_id,qty,price,raw_grn_id,user) VALUES"
+                $sql = "INSERT INTO raw_grn_items (raw_item_id,qty,price,row_grn_id,user) VALUES"
                         . " ('$item','$qty','$price','$grn_last_id','$user')";
 
                 mysqli_query($con, $sql);
             }
-            ?>
+            
+       ?>
+
+
+            
 
 
             <meta charset="utf-8">
@@ -100,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $today = date('Y-m-d');
             $todaynow = date("Y-m-d h:i:sA");
 
-            $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='$company'";
+            $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='1'";
             $result1 = mysqli_query($con, $sql1);
             while ($arraySomething1 = mysqli_fetch_array($result1)) {
                 $companyname = $arraySomething1['name'];
@@ -113,12 +122,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
 
-            $invoice_name = "GRN (Production to Stores)";
+            $invoice_name = "GRN (Raw Items to Stores)";
             ?>                      
                 <div class="row">    
                     <div class="col-md-12">
                         <center>             
-                            <table id="example3" class="table-condensed">
+                            <table >
                 <?php
                 echo "<tr><th><center>" . $companyname . "</center></th></tr>";
                 echo "<tr><td><center>" . $companydescription . "</center></td></tr>";
@@ -136,10 +145,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-md-6">
             <?php
             $grn_no = 10000 + $grn_last_id;
+            
+            $sql1 = "SELECT company_name FROM supplier WHERE id='$supplier'";
+            $result1 = mysqli_query($con, $sql1);
+            while ($arraySomething1 = mysqli_fetch_array($result1)) {
+                $supplier_name = $arraySomething1['company_name'];
+            }
+            
             ?>
                     <table id="example3" class="table table-bordered table-hover">
             <?php
-            echo "<tr><td width='150px'>GRN No</td><td align='right'>G" . $grn_no . "</td></tr>";
+            echo "<tr><td width='150px'>GRN No</td><td align='right'>G" . $grn_no . "</td></tr>"
+                    . "<tr><td width='150px'>Supplier Invoice #</td><td align='right'>G" . $invoice_no. "</td></tr>";
             ?>
                     </table></div>
 
@@ -148,6 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <table class="table table-bordered table-hover">
                         <?php
                         echo "<tr><td width='150px'>Date</td><td align='right'>" . $date . "</td></tr>";
+                        echo "<tr><td width='150px'>Supplier</td><td align='right'>" . $supplier_name . "</td></tr>";
                         ?>
                     </table></div>
             </div>
@@ -155,15 +173,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<table id="example1" class="table table-bordered table-hover">';
 
 
-            echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Qty</center></th>
-                                                   </tr></tfoot></thead><tbody>";
+            echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Qty</center></th><th><center> Unit Price</center></th>
+                               <th style='width:10px'><center> Total</center></th>                    </tr></tfoot></thead><tbody>";
+            $i = 0;
             for ($count = 0; $count < count($_POST["item_name"]); $count++) {
+                $i++;
                 $item = $_POST["item_name"][$count];
-
-                $quantity = $_POST["qty"][$count];
-
-
-
+                $qty = $_POST["qty"][$count];
+                $price= $_POST["unit_price"][$count];
 
                 $cat4 = $cat4_name = "";
                 $cat3 = $cat3_name = "";
@@ -176,10 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $cat2 = $arraySomething78['cat2'];
                     $cat3 = $arraySomething78['cat3'];
                     $cat4 = $arraySomething78['cat4'];
-
-
-
-
+                    
                     $sql18 = "SELECT type FROM row_one WHERE id='$cat1' ";
                     $result18 = mysqli_query($con, $sql18);
                     while ($arraySomething18 = mysqli_fetch_array($result18)) {
@@ -210,9 +224,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-                    echo "<tr bgcolor='#80D8AD'><td width='1%'> </td><td>" . $cat1_name . " " . $cat2_name . " " . $cat3_name . " " . $cat4_name . " </td><td align='right'>" . $quantity . "</td>";
+                    echo "<tr bgcolor='#80D8AD'><td width='1%'>".$i." </td><td>" . $cat1_name . " " . $cat2_name . " " . $cat3_name . " " . $cat4_name . " </td><td align='right'>" . $qty . "</td>"
+                            . "<td align='right'>" . number_format($price, 2, '.', ',') . "</td><td align='right'>" . number_format($price*$qty, 2, '.', ',') . "</td>";
                 }
             }
+             echo "<tr><td colspan='4'><b>Net Total</b></td><td align='right'><b>".number_format($sub_total, 2, '.', ',')."</b></td></tr>";
 
 
 
@@ -240,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
             echo "<tr><td colspan='2' align='center'>................................&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>................................</td></tr>";
             echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
-            echo "<tr><td colspan='2' align='center'>SUPERVISOR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>MANAGER-STORES</td></tr>";
+            echo "<tr><td colspan='2' align='center'>SUPPLIER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>MANAGER-STORES</td></tr>";
             ?>
                         </table>     
 

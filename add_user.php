@@ -157,15 +157,51 @@ include 'connection.php';
 
 
                                     <div class="col-md-6">
+                                                <!-- select -->
+
+                                                <div class="form-group">
+                                                    <label for="examplesemai1">User's Full Name</label>
+                                                    <input type="text" class="form-control" id="ename" name="ename"  placeholder="Enter Employee  Name" autocomplete="off">
+                                                </div>
 
 
-                                        <div class="row">
-                                            <div class="col-md-6">
+
+                                            </div>
+
+
+                                      
+                                            <div class="col-md-3">
                                                 <!-- select -->
 
                                                 <div class="form-group">
                                                     <label for="examplesemai1"> UserName</label>
-                                                    <input type="text" class="form-control" id="name" name="name"  placeholder="Enter Name" autocomplete="off">
+                                                    <?php
+                                                     $sql18 = "SELECT name FROM users ORDER BY id DESC LIMIT 1; ";
+                                                        $result18 = mysqli_query($con,$sql18);
+                                                        while ($arraySomething18 = mysqli_fetch_array($result18)) {
+                                                        $last_user_name = $arraySomething18['name'];
+                                                        }
+                                                        $show_user_name = $last_user_name + 1;
+                                                    ?>
+                                                    
+                                                    
+                                                    
+                                                    <input type="text" value='<?php echo $show_user_name?>'class="form-control" id="name" name="name"  placeholder="Enter Name" readonly="">
+                                                </div>
+
+
+
+                                            </div>
+                                     <div class="col-md-3">
+                                                <!-- select -->
+
+                                                <div class="form-group">
+                                                    <label for="examplesemai1"> Password</label>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    <input type="text" value='abc123'class="form-control" id="pw" name="pw"  placeholder="Enter Name" readonly="">
                                                 </div>
 
 
@@ -178,9 +214,9 @@ include 'connection.php';
                                                     <input type="email" class="form-control" id="email" name="email"  placeholder="Enter Customer's Email" autocomplete="off">
                                                 </div>
                                             </div>
-                                        </div>
+                                      
 
-                                    </div>
+                                
                                     <div class="col-md-6">
 
 
@@ -218,17 +254,7 @@ include 'connection.php';
 
                                     </div>
                                 </div>
-  <div class="col-md-6">
-                                                <!-- select -->
-
-                                                <div class="form-group">
-                                                    <label for="examplesemai1">Employee Name</label>
-                                                    <input type="text" class="form-control" id="ename" name="ename"  placeholder="Enter Employee  Name" autocomplete="off">
-                                                </div>
-
-
-
-                                            </div>
+                                           
 
 
                             </div>
@@ -263,7 +289,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Name </center></th><th><center> Employee Name </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> Action </center></th>
+                                    echo "<tr><th><center> Employee Name </center></th><th><center> Username </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> Action </center></th>
 					
 					</tr></tfoot>
                                         </thead>
@@ -285,6 +311,16 @@ include 'connection.php';
                                         $password = $arraySomething1['password'];
                                         $position = $arraySomething1['position'];
                                         $ename = $arraySomething1['employee_name'];
+                                        
+                                        if($position==1)
+                                            $position = "SUPER-ADMIN";
+                                        else if($position==2)
+                                            $position = "ADMIN";
+                                        else if($position==3)
+                                            $position = "USER";
+                                        else {
+                                            $position = "CUSTOMER";
+                                        }
 
                                         if ($stat == 1) {
                                             $stat1 = "<font color ='green'><b>ACTIVE</b></font>";
@@ -295,16 +331,16 @@ include 'connection.php';
                                         $pass_default = sha1($pass);
                                         if($pass_default == $password) {
                                             
-                                            $pass_default1 = "<font color ='red'>abc123</font>";
+                                            $pass_default1 = "<font color ='red'>DEFAULT</font>";
                                             
                                         } else {
-                                            $pass_default1 = "CHANGED";
+                                            $pass_default1 = "<font color ='green'>CHANGED</font>";
                                         }
                                         
 
 
 
-                                        echo "<tr><td> <center>" . $name . " </center></td> <td> <center>" . $ename . " </center></td><td> &nbsp" . $pass_default1 . " </td><td> &nbsp" . $phone . " </td><td>" . $email . "</td><td>" . $position . "</td><td>" . $stat1 . "</td>";
+                                        echo "<tr><td>" . $ename . " </td> <td> <center>" . $name . " </center></td><td> &nbsp" . $pass_default1 . " </td><td> &nbsp" . $phone . " </td><td>" . $email . "</td><td>" . $position . "</td><td>" . $stat1 . "</td>";
                                                                
 if($stat ==1)
 {

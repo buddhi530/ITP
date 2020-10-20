@@ -4,16 +4,21 @@ include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $name = $_POST['name'];
+     $sql18 = "SELECT name FROM users ORDER BY id DESC LIMIT 1; ";
+    $result18 = mysqli_query($con,$sql18);
+    while ($arraySomething18 = mysqli_fetch_array($result18)) {
+    $last_user_name = $arraySomething18['name'];
+    }
+    $show_user_name = $last_user_name + 1;
     $pw = 'abc123';
     $pw1 = sha1($pw);
     $email = $_POST['email'];
     $phone = $_POST['mobile'];
     $position = $_POST['position'];
-    $ename = $_POST['ename'];
+    $ename = strtoupper($_POST['ename']);
 
 
-    $sql = "insert into users(name,employee_name,password,phone,email,position) values('$name','$ename','$pw1','$phone','$email','$position')";
+    $sql = "insert into users(name,employee_name,password,phone,email,position) values('$show_user_name','$ename','$pw1','$phone','$email','$position')";
 
     if (mysqli_query($con, $sql)) {
         $subject = "SYSTEM LOGIN DETAILS";

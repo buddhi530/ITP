@@ -101,11 +101,7 @@ include 'connection.php';
 
         </script> 
 
-        <script>
-            function myFunction() {
-                document.getElementById("myForm").reset();
-            }
-        </script>
+      
 
 
 

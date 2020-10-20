@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  if(isset($_POST["item_name"][0])){
      
       $date = $_POST["grndate"];
-      $user = 1;
+      
       $description = $_POST["des"];
      
     
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $today = date('Y-m-d'); 
 $todaynow = date("Y-m-d h:i:sA");
 
- $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='$company'";
+ $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='1'";
     $result1 = mysqli_query($con, $sql1);
         while ($arraySomething1 = mysqli_fetch_array($result1)) {
         $companyname = $arraySomething1['name'];

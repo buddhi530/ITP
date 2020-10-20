@@ -54,6 +54,14 @@ else {
     $_SESSION['sess_username'] = $name; //Initializing username
     $_SESSION['sess_position'] = $position; //Initializing user level 
     $_SESSION['sess_name'] = $name;
+    
+    if($password==sha1('abc123')){
+        $_SESSION['sess_pw_reset'] = "F";
+    }
+    else{
+        $_SESSION['sess_pw_reset'] = "T";
+        }
+    
     echo 'done';
     
     

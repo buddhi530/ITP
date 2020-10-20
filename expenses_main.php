@@ -164,11 +164,23 @@ function calc_total()
                         <div class="card-header">
                             <h3 class="card-title">Enter Expenses Details</h3>
                         </div>
-                         <form action="product_grn_proc.php" method='post'>
+                        <form action="expenses_main_proc.php" method='post'>
                             <div class="card-body">
                                 <div class="row">
                                     <!-- left column -->
-                                    <div class="col-md-6">
+                                      <div class="col-md-4">
+                                        <!-- general form elements -->
+
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                       
+                                        <div class="form-group">
+                                            <label for="examplesphone">Payee</label>
+                                            <input type="text" class="form-control" id="total" name="pay"   dir="ltr" placeholder="Enter Payee Name" autocomplete="off" >
+                                        </div>
+                                   
+                                    </div>
+                                    <div class="col-md-4">
                                         <!-- general form elements -->
 
                                         <!-- /.card-header -->
@@ -187,7 +199,7 @@ function calc_total()
 
 
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
 
 
                                         
@@ -221,14 +233,15 @@ function calc_total()
             <th class="text-center"> # </th>
             <th class="text-center" width='80%'> Item </th>
             <th class="text-center"> Amount </th>
-             <th class="text-center"> Total </th>
+            <th class="text-center">  </th>
+          
           </tr>
         </thead><tbody>
              <tr id='addr0'>
             <td>1</td>
             <td><select name="item_name[]"  class='form-control itemname' required><option value="">Select Item</option><?php echo fill_unit_select_box($connect,$con); ?></select></td>
-            <td><input type="text" name='qty[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Amount' class="form-control qty"  /></td>
-             <td><input type="text" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
+             <td><input type="text" name='qty[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Qty' class="form-control qty"  /></td>
+            <td><input type="hidden" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
 
           </tr>
           <tr id='addr1'></tr>

@@ -1,7 +1,7 @@
 <?php
-
+include 'header.php';
 include 'connection.php';
-//include 'header.php';
+
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 
@@ -222,7 +222,7 @@ function calc_total()
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>New Delivery Order</h1>
+                            <h1>New Invoice</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">

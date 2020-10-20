@@ -1,4 +1,8 @@
+<?php
+include 'header.php';
+include 'connection.php';
 
+?>
 
 <script>
     window.onload = function () {
@@ -6,23 +10,47 @@
     }
 </script>
 <?php
-include 'connection.php';
-//include 'header.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $company = 1;
+   
     if (isset($_POST["item_name"][0])) {
 
         $date = $_POST["date"];
-        $user = 1;
         $description = $_POST["des"];
-        $total=$_POST["sub_total"];
+        $pay = $_POST["pay"];
+       
+       
+        
+        //CALCULATE GRN TOTAL - START
+        $sub_total = $_POST["sub_total"];
+        
+         //CALCULATE GRN TOTAL - END
 
-$category_id = mysqli_insert_id($con);
-        
-        $sql = "INSERT INTO expenses_proc (date,description,cat_id,total,user) VALUES"
-                . " ('$date','$description','$category_id','$total',$user')";
-        
-            ?>
+
+        $sql = "INSERT INTO expenses_proc (date,pay,description,amount,user) VALUES"
+                . " ('$date','$pay','$description','$sub_total','$user')";
+        if (mysqli_query($con, $sql)) {
+
+
+
+            $exp_last_id = mysqli_insert_id($con);
+
+
+
+            for ($count = 0; $count < count($_POST["item_name"]); $count++) {
+                $item = $_POST["item_name"][$count];
+                $price = $_POST["qty"][$count];
+              
+
+                $sql = "INSERT INTO expenses_proc_items (excat_id,proc_id,amount,user) VALUES"
+                        . " ('$item','$exp_last_id','$price','$user')";
+
+                mysqli_query($con, $sql);
+            }
+            
+       ?>
+
+
+            
 
 
             <meta charset="utf-8">
@@ -70,7 +98,7 @@ $category_id = mysqli_insert_id($con);
             $today = date('Y-m-d');
             $todaynow = date("Y-m-d h:i:sA");
 
-            $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='$company'";
+            $sql1 = "SELECT name,phone,address,email,description,br_no,cheques_payable FROM company WHERE id='1'";
             $result1 = mysqli_query($con, $sql1);
             while ($arraySomething1 = mysqli_fetch_array($result1)) {
                 $companyname = $arraySomething1['name'];
@@ -83,12 +111,12 @@ $category_id = mysqli_insert_id($con);
             }
 
 
-            $invoice_name = "GRN (Production to Stores)";
+            $invoice_name = "Expenses Voucher";
             ?>                      
                 <div class="row">    
                     <div class="col-md-12">
                         <center>             
-                            <table id="example3" class="table-condensed">
+                            <table >
                 <?php
                 echo "<tr><th><center>" . $companyname . "</center></th></tr>";
                 echo "<tr><td><center>" . $companydescription . "</center></td></tr>";
@@ -100,16 +128,20 @@ $category_id = mysqli_insert_id($con);
                 </div>                   
             </div>
             <br><br>
-            <h4 class="box-title"><center></center></h4></u>    
+            <h4 class="box-title"><center><?php echo $invoice_name; ?></center></h4></u>    
             <br><br>
             <div class="row">
                 <div class="col-md-6">
             <?php
-            $grn_no = 10000 + $grn_last_id;
+            $exp_no = 10000 + $exp_last_id;
+            
+            
+            
             ?>
                     <table id="example3" class="table table-bordered table-hover">
             <?php
-            echo "<tr><td width='150px'>GRN No</td><td align='right'></td></tr>";
+            echo "<tr><td width='150px'>Voucher No</td><td align='right'>V" . $exp_no . "</td></tr>"
+                    . "<tr><td width='150px'>Note</td><td align='right'>" . $description. "</td></tr>";
             ?>
                     </table></div>
 
@@ -118,6 +150,7 @@ $category_id = mysqli_insert_id($con);
                     <table class="table table-bordered table-hover">
                         <?php
                         echo "<tr><td width='150px'>Date</td><td align='right'>" . $date . "</td></tr>";
+                        echo "<tr><td width='150px'>Payee</td><td align='right'>" . $pay . "</td></tr>";
                         ?>
                     </table></div>
             </div>
@@ -125,29 +158,32 @@ $category_id = mysqli_insert_id($con);
             echo '<table id="example1" class="table table-bordered table-hover">';
 
 
-            echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Price</center></th>
-                                                   </tr></tfoot></thead><tbody>";
+            echo "<tr><th><center> * </center></th><th><center> Expense Type </center></th>
+                               <th style='width:10px'><center> Amount</center></th>                    </tr></tfoot></thead><tbody>";
+            $i = 0;
             for ($count = 0; $count < count($_POST["item_name"]); $count++) {
+                $i++;
                 $item = $_POST["item_name"][$count];
-
-                $total = $_POST["sub_total"][$count];
-
-
-
-
-//                
-//             
-                $type1="";
-                
-                $sql356 = "SELECT id,type FROM expenses_category WHERE id='$item'";
-                $result356 = mysqli_query($con, $sql356);
-                while ($arraySomething78 = mysqli_fetch_array($result356)) {
-                    $type1 = $arraySomething78['type'];
+                $price = $_POST["qty"][$count];
                 
 
-                    echo "<tr bgcolor='#80D8AD'><td width='1%'> </td><td>" .$type1. " </td><td align='right'>" . $quantity . "</td>";
+
+
+                    $sql4 = "SELECT type FROM expenses_category WHERE id='$item' ";
+                    $result4 = mysqli_query($con, $sql4);
+                    while ($arraySomething4 = mysqli_fetch_array($result4)) {
+                        $exp_name = $arraySomething4['type'];
+                    }
+
+
+                   
+
+
+                    echo "<tr bgcolor='#80D8AD'><td width='1%'>".$i." </td><td>" . $exp_name . " </td>"
+                            . "<td align='right'>" . number_format($price, 2, '.', ',') . "</td>";
                 }
             }
+             echo "<tr><td colspan='2'><b>Net Total</b></td><td align='right'><b>".number_format($sub_total, 2, '.', ',')."</b></td></tr>";
 
 
 
@@ -175,7 +211,7 @@ $category_id = mysqli_insert_id($con);
             echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
             echo "<tr><td colspan='2' align='center'>................................&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>................................</td></tr>";
             echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
-            echo "<tr><td colspan='2' align='center'>SUPERVISOR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>MANAGER-STORES</td></tr>";
+            echo "<tr><td colspan='2' align='center'>PAYEE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>ACCOUNTANT</td></tr>";
             ?>
                         </table>     
 
