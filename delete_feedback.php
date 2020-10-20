@@ -1,7 +1,7 @@
 
 <?php
+include 'header.php';
 include 'connection.php';
-//include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,12 +29,12 @@ include 'connection.php';
 
 
     <body>
-        
-              <?php
+
+        <?php
         include 'sidebar.php';
         ?>
         <?php
-        if (isset($_GET['r'])) {  
+        if (isset($_GET['r'])) {
             $id = $_GET['r'];
             ?> <br><br><br><br><br><br><br>
 
@@ -49,7 +49,7 @@ include 'connection.php';
                     <form action = "delete_feedback.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
-                                <input type='hidden' name='r' value='<?php echo $id ?>'>
+                            <input type='hidden' name='r' value='<?php echo $id ?>'>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -66,8 +66,8 @@ include 'connection.php';
 
 
                         </div>
-</form>
-                        <!-- /.box-body -->
+                    </form>
+                    <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
 
@@ -75,20 +75,21 @@ include 'connection.php';
 
         </center>
 
-    
+
     </body>
 
     <?php
 }
 
-if (isset($_POST['delete'])) { 
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
     $sql = "UPDATE feedback SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-
-        echo "<script>window.location = 'feedback_customer.php?msg=FEEDBACK HAS BEEN REMOVED ! ';</script>";
+        $message = "FEEDBACK HAS BEEN REMOVED ! !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='feedback_customer.php';</script>";
+        //echo "<script>window.location = 'feedback_customer.php?msg=FEEDBACK HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'feedback_customer.php?msge=REMOVING FEEDBACK FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

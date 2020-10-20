@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 
 
@@ -10,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $model =$_POST['model'];
    
    
-   $sql = "insert into category_three(model) values ('$model')";
+   $sql = "insert into category_three(model,user) values ('$model','$user')";
    
    if(mysqli_query($con, $sql))
     {

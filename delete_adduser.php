@@ -6,13 +6,13 @@ include 'connection.php';
 <!DOCTYPE html>
 <html>
     <head>
-         <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-       <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
@@ -51,13 +51,13 @@ include 'connection.php';
 
 
     <body>
-        
-        
-             <?php
+
+
+        <?php
         include 'sidebar.php';
         ?>
         <?php
-        if (isset($_GET['r'])) {   
+        if (isset($_GET['r'])) {
             $id = $_GET['r'];
             ?> <br><br><br><br><br><br><br>
 
@@ -69,7 +69,7 @@ include 'connection.php';
 
             <div class="col-md-6">
                 <div class="box box-default">
-                    <form action = "delete_driver.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
+                    <form action = "delete_adduser.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
                             <input type='hidden' name='r' value='<?php echo $id ?>'>
@@ -77,12 +77,12 @@ include 'connection.php';
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="callout callout-danger">
-                                <h4 class="modal-title">Are you sure you want to remove this driver ?</h4>
+                                <h4 class="modal-title">Are you sure you want to remove this user ?</h4>
 
-                                <p>This will lead to remove the driver after your confirmation. All transactions, combined with this driver will be removed and system won't be able to roll-back these transactions in future.</p>
+                                <p>This will lead to remove the user after your confirmation. All transactions, combined with this user will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
-                                    <a href='driver.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                    <a href='add_user.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
                                     <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
                                 </div>
                             </div>
@@ -104,19 +104,19 @@ include 'connection.php';
     <?php
 }
 
-if (isset($_POST['delete'])) { 
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
-    $sql = "UPDATE driver SET status='0' WHERE id='$id' ";
+    $sql = "UPDATE users SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
 
-        
-          $message = "DRIVER HAS BEEN REMOVED !";
-        echo "<script type='text/javascript'>alert('$message');window.location.href='Driver.php';</script>";
-       // echo "<script>window.location = 'Driver.php?msg=SUPPLIER HAS BEEN REMOVED ! ';</script>";
+
+        $message = "USER HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='add_user.php';</script>";
+        //echo "<script>window.location = 'add_user.php?msg=USER HAS BEEN REMOVED ! ';</script>";
     } else {
-        echo "<script>window.location = 'Driver.php?msge=ROMVING SUPPLIER FAILED ! CONTACT ADMINISTRATOR ';</script>";
+        echo "<script>window.location = 'add_user.php?msge=ROMVING USER FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }
 }
 //
@@ -132,13 +132,14 @@ if (isset($_POST['delete'])) {
 <script src="dist/js/demo.js"></script>  
 
 <script src="plugins/moment/moment.min.js"></script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- page script -->
-    <script type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- page script -->
+<script type="text/javascript"></script>
+
 
 

@@ -1,8 +1,8 @@
 
 <?php
 
+include 'header.php';
 include 'connection.php';
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $msp = 0;
 
 
-    $sql = "INSERT INTO company_customer(type_customer,company_name,br_no,vat_no,company_phone,company_fax,company_address,person_name,person_mobile,salutation,company_email,min_sale_price) VALUES 
-			('2','$companyname','$br','$vat','$com_phone','$fax','$com_address','$pname','$pmobile','$salutation','$com_email','$msp')";
+    $sql = "INSERT INTO company_customer(type_customer,company_name,br_no,vat_no,company_phone,company_fax,company_address,person_name,person_mobile,salutation,company_email,min_sale_price,user) VALUES 
+			('2','$companyname','$br','$vat','$com_phone','$fax','$com_address','$pname','$pmobile','$salutation','$com_email','$msp','$user')";
     if (mysqli_query($con, $sql)) {
         echo ' <div class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

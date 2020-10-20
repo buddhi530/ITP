@@ -1,8 +1,7 @@
 
 <?php
+include 'header.php';
 include 'connection.php';
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,18 +29,18 @@ include 'connection.php';
 
 
     <body>
-        
-           
-             <?php
-        include 'sidebar.php';
-        ?>
-        
-        
-        
-        <?php
-        if (isset($_GET['r'])) {  
-            $id = $_GET['r'];
-            ?> <br><br><br><br><br><br><br>
+
+
+<?php
+include 'sidebar.php';
+?>
+
+
+
+<?php
+if (isset($_GET['r'])) {
+    $id = $_GET['r'];
+    ?> <br><br><br><br><br><br><br>
 
         <body class="hold-transition skin-blue sidebar-mini "> 
 
@@ -54,7 +53,7 @@ include 'connection.php';
                     <form action = "delete_vehicle.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
-                                <input type='hidden' name='r' value='<?php echo $id ?>'>
+                            <input type='hidden' name='r' value='<?php echo $id ?>'>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" >
@@ -71,8 +70,8 @@ include 'connection.php';
 
 
                         </div>
-</form>
-                        <!-- /.box-body -->
+                    </form>
+                    <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
 
@@ -80,21 +79,22 @@ include 'connection.php';
 
         </center>
 
-    
+
     </body>
 
     <?php
 }
 
-if (isset($_POST['delete'])) { 
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
     $sql = "UPDATE vehicle SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-//       
+//       $message = " VEHICLE HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='vehicle.php';</script>";
 
-        echo "<script>window.location = 'vehicle.php?msg=VEHICLE HAS BEEN REMOVED ! ';</script>";
+        //echo "<script>window.location = 'vehicle.php?msg=VEHICLE HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'vehicle.php?msge=ROMVING VEHICLE FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

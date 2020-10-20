@@ -1,7 +1,6 @@
 <?php
-
+include 'header.php';
 include 'connection.php';
-//include 'header.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 
@@ -292,7 +291,7 @@ function calc_total()
   
      <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Generate GRN </button>
-                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
+                               
                               
                             </div>
 </form>

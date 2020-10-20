@@ -1,5 +1,6 @@
 
 <?php
+include 'header.php';
 include 'connection.php';
 
 ?>
@@ -112,8 +113,9 @@ if (isset($_POST['delete'])) {
     $sql = "UPDATE supplier SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
-
-        echo "<script>window.location = 'supplier_register.php?msg=SUPPLIER HAS BEEN REMOVED ! ';</script>";
+        $message = " SUPPLIER HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='supplier_register.php';</script>";
+        //echo "<script>window.location = 'supplier_register.php?msg=SUPPLIER HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'supplier_register.php?msge=ROMVING SUPPLIER FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

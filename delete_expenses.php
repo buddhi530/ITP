@@ -6,7 +6,7 @@ include 'header.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+     <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AdminLTE 3 | General Form Elements</title>
         <!-- Tell the browser to be responsive to screen width -->
@@ -23,19 +23,26 @@ include 'header.php';
         <!-- DataTables -->
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   
 
 
     </head>
 
 
-    <body>
+        
+              <?php
+        include 'sidebar.php';
+        ?>
+        
         <?php
         if (isset($_GET['r'])) {  
             $id = $_GET['r'];
-            ?> <br><br><br><br><br><br><br>
+            ?> <br><br><br><br>
 
-        <body class="hold-transition skin-blue sidebar-mini"> 
+        <body >
 
+
+       
 
         <center> 
 
@@ -50,9 +57,9 @@ include 'header.php';
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="callout callout-danger">
-                                <h4 class="modal-title">Are you sure you want to remove this vehicle ?</h4>
+                                <h4 class="modal-title">Are you sure you want to remove this Expenses ?</h4>
 
-                                <p>This will lead to remove the vehicle details after your confirmation. All transactions, combined with this vehicle will be removed and system won't be able to roll-back these transactions in future.</p>
+                                <p>This will lead to remove the Expenses details after your confirmation. All transactions, combined with this Expenses will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
                                     <a href='expenses_main.php'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
@@ -80,14 +87,15 @@ include 'header.php';
 if (isset($_POST['delete'])) { 
     $id = $_POST['r'];
 
-    $sql = "UPDATE expenses SET status='0' WHERE id='$id' ";
+    $sql = "UPDATE expenses_category SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con,$sql)) {
 //       
-
-        echo "<script>window.location = 'expenses_main.php?msg=EXPENSES HAS BEEN REMOVED ! ';</script>";
+$message = "EXPENSES HAS BEEN REMOVED !";
+    echo "<script type='text/javascript'>alert('$message');window.location.href='expenses_cat1.php';</script>";
+        //echo "<script>window.location = 'expenses_cat1.php?msg=EXPENSES HAS BEEN REMOVED ! ';</script>";
     } else {
-        echo "<script>window.location = 'expenses_main.php?msge=ROMVING EXPENSES FAILED ! CONTACT ADMINISTRATOR ';</script>";
+        echo "<script>window.location = 'delete_expenses.php?msg=ROMVING EXPENSES FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }
 }
 //

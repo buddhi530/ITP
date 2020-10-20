@@ -1,7 +1,7 @@
 
 <?php
-include 'connection.php';
 include 'header.php';
+include 'connection.php';
 
 ?>
 <!DOCTYPE html>
@@ -98,8 +98,9 @@ if (isset($_POST['delete'])) {
 
     if (mysqli_query($con, $sql)) {
 
-
-        echo "<script>window.location = 'row_category03.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
+        $message = "ITEM HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='row_category03.php';</script>";
+        //echo "<script>window.location = 'row_category03.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'delete_raw3.php?msge=ROMVING ITEM FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

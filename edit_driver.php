@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 ?>
 <!DOCTYPE html>
@@ -211,11 +212,12 @@ include 'connection.php';
             $raddress = $_POST['raddress'];
             $rphone = $_POST['rphone'];
             $rlicence = $_POST['rlicence'];
-          
+
             $sql = "UPDATE driver SET dnic='$dnic',dname='$dname', daddress='$daddress',dphone='$dphone',dlicense='$dlicence',rnic='$rnic',rname='$rname',raddress='$raddress',rphone='$rphone',rlicense='$rlicence' WHERE id='$id'";
             if (mysqli_query($con, $sql)) {
-
-                echo "<script>window.location = 'driver.php?msg=DRIVER DETAILS UPDATED ! ';</script>";
+                $message = "DRIVER DETAILS UPDATED !";
+                echo "<script type='text/javascript'>alert('$message');window.location.href='driver.php';</script>";
+                //echo "<script>window.location.href = 'driver.php?msg=DRIVER DETAILS UPDATED ! ';</script>";
             } else {
                 echo "<script>window.location = 'edit_driver.php?msge=UPDATING DRIVER DETAILS FAILED ! CONTACT ADMINISTRATOR ';</script>";
             }

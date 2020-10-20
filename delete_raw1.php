@@ -1,8 +1,7 @@
 
 <?php
-include 'connection.php';
 include 'header.php';
-
+include 'connection.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,26 +28,24 @@ include 'header.php';
     </head>
 
 
-    
-        
-        
-  
+
+
+
+
+    <?php
+    if (isset($_GET['r'])) {
+        $id = $_GET['r'];
+        ?> 
+
+
+
+
         <?php
-        if (isset($_GET['r'])) {  
-            $id = $_GET['r'];
-            ?> 
+        include 'sidebar.php';
+        ?>
+        <body>
 
-     
-
-
-                   <?php
-  
-   include 'sidebar.php';
-  
-  ?>
-            <body>
-        
-        <br><br><br>
+            <br><br><br>
         <center> 
 
 
@@ -57,27 +54,27 @@ include 'header.php';
                     <form action = "delete_raw1.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
-                                <input type='hidden' name='r' value='<?php echo $id ?>'>
+                            <input type='hidden' name='r' value='<?php echo $id ?>'>
                         </div>
                         <!-- /.box-header -->
-                           <center> 
-                        <div class="box-body">
-                            <div class="callout callout-danger">
-                                <h4 class="modal-title">Are you sure you want to remove this raw item ?</h4>
+                        <center> 
+                            <div class="box-body">
+                                <div class="callout callout-danger">
+                                    <h4 class="modal-title">Are you sure you want to remove this raw item ?</h4>
 
-                                <p>This will lead to remove the raw items after your confirmation. All transactions, combined with this items will be removed and system won't be able to roll-back these transactions in future.</p>
+                                    <p>This will lead to remove the raw items after your confirmation. All transactions, combined with this items will be removed and system won't be able to roll-back these transactions in future.</p>
 
-                                <div class="card-footer">
-                                    <a href='row_category01.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
-                                    <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
+                                    <div class="card-footer">
+                                        <a href='row_category01.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                        <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
+                                    </div>
                                 </div>
+
+
                             </div>
-
-
-                        </div>
-                           </center>
-</form>
-                        <!-- /.box-body -->
+                        </center>
+                    </form>
+                    <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
 
@@ -85,21 +82,22 @@ include 'header.php';
 
         </center>
 
-    
+
     </body>
 
     <?php
 }
 
-if (isset($_POST['delete'])) { 
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
     $sql = "UPDATE row_one SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
+        $message = "ITEM HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='row_category01.php';</script>";
 
-
-        echo "<script>window.location = 'row_category01.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
+        //echo "<script>window.location = 'row_category01.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'delete_raw01.php?msge=ROMVING ITEM FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

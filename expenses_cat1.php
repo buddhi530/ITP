@@ -1,6 +1,6 @@
 <?php
-include 'connection.php';
 include 'header.php';
+include 'connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -197,9 +197,12 @@ include 'header.php';
 
                                         echo "<tr><td>&nbsp " . $type1 . "</td>";
 
-                                        echo"<td> <div class='btn-group'>
-                              
-                           <center>   <button type='button' class='btn btn-warning'>Delete</button></div></td></center></tr>";
+                                                 echo "<td> <div class='btn-group'>
+                              <a href='edit_expenses.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                        <a href='delete_expenses.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
+                       
+                     
+                      </div></td>";
                                     }
 
                                     echo "</tbody>

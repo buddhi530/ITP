@@ -1,5 +1,6 @@
 <?php
 
+include 'header.php';
 include 'connection.php';
 
 
@@ -16,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
     
     
-      $sql = "INSERT INTO feedback(invoice_id,recieved_date,pay_done,pay_type,description) VALUES 
-			('$invoice_num','$recieved_date','$pay_done','$pay_type','$description')";
+      $sql = "INSERT INTO feedback(invoice_id,recieved_date,pay_done,pay_type,description,user) VALUES 
+			('$invoice_num','$recieved_date','$pay_done','$pay_type','$description',$user)";
       
       $sql1 = "UPDATE invoice SET feedback='1' where id='$invoice_num'";
       

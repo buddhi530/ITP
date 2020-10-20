@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 
 
@@ -10,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $extra =$_POST['extra'];
    
    
-   $sql = "insert into row_four(extra) values ('$extra')";
+   $sql = "insert into row_four(extra,user) values ('$extra','$user')";
    
    if(mysqli_query($con, $sql))
     {

@@ -1,3 +1,10 @@
+
+<?php
+//include 'header.php';
+include 'connection.php';
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +51,7 @@
                 var x = data;
            
            if ($.trim(data) == 'done') {
-             window.location.href = "/my_project/dashboard_main.php";
+             window.location.href = "/my_project/index.php";
          }
           else {
            MessageManager.show(x);

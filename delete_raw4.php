@@ -1,7 +1,7 @@
 
 <?php
-include 'connection.php';
 include 'header.php';
+include 'connection.php';
 
 ?>
 <!DOCTYPE html>
@@ -97,9 +97,10 @@ if (isset($_POST['delete'])) {
     $sql = "UPDATE row_four SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
+        $message = "ITEM HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='row_category04.php';</script>";
 
-
-        echo "<script>window.location = 'row_category04.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
+        //echo "<script>window.location = 'row_category04.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'delete_raw4.php?msge=ROMVING ITEM FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 ?>
 <!DOCTYPE html>
@@ -251,7 +252,10 @@ include 'connection.php';
 
 //                            $sql1 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER DETAILS UPDATED ID :$id ')";
             //mysqli_query($con, $sql1);
-            echo "<script>window.location = 'company_register.php?msg=CUSTOMER DETAILS UPDATED ! ';</script>";
+
+            $message = "COMPANY DETAILS UPDATED !";
+            echo "<script type='text/javascript'>alert('$message');window.location.href='company_register.php';</script>";
+            //echo "<script>window.location = 'company_register.php?msg=CUSTOMER DETAILS UPDATED ! ';</script>";
         } else {
             echo "<script>window.location = 'edit_company.php?msge=UPDATING CUSTOMER DETAILS FAILED ! CONTACT ADMINISTRATOR ';</script>";
         }

@@ -1,6 +1,7 @@
 <?php
-
+include 'header.php';
 include 'connection.php';
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -14,7 +15,7 @@ $credit = $_POST['credit'];
 $cat4 = $_POST['cat4'];
 
 
-$sql = "insert into product_item (cat1,cat2,cat3,cat4,min_sale_price,cash_price,credit_price) values ('$cat1','$cat2','$cat3','$cat4','$msp','$cash','$credit')";
+$sql = "insert into product_item (cat1,cat2,cat3,cat4,min_sale_price,cash_price,credit_price,user) values ('$cat1','$cat2','$cat3','$cat4','$msp','$cash','$credit','$user')";
   if(mysqli_query($con, $sql))
     {
                            echo ' <div class="alert alert-success alert-dismissible">

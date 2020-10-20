@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 
 
@@ -23,8 +24,8 @@ include 'connection.php';
                        
                         
                         
-                        $sql = "INSERT INTO supplier(company_name,br_no,vat_no,company_phone,company_fax,company_address,person_name,person_mobile,salutation,company_email,country) VALUES 
-			('$companyname','$br','$vat','$com_phone','$fax','$com_address','$pname','$pmobile','$salutation','$com_email','$country')";
+                        $sql = "INSERT INTO supplier(company_name,br_no,vat_no,company_phone,company_fax,company_address,person_name,person_mobile,salutation,company_email,country,user) VALUES 
+			('$companyname','$br','$vat','$com_phone','$fax','$com_address','$pname','$pmobile','$salutation','$com_email','$country','$user')";
                        if(mysqli_query($con, $sql))
                        {
                            echo ' <div class="alert alert-success alert-dismissible">

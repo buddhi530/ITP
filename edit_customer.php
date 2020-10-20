@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 ?>
 <!DOCTYPE html>
@@ -129,16 +130,16 @@ include 'connection.php';
                                             </div>
                                             <div class="form-group">
                                                 <label>Contact Person Salutation</label>
-                                                  <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
-                                                <?php ECHO '<option value="' . $salutation . '"> ' . $salutation . '</OPTION>'; ?>
+                                                <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
+                                                    <?php ECHO '<option value="' . $salutation . '"> ' . $salutation . '</OPTION>'; ?>
 
-                                                <option value='Mr'>Mr</option>
-                                                <option value='Mrs'>Mrs</option>
-                                                <option value='Miss'>Miss</option>
-                                                <option value='Dr'>Dr</option>
-                                                <option value='Ms'>Ms</option>
-                                                <option value='Rev'>Rev</option>
-                                            </select>
+                                                    <option value='Mr'>Mr</option>
+                                                    <option value='Mrs'>Mrs</option>
+                                                    <option value='Miss'>Miss</option>
+                                                    <option value='Dr'>Dr</option>
+                                                    <option value='Ms'>Ms</option>
+                                                    <option value='Rev'>Rev</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="examplesfax">Name<font color='red'> *</font></label>
@@ -166,7 +167,7 @@ include 'connection.php';
                                                         <label>Price below MSP<font color='red'> *</font></label>
                                                         <select class="form-control select2" style="width: 100%;" name="msp" id="msp">
                                                             <?php ECHO '<option value="' . $msp1 . '"> ' . $msp1 . '</OPTION>'; ?>
-                                                           
+
                                                             <option value='YES'>YES</option>
                                                             <option value='NO'>NO</option>
 
@@ -241,7 +242,10 @@ include 'connection.php';
 
 //                            $sql1 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER DETAILS UPDATED ID :$id ')";
                 //mysqli_query($con, $sql1);
-                echo "<script>window.location = 'customer_register.php?msg=CUSTOMER DETAILS UPDATED ! ';</script>";
+
+                $message = "CUSTOMER DETAILS UPDATED !";
+                echo "<script type='text/javascript'>alert('$message');window.location.href='customer_register.php';</script>";
+                //echo "<script>window.location = 'customer_register.php?msg=CUSTOMER DETAILS UPDATED ! ';</script>";
             } else {
                 echo "<script>window.location = 'edit_customer.php?msge=UPDATING CUSTOMER DETAILS FAILED ! CONTACT ADMINISTRATOR ';</script>";
             }

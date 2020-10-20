@@ -1,8 +1,7 @@
 
 <?php
+include 'header.php';
 include 'connection.php';
-//include 'header.php';
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,22 +30,27 @@ include 'connection.php';
 
     <body>
         <?php
-        if (isset($_GET['r'])) {  
+        if (isset($_GET['r'])) {
             $id = $_GET['r'];
-            ?> <br><br><br><br><br><br><br>
+            ?> 
 
         <body class="hold-transition skin-blue sidebar-mini"> 
 
-
+           
+ <?php
+  
+   include 'sidebar.php';
+  
+  ?>
         <center> 
 
-
+<br> <br> <br><br> <br>
             <div class="col-md-6">
                 <div class="box box-default">
                     <form action = "delete_product_cat3.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">
                         <div class="box-header with-border">
                             <i class="fa fa-bullhorn"></i>
-                                <input type='hidden' name='r' value='<?php echo $id ?>'>
+                            <input type='hidden' name='r' value='<?php echo $id ?>'>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -63,8 +67,8 @@ include 'connection.php';
 
 
                         </div>
-</form>
-                        <!-- /.box-body -->
+                    </form>
+                    <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
 
@@ -72,21 +76,22 @@ include 'connection.php';
 
         </center>
 
-    
+
     </body>
 
     <?php
 }
 
-if (isset($_POST['delete'])) { 
+if (isset($_POST['delete'])) {
     $id = $_POST['r'];
 
     $sql = "UPDATE category_three SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {
+        $message = "ITEM HAS BEEN REMOVED !";
+        echo "<script type='text/javascript'>alert('$message');window.location.href='product_category03.php';</script>";
 
-
-        echo "<script>window.location = 'product_category03.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
+        //echo "<script>window.location = 'product_category03.php?msg=ITEM HAS BEEN REMOVED ! ';</script>";
     } else {
         echo "<script>window.location = 'product_category03.php?msge=ROMVING ITEM FAILED ! CONTACT ADMINISTRATOR ';</script>";
     }

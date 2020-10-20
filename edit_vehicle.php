@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 ?>
 <!DOCTYPE html>
@@ -120,7 +121,7 @@ include 'connection.php';
                                                 <label>Vehicle Type <font color='red'> *</font></label>
 
                                                 <select class="form-control select2" style="width: 100%;" name="type" id="type" >
-                                                <?php echo' <option selected="selected"  name="type" id="type"  value='.$type1.' >'.$type1.'</option>'?>
+                                                    <?php echo' <option selected="selected"  name="type" id="type"  value=' . $type1 . ' >' . $type1 . '</option>' ?>
                                                     <option value="LORRY">LORRY</option>
                                                     <option VALUE="BIKE">BIKE</option>
                                                     <option value="THREE-WHELLER">THREE-WHELLER</option>
@@ -168,7 +169,7 @@ include 'connection.php';
                                                     <div class="form-group">
                                                         <label>Driver Name <font color='red'> *</font></label>
                                                         <select class="form-control select2" style="width: 100%;" name="dname" id="dname" value='<?php echo $dname1 ?>'>
-                                                        <?php echo '<option selected="" value='.$dname1.'>'.$dname1.'</option>'?>
+                                                            <?php echo '<option selected="" value=' . $dname1 . '>' . $dname1 . '</option>' ?>
                                                             <?php
                                                             $sql1 = mysqli_query($con, "SELECT id,dname FROM driver WHERE status='1'");
                                                             while ($row = mysqli_fetch_array($sql1)) {
@@ -184,7 +185,7 @@ include 'connection.php';
                                                     <div class="form-group">
                                                         <label>Driver Rep Name <font color='red'> *</font></label>
                                                         <select class="form-control select2" style="width: 100%;" name="sname" id="sname" >
-                                                         <?php echo '<option selected="" value='.$sname1.' >'.$sname1.'</option>'?>
+                                                            <?php echo '<option selected="" value=' . $sname1 . ' >' . $sname1 . '</option>' ?>
                                                             <?php
                                                             $sql1 = mysqli_query($con, "SELECT id,rname FROM driver WHERE status='1'");
                                                             while ($row = mysqli_fetch_array($sql1)) {
@@ -209,7 +210,7 @@ include 'connection.php';
                                                     <div class="form-group">
                                                         <label>Insuarance Date<font color='red'> *</font></label>
                                                         <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                                                            <input autocomplete="off" type="text" id="insu_date" name="insu_date" value='<?php echo  $insu_date1 ?>' class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                                                            <input autocomplete="off" type="text" id="insu_date" name="insu_date" value='<?php echo $insu_date1 ?>' class="form-control datetimepicker-input" data-target="#reservationdate"/>
                                                             <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                             </div>
@@ -223,7 +224,7 @@ include 'connection.php';
 
                                                         <div class="form-group">
                                                             <label for="examplebr">Insuarance company</label>
-                                                            <input type="text" class="form-control" id="insu_company" value='<?php echo  $insu_company1 ?>' name="insu_company"  placeholder="Enter Insuarance company" autocomplete="off">
+                                                            <input type="text" class="form-control" id="insu_company" value='<?php echo $insu_company1 ?>' name="insu_company"  placeholder="Enter Insuarance company" autocomplete="off">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -267,7 +268,9 @@ include 'connection.php';
 
 //                            $sql1 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER DETAILS UPDATED ID :$id ')";
                 //mysqli_query($con, $sql1);
-                echo "<script>window.location = 'vehicle.php?msg=SUPPLIER DETAILS UPDATED ! ';</script>";
+                $message = "VEHICLE DETAILS UPDATED !";
+                echo "<script type='text/javascript'>alert('$message');window.location.href='vehicle.php';</script>";
+                //echo "<script>window.location = 'vehicle.php?msg=SUPPLIER DETAILS UPDATED ! ';</script>";
             } else {
                 echo "<script>window.location = 'edit_vehicle.php?msge=UPDATING SUPPLIER DETAILS FAILED ! CONTACT ADMINISTRATOR ';</script>";
             }
@@ -316,81 +319,81 @@ include 'connection.php';
 
 
         <script>
-                                $(function () {
-                                    //Initialize Select2 Elements
-                                    $('.select2').select2()
+                            $(function () {
+                                //Initialize Select2 Elements
+                                $('.select2').select2()
 
-                                    //Initialize Select2 Elements
-                                    $('.select2bs4').select2({
-                                        theme: 'bootstrap4'
-                                    })
-
-                                    //Datemask dd/mm/yyyy
-                                    $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
-                                    //Datemask2 mm/dd/yyyy
-                                    $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
-                                    //Money Euro
-                                    $('[data-mask]').inputmask()
-
-                                    //Date range picker
-                                    $('#reservationdate').datetimepicker({
-                                        format: 'YYYY-MM-DD'
-                                    });
-                                    $('#reservationdate1').datetimepicker({
-                                        format: 'YYYY-MM-DD'
-                                    });
-                                    //Date range picker
-                                    $('#reservation').daterangepicker();
-                                    //Date range picker with time picker
-
-                                    $('#reservationtime').daterangepicker({
-                                        timePicker: true,
-                                        timePickerIncrement: 30,
-                                        locale: {
-                                            format: 'MM/DD/YYYY hh:mm A'
-                                        }
-                                    })
-                                    //Date range as a button
-                                    $('#daterange-btn').daterangepicker(
-                                            {
-                                                ranges: {
-                                                    'Today': [moment(), moment()],
-                                                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                                                },
-                                                startDate: moment().subtract(29, 'days'),
-                                                endDate: moment()
-                                            },
-                                            function (start, end) {
-                                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                                            }
-                                    )
-
-                                    //Timepicker
-                                    $('#timepicker').datetimepicker({
-                                        format: 'LT'
-                                    })
-
-                                    //Bootstrap Duallistbox
-                                    $('.duallistbox').bootstrapDualListbox()
-
-                                    //Colorpicker
-                                    $('.my-colorpicker1').colorpicker()
-                                    //color picker with addon
-                                    $('.my-colorpicker2').colorpicker()
-
-                                    $('.my-colorpicker2').on('colorpickerChange', function (event) {
-                                        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-                                    });
-
-                                    $("input[data-bootstrap-switch]").each(function () {
-                                        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-                                    });
-
+                                //Initialize Select2 Elements
+                                $('.select2bs4').select2({
+                                    theme: 'bootstrap4'
                                 })
+
+                                //Datemask dd/mm/yyyy
+                                $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
+                                //Datemask2 mm/dd/yyyy
+                                $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
+                                //Money Euro
+                                $('[data-mask]').inputmask()
+
+                                //Date range picker
+                                $('#reservationdate').datetimepicker({
+                                    format: 'YYYY-MM-DD'
+                                });
+                                $('#reservationdate1').datetimepicker({
+                                    format: 'YYYY-MM-DD'
+                                });
+                                //Date range picker
+                                $('#reservation').daterangepicker();
+                                //Date range picker with time picker
+
+                                $('#reservationtime').daterangepicker({
+                                    timePicker: true,
+                                    timePickerIncrement: 30,
+                                    locale: {
+                                        format: 'MM/DD/YYYY hh:mm A'
+                                    }
+                                })
+                                //Date range as a button
+                                $('#daterange-btn').daterangepicker(
+                                        {
+                                            ranges: {
+                                                'Today': [moment(), moment()],
+                                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                            },
+                                            startDate: moment().subtract(29, 'days'),
+                                            endDate: moment()
+                                        },
+                                        function (start, end) {
+                                            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                                        }
+                                )
+
+                                //Timepicker
+                                $('#timepicker').datetimepicker({
+                                    format: 'LT'
+                                })
+
+                                //Bootstrap Duallistbox
+                                $('.duallistbox').bootstrapDualListbox()
+
+                                //Colorpicker
+                                $('.my-colorpicker1').colorpicker()
+                                //color picker with addon
+                                $('.my-colorpicker2').colorpicker()
+
+                                $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                                    $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+                                });
+
+                                $("input[data-bootstrap-switch]").each(function () {
+                                    $(this).bootstrapSwitch('state', $(this).prop('checked'));
+                                });
+
+                            })
         </script>
 
 

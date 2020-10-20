@@ -252,7 +252,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Name </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> P/W reset </center></th>
+                                    echo "<tr><th><center> Name </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> Action </center></th>
 					
 					</tr></tfoot>
                                         </thead>
@@ -302,7 +302,12 @@ if($stat ==1)
 else{
    echo '<td align= "center">  <button type="button" class="btn btn-block btn-warning">CHANGE</button></td>'; 
 }
-echo '<td align= "center"><button type="button" class="btn btn-block btn-warning">Reset</button></td>';
+     echo "<td> <div class='btn-group'>
+                              <a href='edit_adduser.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                        <a href='delete_adduser.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
+                       
+                     
+                      </div></td>";
 
                            
                        

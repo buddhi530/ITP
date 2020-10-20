@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 
 
@@ -10,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $type = strtoupper($_POST['type']);
    
    
-   $sql = "insert into expenses_category(type) values ('$type')";
+   $sql = "insert into expenses_category(type,user) values ('$type','$user')";
    
    if(mysqli_query($con, $sql))
    {

@@ -1,4 +1,5 @@
 <?php
+include 'header.php';
 include 'connection.php';
 ?>
 <!DOCTYPE html>
@@ -331,7 +332,7 @@ include 'connection.php';
                                     }
                                         
 //                                        $id1 = $id + 1000;
-                                    echo "<tr><td> <center>$type1</center></td><td> &nbsp" .$driver_name . " </td><td> &nbsp" . $rep_name . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
+                                    echo "<tr><td> <center>$type1</center></td><td> &nbsp" .$dname1 . " </td><td> &nbsp" . $sname1 . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
                                                                 <td> &nbsp" . $insu_date1 . " </td><td> &nbsp" . $reg_num1 . " </td>";
 
 

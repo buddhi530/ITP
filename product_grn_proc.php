@@ -1,13 +1,15 @@
-
+<?php
+include 'header.php';
+include 'connection.php';
+?>
 
 <script>
     window.onload = function() { window.print(); }
     </script>
 <?php
-include 'connection.php';
-//include 'header.php';
+;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $company = 1;
+  
  if(isset($_POST["item_name"][0])){
      
       $date = $_POST["grndate"];
@@ -15,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $description = $_POST["des"];
      
     
-       $sql = "INSERT INTO raw_grn (grn_date,description,user) VALUES"
+       $sql = "INSERT INTO production_grn (grn_date,description,user) VALUES"
     . " ('$date','$description','$user')";   
     if(mysqli_query($con, $sql)){
         

@@ -70,7 +70,7 @@ include 'connection.php';
                 $('#sellingprice').val("");
 
 
-                alert(data);
+                MessageManager.show(data);
 
             });
             return false;
@@ -289,7 +289,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Item name </center></th><th><center> Reorder Level </center></th>
+                                    echo "<tr><th><center> Item name </center></th><th><center> Reorder Level </center></th><th><center> Stock </center></th>
 					<th width='1%'><center> Actions</center></th>
 					</tr>
                                       
@@ -297,7 +297,7 @@ include 'connection.php';
                                  
                                         <tbody>";
 
-                                    $sql = "SELECT id,cat1,cat2,cat3,cat4,reorder FROM row_item WHERE  status = '1'  ";
+                                    $sql = "SELECT id,cat1,cat2,cat3,cat4,reorder,stock_stores FROM row_item WHERE  status = '1'  ";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
@@ -310,7 +310,7 @@ include 'connection.php';
                              
                                         $cat4 = $arraySomething1['cat4'];
                                         $reorder = $arraySomething1['reorder'];
-
+                                         $stock = $arraySomething1['stock_stores'];
 
                                         $sql1 = "select type from row_one where id ='$cat1'  ";
                                         $result1 = mysqli_query($con, $sql1);
@@ -337,7 +337,7 @@ include 'connection.php';
                                         }
 
 
-                                        echo "<tr> <td>" . $cat10 . " " . $cat20 . " " . $cat30 . " " . $cat40 . " </td><td> <center>&nbsp" . $reorder . " </center></td>
+                                        echo "<tr> <td>" . $cat10 . " " . $cat20 . " " . $cat30 . " " . $cat40 . " </td><td> <center>&nbsp" . $reorder . " </center></td><td> <center>&nbsp" . $stock . " </center></td>
                                                                 ";
 
 

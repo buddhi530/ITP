@@ -1,7 +1,7 @@
 <?php
 
 include 'connection.php';
-//include 'header.php';
+include 'header.php';
 
 $connect = new PDO("mysql:host=localhost;dbname=db_sale", "root", "");
 
@@ -16,12 +16,13 @@ function fill_unit_select_box($connect,$con)
  foreach($result as $arraySomething78)
  {
    
-     
+   
      $id = $arraySomething78['id'];
     $cat1 = $arraySomething78['cat1'];
     $cat2 = $arraySomething78['cat2'];
     $cat3 = $arraySomething78['cat3'];
     $cat4 = $arraySomething78['cat4'];
+ 
    
 
 
@@ -55,13 +56,19 @@ function fill_unit_select_box($connect,$con)
     $item_name = $cat1_name." ".$cat2_name." ".$cat3_name." ".$cat4_name;
            
     
+        
+      
+           
+    
   $output .= '<option value="'.$id.'">'.$item_name.'</option>';
  }
  return $output;
 }
 
 
+
 ?>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <style>
@@ -125,8 +132,8 @@ function calc()
 		if(html!='')
 		{
 			var qty =  Number($(this).find('.qty').val().replace(/,/g, ''))     ;
-			var price = 1;
-			$(this).find('.total').val(qty);
+			var price = Number($(this).find('.price').val().replace(/,/g, ''));
+			$(this).find('.total').val(qty*price);
 			
 			calc_total();
 		}
@@ -140,7 +147,9 @@ function calc_total()
         total += parseInt($(this).val());
     });
 	$('#sub_total').val(total.toFixed(2));
-
+	tax_sum=total/100*$('#tax').val();
+	$('#tax_amount').val(tax_sum.toFixed(2));
+	$('#total_amount').val((tax_sum+total).toFixed(2));
 }
 //ADD REMOVE ROWS INVOICE - END
 
@@ -247,23 +256,24 @@ function calc_total()
                                         <div class="form-group">
                                     
                                         </div>   </div>
-
-        <table class="table table-bordered table-hover" id="tab_logic">
+                       
+                  <table class="table table-bordered table-hover" id="tab_logic">
     
         <thead>
           <tr>
             <th class="text-center"> # </th>
-            <th class="text-center" width='80%'> Item </th>
+            <th class="text-center" width='60%'> Item </th>
             <th class="text-center"> Qty </th>
-            
+            <th class="text-center"> Price </th>
+            <th class="text-center"> Total </th>
           </tr>
         </thead><tbody>
              <tr id='addr0'>
-            <td>1</td>
+            <td></td>
             <td><select name="item_name[]"  class='form-control itemname' required><option value="">Select Item</option><?php echo fill_unit_select_box($connect,$con); ?></select></td>
-            <td><input type="text" name='qty[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Qty' class="form-control qty"  /></td>
-           
-
+            <td><input type="text" name='quantity[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Qty' class="form-control qty"  /></td>
+            <td><input type="text" name='unit_price[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Unit Price' class="form-control price"  /></td>
+            <td><input type="text" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
           </tr>
           <tr id='addr1'></tr>
         </tbody>
@@ -282,7 +292,10 @@ function calc_total()
       <table class="table table-bordered table-hover" id="tab_logic_total">
         <tbody>
          
-        
+         <tr>
+            <th class="text-center">Total</th>
+            <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly/></td>
+          </tr>
         
         </tbody>
       </table>
@@ -292,7 +305,7 @@ function calc_total()
   
      <div class="card-footer">
                                 <button type="submit" class="btn btn-primary" id ="submit">Generate GRN </button>
-                                <!--                            <button type="submit" class="btn btn-primary">Update</button>-->
+                              
                               
                             </div>
 </form>
@@ -408,23 +421,7 @@ function calc_total()
         <!-- AdminLTE for demo purposes -->
         <script src="dist/js/demo.js"></script>
         <!-- page script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "autoWidth": false,
-                });
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": true,
-                    "searching": true,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+       
 
 
 

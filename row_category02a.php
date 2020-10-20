@@ -1,5 +1,6 @@
 
 <?php
+include 'header.php';
 include 'connection.php';
 
 
@@ -11,7 +12,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
    $brand =$_POST['brand'];
    
    
-   $sql = "insert into row_two(brand) values ('$brand')";
+   $sql = "insert into row_two(brand,user) values ('$brand','$user')";
    
    if(mysqli_query($con, $sql))
     {

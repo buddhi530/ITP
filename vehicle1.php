@@ -1,5 +1,5 @@
 <?php
-
+include 'header.php';
 include 'connection.php';
 
 
@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
     
     
-      $sql = "INSERT INTO vehicle(type,dname,rname,revenue_license,insurance_company,insurance_date,registration_num) VALUES 
-			('$type','$dname','$sname','$revenue_date','$insu_company','$insu_date','$reg_num')";
+      $sql = "INSERT INTO vehicle(type,dname,rname,revenue_license,insurance_company,insurance_date,registration_num,user) VALUES 
+			('$type','$dname','$sname','$revenue_date','$insu_company','$insu_date','$reg_num','$user')";
                        if(mysqli_query($con, $sql))
                             {
                            echo ' <div class="alert alert-success alert-dismissible">

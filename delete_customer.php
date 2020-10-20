@@ -1,7 +1,7 @@
 
 <?php
-include 'connection.php';
 include 'header.php';
+include 'connection.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,11 @@ include 'header.php';
 
         <center> 
 
+<br>
+<br>
+<br>
 
+<br>
             <div class="col-md-6">
                 <div class="box box-default">
                     <form action = "delete_customer.php" class="form-horizontal" method="POST"  enctype="multipart/form-data" name="form" id="form">

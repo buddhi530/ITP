@@ -1,5 +1,8 @@
-
 <?php
+include 'header.php';
+include 'connection.php';
+
+
 
     if(!isset($_SESSION)) 
     { 
@@ -22,7 +25,7 @@ if($position == 1)
         <a href="../../index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="logout.php" class="nav-link">Logout</a>
       </li>
     </ul>
 
@@ -51,7 +54,7 @@ if($position == 1)
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Developer</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['sess_name']; ?></a>
         </div>
       </div>
 
@@ -61,7 +64,7 @@ if($position == 1)
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-              <a href="Dashboard_main.php" class="nav-link">
+              <a href="index.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -450,7 +453,7 @@ else if($position == 2)
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Developer</a>
+          <a href="#" class="d-block"><?php echo $_SESSION['sess_name']; ?> </a>
         </div>
       </div>
 

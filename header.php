@@ -1,5 +1,7 @@
 <?php
+
 include 'connection.php';
+
 
 
     if(!isset($_SESSION)) 
@@ -17,8 +19,8 @@ if (!isset($_SESSION['sess_user_id']) || (trim($_SESSION['sess_user_id']) == '')
     exit();
 }
 
-
-
+$user = $_SESSION['sess_user_id'];
+$position = $_SESSION['sess_position'];
 
 date_default_timezone_set("Asia/Colombo");
 

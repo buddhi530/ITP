@@ -1,4 +1,9 @@
+
 <?php
+
+
+
+
 session_start();
 ob_start();
 
@@ -48,7 +53,7 @@ else {
     $_SESSION['sess_user_id'] = $id; //Initializing login id
     $_SESSION['sess_username'] = $name; //Initializing username
     $_SESSION['sess_position'] = $position; //Initializing user level 
-    
+    $_SESSION['sess_name'] = $name;
     echo 'done';
     
     

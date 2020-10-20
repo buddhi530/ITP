@@ -5,7 +5,7 @@ include 'connection.php';
 <!DOCTYPE html>
 <html>
     <head>
-          <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Shanaz</title>
         <!-- Tell the browser to be responsive to screen width -->
@@ -26,7 +26,7 @@ include 'connection.php';
         <!-- Select2 -->
         <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
         <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-        
+
         <!-- Bootstrap4 Duallistbox -->
         <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
         <!-- Theme style -->
@@ -36,17 +36,17 @@ include 'connection.php';
         <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
-        
+
         <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-   
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
 
 
         <script>
@@ -56,13 +56,16 @@ include 'connection.php';
                 var form_data = new FormData(document.getElementById("myForm"));
                 form_data.append("label", "WEBUPLOAD");
                 $.ajax({
-                    url: "driver1.php",
+                    url: "Driver1.php",
                     type: "POST",
                     data: form_data,
                     processData: false, // tell jQuery not to process the data
                     contentType: false   // tell jQuery not to set contentType
                 }).done(function (data) {
                     console.log(data);
+                    $("#example1").load(window.location + " #example1");
+                    $("#example2").load(window.location + " #example2");
+                    $('#type').val("");
                     $("#example2").load(window.location + " #example2");
                     $('#dnic').val("");
                     $('#dname').val("");
@@ -74,6 +77,8 @@ include 'connection.php';
                     $('#raddress').val("");
                     $('#rphone').val("");
                     $('#rlicense').val("");
+
+
                     MessageManager.show(data);
                 });
                 return false;
@@ -84,44 +89,17 @@ include 'connection.php';
                     $('#ajaxmsg').html(content);
                     setTimeout(function () {
                         $('#ajaxmsg').html('');
-                    }, 3000);
+                    }, 6000);
                 }
             };
             window.setTimeout(function () {
                 $(".alert").fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
                 });
-            }, 4000);
-            function supplier_check(str) {
-
-                document.getElementById("txtHint").innerHTML = "";
-                if (str == "") {
-                    document.getElementById("txtHint").innerHTML = "";
-                    return;
-                }
-                if (window.XMLHttpRequest) {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                } else { // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        // document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-                        MessageManager.show(xmlhttp.responseText);
-                        if (xmlhttp.responseText) {
-                            document.getElementById("submit1").disabled = false;
-                        } else {
-                            document.getElementById("submit1").disabled = false;
-                        }
-                    }
-                }
-                xmlhttp.open("GET", "ajax_add_supplier.php?id=" + str, true);
-                xmlhttp.send();
-            }
+            }, 6000);
 
 
-        </script>
+        </script> 
 
         <script>
             function myFunction() {
@@ -132,14 +110,12 @@ include 'connection.php';
 
 
 
-     </head>
-   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    </head>
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
- <?php
-  
-   include 'sidebar.php';
-  
-  ?>
+        <?php
+        include 'sidebar.php';
+        ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -270,8 +246,8 @@ include 'connection.php';
                                 <thead>
 
 
-                                    <?php
-                                    echo "<tr><th><center>Driver NIC</center></th><th><center> Driver Name </center></th><th><center> Driver Address </center></th><th><center> Driver Phone </center></th><th><center>Driving license Num</center></th><th><center> Rep NIC </center></th><th><center> Rep Name </center></th>
+<?php
+echo "<tr><th><center>Driver NIC</center></th><th><center> Driver Name </center></th><th><center> Driver Address </center></th><th><center> Driver Phone </center></th><th><center>Driving license Num</center></th><th><center> Rep NIC </center></th><th><center> Rep Name </center></th>
 					<th><center> Rep Address </center></th><th><center> Rep Phone </center></th><th><center> Driving license Num </center></th><th width='1%'><center> Actions</center></th>
 					</tr></tfoot>
                                         </thead>
@@ -279,48 +255,49 @@ include 'connection.php';
                                         <tbody>";
 
 
-                                    $credit_limit1 = 0;
 
-                                    $sql = "SELECT id,dnic,dname,daddress,dphone,dlicense,rnic,rname,raddress,rphone,rlicense FROM driver WHERE  status = '1' ORDER BY dname ASC";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($arraySomething1 = mysqli_fetch_array($result)) {
-                                        $id = $arraySomething1['id'];
-                                        $dnic = $arraySomething1['dnic'];
-                                        $dname = $arraySomething1['dname'];
-                                        $daddress = $arraySomething1['daddress'];
-                                        $dphone = $arraySomething1['dphone'];
-                                        $dlicense = $arraySomething1['dlicense'];
-                                        $rnic = $arraySomething1['rnic'];
-                                        $rname = $arraySomething1['rname'];
-                                        $raddress = $arraySomething1['raddress'];
-                                        $rphone = $arraySomething1['rphone'];
-                                        $rlicense = $arraySomething1['rlicense'];
 
-                                        if ($dphone == 0) {
-                                            $dphone = "";
-                                        }
-                                        if ($rphone == 0) {
-                                            $rphone = "";
-                                        }
-                                    }
+$sql = "SELECT id,dnic,dname,daddress,dphone,dlicense,rnic,rname,raddress,rphone,rlicense FROM driver WHERE  status = '1' ORDER BY dname ASC";
+$result = mysqli_query($con, $sql);
+while ($arraySomething1 = mysqli_fetch_array($result)) {
+    $id = $arraySomething1['id'];
+    $dnic1 = $arraySomething1['dnic'];
+    $dname = $arraySomething1['dname'];
+    $daddress = $arraySomething1['daddress'];
+    $dphone = $arraySomething1['dphone'];
+    $dlicense = $arraySomething1['dlicense'];
+    $rnic = $arraySomething1['rnic'];
+    $rname = $arraySomething1['rname'];
+    $raddress = $arraySomething1['raddress'];
+    $rphone = $arraySomething1['rphone'];
+    $rlicense = $arraySomething1['rlicense'];
+
+    if ($dphone == 0) {
+        $dphone = "";
+    }
+    if ($rphone == 0) {
+        $rphone = "";
+    }
+    
+
 //                                        $id1 = $id + 1000;
-                                    echo "<tr><td> <center> $dnic</center></td> <td> $dname </td><td>$daddress</td><td> $dphone</td><td> <center>$dlicense</center> </td>
+echo "<tr><td> <center> $dnic1</center></td> <td> $dname </td><td>$daddress</td><td> $dphone</td><td> <center>$dlicense</center> </td>
                                                                 <td>$rnic </td><td>  $rname </td><td> $raddress </td><td>$rphone</td><td>$rlicense</td>";
 
 
-                                    echo "<td> <div class='btn-group'>
+echo "<td> <div class='btn-group'>
                               <a href='edit_driver.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
                         <a href='delete_driver.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
                        
                      
-                      </div></td>";
+                      </div></td></tr>";
+}
 
 
 
-
-                                    echo "</tbody>
+echo "</tbody>
                                                                                  ";
-                                    ?>                   
+?>                   
 
 
                                     </tbody>
@@ -340,47 +317,47 @@ include 'connection.php';
         <!-- /wrapper-->
 
 
-                    <!-- Form Element sizes -->
-                    <!-- jQuery -->
-                  
-                    <!-- Bootstrap 4 -->
-                    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-                    <!-- bs-custom-file-input -->
-                    <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-                    <!-- AdminLTE App -->
-                    <script src="dist/js/adminlte.min.js"></script>
-                    <!-- AdminLTEfor demo purposes -->
-                    <script src="dist/js/demo.js"></script>
+        <!-- Form Element sizes -->
+        <!-- jQuery -->
 
-                    </body>
-                    <!-- DataTables -->
-                    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-                    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-                    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-                    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- bs-custom-file-input -->
+        <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="dist/js/adminlte.min.js"></script>
+        <!-- AdminLTEfor demo purposes -->
+        <script src="dist/js/demo.js"></script>
 
-                    <script src="plugins/moment/moment.min.js"></script>
-                    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    </body>
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
-                    <!-- AdminLTE App -->
-                    <script src="dist/js/adminlte.min.js"></script>
-                    <!-- AdminLTE for demo purposes -->
-                    <script src="dist/js/demo.js"></script>
-                    <!-- page script -->
-                    <script type="text/javascript"></script>
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
-                    <script>
-                                           $(function () {
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script type="text/javascript"></script>
 
-                                               $('#example2').DataTable({
-                                                   "paging": true,
-                                                   "lengthChange": true,
-                                                   "searching": true,
-                                                   "ordering": true,
-                                                   "info": true,
-                                                   "autoWidth": false,
-                                                   "responsive": true,
-                                               });
-                                           });
-                    </script>
+    <script>
+                            $(function () {
+
+                                $('#example2').DataTable({
+                                    "paging": true,
+                                    "lengthChange": true,
+                                    "searching": true,
+                                    "ordering": true,
+                                    "info": true,
+                                    "autoWidth": false,
+                                    "responsive": true,
+                                });
+                            });
+    </script>
 

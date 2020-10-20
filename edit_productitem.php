@@ -1,6 +1,6 @@
 <?php
-include 'connection.php';
 include 'header.php';
+include 'connection.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -292,7 +292,10 @@ include 'header.php';
 
 //                            $sql1 ="INSERT INTO user_activity (user,activity) VALUES ('$user','SUPPLIER DETAILS UPDATED ID :$id ')";
                 //mysqli_query($con, $sql1);
-                echo "<script>window.location = 'product_item.php?msg=FEEDBACK DETAILS UPDATED ! ';</script>";
+                
+                $message = "PRODUCT ITEM DETAILS UPDATED !";
+                echo "<script type='text/javascript'>alert('$message');window.location.href='product_item.php';</script>";
+                //echo "<script>window.location = 'product_item.php?msg=FEEDBACK DETAILS UPDATED ! ';</script>";
             } else {
                 echo "<script>window.location = 'edit_productitem.php?msge=UPDATING FEEDBACK DETAILS FAILED ! CONTACT ADMINISTRATOR ';</script>";
             }
