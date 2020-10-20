@@ -1,5 +1,5 @@
 <?php
-
+include 'header.php';
 include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['mobile'];
     $position = $_POST['position'];
+    $ename = $_POST['ename'];
 
 
-    $sql = "insert into users(name,password,phone,email,position) values('$name','$pw1','$phone','$email','$position')";
+    $sql = "insert into users(name,employee_name,password,phone,email,position) values('$name','$ename','$pw1','$phone','$email','$position')";
 
     if (mysqli_query($con, $sql)) {
         $subject = "SYSTEM LOGIN DETAILS";

@@ -1,6 +1,7 @@
 <?php
+include 'header.php';
 include 'connection.php';
-//include 'header.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -217,7 +218,17 @@ include 'connection.php';
 
                                     </div>
                                 </div>
+  <div class="col-md-6">
+                                                <!-- select -->
 
+                                                <div class="form-group">
+                                                    <label for="examplesemai1">Employee Name</label>
+                                                    <input type="text" class="form-control" id="ename" name="ename"  placeholder="Enter Employee  Name" autocomplete="off">
+                                                </div>
+
+
+
+                                            </div>
 
 
                             </div>
@@ -252,7 +263,7 @@ include 'connection.php';
 
 
                                     <?php
-                                    echo "<tr><th><center> Name </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> Action </center></th>
+                                    echo "<tr><th><center> Name </center></th><th><center> Employee Name </center></th><th><center> Password </center></th><th><center> Phone </center></th><th><center> Email</center></th> <th><center> Position</center></th> <th><center>Status</center></th><th><center> Action</center></th><th><center> Action </center></th>
 					
 					</tr></tfoot>
                                         </thead>
@@ -262,7 +273,7 @@ include 'connection.php';
 
 
 
-                                    $sql = "SELECT id,name,password,phone,email,position,status FROM users ORDER BY id ASC";
+                                    $sql = "SELECT id,name,employee_name,password,phone,email,position,status FROM users ORDER BY id ASC";
                                     $result = mysqli_query($con, $sql);
                                     while ($arraySomething1 = mysqli_fetch_array($result)) {
                                         $id = $arraySomething1['id'];
@@ -273,7 +284,7 @@ include 'connection.php';
                                         $stat = $arraySomething1['status'];
                                         $password = $arraySomething1['password'];
                                         $position = $arraySomething1['position'];
-                                        
+                                        $ename = $arraySomething1['employee_name'];
 
                                         if ($stat == 1) {
                                             $stat1 = "<font color ='green'><b>ACTIVE</b></font>";
@@ -293,7 +304,7 @@ include 'connection.php';
 
 
 
-                                        echo "<tr><td> <center>" . $name . " </center></td> <td> &nbsp" . $pass_default1 . " </td><td> &nbsp" . $phone . " </td><td>" . $email . "</td><td>" . $position . "</td><td>" . $stat1 . "</td>";
+                                        echo "<tr><td> <center>" . $name . " </center></td> <td> <center>" . $ename . " </center></td><td> &nbsp" . $pass_default1 . " </td><td> &nbsp" . $phone . " </td><td>" . $email . "</td><td>" . $position . "</td><td>" . $stat1 . "</td>";
                                                                
 if($stat ==1)
 {

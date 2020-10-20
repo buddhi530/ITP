@@ -76,5 +76,5 @@ if (mysqli_query($con, $sql)){
                   Customer registration has been Failed !
                 </div>';
     }
-}
+
 ?>
