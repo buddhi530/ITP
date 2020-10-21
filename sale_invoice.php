@@ -255,7 +255,7 @@ function calc_total()
                                     
                                      <div class="form-group">
                                             <label>Customer <font color='red'> *</font></label>
-                                            <select class="form-control select2" style="width: 100%;" name="customer" id="customer" >
+                                            <select class="form-control select2" style="width: 100%;" name="customer" id="customer" required="">
                                                 <option value='' >SELECT CUSTOMER</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,company_name FROM company_customer WHERE status='1' and type_customer='2' ORDER BY company_name  ASC");
@@ -281,9 +281,9 @@ function calc_total()
                                          <div class="col-md-4">
                                     
                                    <div class="form-group">
-                  <label>Date:</label>
+                  <label>Date<font color='red'> *</font></label>
                     <div class="input-group date"  id="reservationdate" data-target-input="nearest">
-                        <input type="text" name='date' class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                        <input type="text" name='date' class="form-control datetimepicker-input" data-target="#reservationdate" autocomplete="off" required=""/>
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -324,7 +324,7 @@ function calc_total()
                                 
                                   <div class="form-group">
                                             <label>Driver <font color='red'> *</font></label>
-                                            <select class="form-control select2" style="width: 100%;" name="driver" id="driver" >
+                                            <select class="form-control select2" style="width: 100%;" name="driver" id="driver" required="">
                                                 <option value="" >SELECT Driver</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,dname FROM driver WHERE status='1' ORDER BY dname ASC");
@@ -343,7 +343,7 @@ function calc_total()
                                
                                     <div class="form-group">
                                          <label>Vehicle <font color='red'> *</font></label>
-                                            <select class="form-control select2" style="width: 100%;" name="vehicle" id="vehicle" >
+                                         <select class="form-control select2" style="width: 100%;" name="vehicle" id="vehicle" required="">
                                                 <option value="" >SELECT VEHICLE</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,registration_num FROM vehicle WHERE status='1' ");
@@ -361,7 +361,7 @@ function calc_total()
              
                                                <div class="form-group">
                                          <label>Sales Rep <font color='red'> *</font></label>
-                                            <select class="form-control select2" style="width: 100%;" name="porter" id="rep" >
+                                         <select class="form-control select2" style="width: 100%;" name="porter" id="rep" required="">
                                                 <option value="" >SELECT SALES REP</option>
                                                  <?php
                                               $sql1 = mysqli_query($con,"SELECT id,rname FROM driver WHERE status='1' ");
@@ -392,8 +392,8 @@ function calc_total()
              <tr id='addr0'>
             <td></td>
             <td><select name="item_name[]"  class='form-control itemname' required><option value="">Select Item</option><?php echo fill_unit_select_box($connect,$con); ?></select></td>
-            <td><input type="text" name='quantity[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Qty' class="form-control qty"  /></td>
-            <td><input type="text" name='unit_price[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Unit Price' class="form-control price"  /></td>
+            <td><input type="number" name='quantity[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Qty' class="form-control qty"  /></td>
+            <td><input type="number" name='unit_price[]' autocomplete="off" onkeypress="return isNumber(event)" placeholder='Unit Price' class="form-control price"  /></td>
             <td><input type="text" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
           </tr>
           <tr id='addr1'></tr>

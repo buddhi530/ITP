@@ -86,7 +86,7 @@ include 'connection.php';
                                 <p>This will lead to remove the supplier after your confirmation. All transactions, combined with this customer will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                 <div class="card-footer">
-                                    <a href='supplier_register.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                    <a href='supplier_register.php?'><button type="button" class="btn btn-info float-left" >Cancel</button></a>
                                     <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ include 'connection.php';
 }
 
 if (isset($_POST['delete'])) { 
-
+$id = $_POST['r'];
     $sql = "UPDATE supplier SET status='0' WHERE id='$id' ";
 
     if (mysqli_query($con, $sql)) {

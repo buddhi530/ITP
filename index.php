@@ -118,7 +118,15 @@ if($position == 1 || $position == 2 || $position == 3 )
         </div>
         <!-- /.content-header -->
 
-        <!-- Main content -->
+        <?php
+        $month = date('m');
+                                $sql = "SELECT sum(invoice_amount) AS amount FROM invoice WHERE MONTH(date)='$month'";
+                               
+                                 $result = mysqli_query($con, $sql);
+                        while ($arraySomething1 = mysqli_fetch_array($result)) {
+                            $amount = $arraySomething1['amount'];
+                        }
+                                ?>
         <section class="content">
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
@@ -127,9 +135,9 @@ if($position == 1 || $position == 2 || $position == 3 )
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3><?php echo number_format($amount,2)?></h3>
 
-                                <p>New Orders</p>
+                                <p>This Month Income</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
@@ -149,7 +157,7 @@ if($position == 1 || $position == 2 || $position == 3 )
                                 ?>
                                 <h3><?php echo $cus_count; ?><sup style="font-size: 20px"></sup></h3>
 
-                                <p>Customer Registration</p>
+                                <p>Total Customers</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
@@ -170,7 +178,7 @@ if($position == 1 || $position == 2 || $position == 3 )
 
                                 <h3><?php echo $sup_count; ?></h3>
 
-                                <p>Suppliers Registrations</p>
+                                <p>Total Suppliers</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
@@ -178,14 +186,23 @@ if($position == 1 || $position == 2 || $position == 3 )
                             <a href="supplier_register.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <!-- ./col -->
+                    
+                    <?php
+                     $month = date('m');
+                                $sql = "SELECT sum(amount) AS amount FROM expenses_proc WHERE MONTH(date)='$month'";
+                               
+                                 $result = mysqli_query($con, $sql);
+                        while ($arraySomething1 = mysqli_fetch_array($result)) {
+                            $amount = $arraySomething1['amount'];
+                        }
+                                ?>
                     <div class="col-lg-3 col-6">
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3><?php  echo number_format($amount,2); ?></h3>
 
-                                <p>Unique Visitors</p>
+                                <p>This Month Expenses</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
@@ -195,6 +212,67 @@ if($position == 1 || $position == 2 || $position == 3 )
                     </div>
                     <!-- ./col -->
                 </div>
+                
+                    <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Customer Feedbacks</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+
+                <table id="example2" class="table table-bordered table-striped">
+                    <thead>
+
+
+                        <?php
+                        echo "<tr><th><center>Invoice Number</center></th><th><center>Payment Done</center></th><th><center>Payment Method </center></th><th><center> Damage Description</center></th>
+					<th width='1%'><center> Actions</center></th>
+					</tr></tfoot>
+                                        </thead>
+                                        
+                                        <tbody>";
+
+
+                        $credit_limit1 = 0;
+
+                        $sql = "SELECT id,invoice_id,pay_done,pay_type,description FROM feedback WHERE  status = '1' ";
+                        $result = mysqli_query($con, $sql);
+                        while ($arraySomething1 = mysqli_fetch_array($result)) {
+                            $id = $arraySomething1['id'];
+                            $invoice_id = $arraySomething1['invoice_id'];
+                            $pay_done = $arraySomething1['pay_done'];
+                            $pay_type = $arraySomething1['pay_type'];
+                            $description = $arraySomething1['description'];
+
+
+
+                                       $id1 = $id + 10000;
+                            echo "<tr><td> <center>$id1</center></td><td> &nbsp" . $pay_done . " </td><td> &nbsp" . $pay_type . " </td><td>$description</td>";
+
+
+
+                            echo "<td> <div class='btn-group'>
+                              <a href='edit_feedback.php?r=$id'><button type='button' class='btn btn-info'>Edit</button></a>
+                        <a href='delete_feedback.php?r=$id' button type='button' class='btn btn-warning'>Delete</button>
+                       
+                     
+                      </div></td>";
+                        }
+
+
+
+
+                        echo "</tbody>
+                                                                                 ";
+                        ?>                   
+
+
+                        </tbody>
+
+                </table>
+
+            </div>  </div>  
 <?php
 }
 

@@ -65,7 +65,7 @@ include 'connection.php';
                                     <p>This will lead to remove the raw items after your confirmation. All transactions, combined with this items will be removed and system won't be able to roll-back these transactions in future.</p>
 
                                     <div class="card-footer">
-                                        <a href='row_category01.php?'><button type="submit" class="btn btn-info float-left" >Cancel</button></a>
+                                        <a href='row_category01.php?'><button type="button" class="btn btn-info float-left" >Cancel</button></a>
                                         <button type="submit" name='delete' class="btn btn-warning float-right">Delete</button>
                                     </div>
                                 </div>

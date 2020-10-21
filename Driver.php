@@ -116,6 +116,8 @@ include 'connection.php';
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                <div id='ajaxmsg'>
+                    </div>
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -167,7 +169,7 @@ include 'connection.php';
                                             <input type="text" class="form-control" id="dphone" name="dphone" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits"  placeholder="Enter Driver Fax" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesemai1">Driving License number</label>
+                                            <label for="examplesemai1">Driver Driving License number</label>
                                             <input type="text" class="form-control" id="dlicence" name="dlicence"  placeholder="Enter Driving License number" autocomplete="off">
                                         </div>
 
@@ -179,23 +181,23 @@ include 'connection.php';
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="examplesname">Driver rep NIC</label>
-                                            <input type="text" class="form-control" name="rnic"  id="rnic" placeholder="Enter Driver rep  NIC" autocomplete="off">
+                                            <label for="examplesname">Rep NIC</label>
+                                            <input type="text" class="form-control" name="rnic"  id="rnic" placeholder="Enter Driver rep  NIC" autocomplete="off" >
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesphone">Driver rep Name</label>
+                                            <label for="examplesphone">Rep Name</label>
                                             <input type="text" class="form-control" id="rname" name="rname"  placeholder="Enter Driver rep  Name" autocomplete="off" >
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesaddress">Driver rep Address</label>
+                                            <label for="examplesaddress">Rep Address</label>
                                             <input type="text" class="form-control" id="raddress" name="raddress" placeholder="Enter Driver rep  Address" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesfax">Driver rep Phone</label>
+                                            <label for="examplesfax">Rep Phone</label>
                                             <input type="text" class="form-control" id="rphone" name="rphone" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits"  placeholder="Enter Driver rep Fax" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesemai1">Driving License number</label>
+                                            <label for="examplesemai1">Rep Driving License number</label>
                                             <input type="text" class="form-control" id="rlicence" name="rlicence"  placeholder="Enter Driving License number" autocomplete="off">
                                         </div>
 

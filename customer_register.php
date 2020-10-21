@@ -48,6 +48,19 @@ include 'connection.php';
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+   <script>
+        //ONLY NUMBERS - START
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if  (charCode > 32 && (charCode < 65 || charCode > 90) &&
+          (charCode < 97 || charCode > 122)) {
+                return false;
+            }
+            return true;
+        }
+        //ONLY NUMBERS - END
+        </script>
 
         <script>
 
@@ -165,8 +178,8 @@ include 'connection.php';
 
 
                                         <div class="form-group">
-                                            <label for="examplesname">NIC/PASSPORT</label>
-                                            <input type="text" class="form-control" name="nic"  id="nic" placeholder="Enter Customer's NIC" autocomplete="off">
+                                            <label for="examplesname">NIC/PASSPORT<font color='red'> *</font></label></label>
+                                            <input type="text" class="form-control" name="nic"  id="nic" placeholder="Enter Customer's NIC" autocomplete="off" required="">
                                         </div>
                                         <div class="form-group">
                                             <label>Customer Type<font color='red'> *</font></label>
@@ -180,8 +193,8 @@ include 'connection.php';
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Contact Person Salutation</label>
-                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
+                                            <label>Contact Person Salutation<font color='red'> *</font></label></label>
+                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" required="">
                                                 <option value=''>SALUTATION</option>
                                                 <option value="MR"> Mr</OPTION>  
                                                 <option value="MRS"> Mrs </OPTION>
@@ -193,7 +206,7 @@ include 'connection.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="examplesfax">Name<font color='red'> *</font></label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Customer's Name" autocomplete="off">
+                                            <input type="text" onkeydown="return isNumber(event)"  class="form-control" id="name" name="name" placeholder="Enter Customer's Name" autocomplete="off" required="">
                                         </div>
 
 
@@ -215,7 +228,7 @@ include 'connection.php';
 
                                                 <div class="form-group">
                                                     <label>Price below MSP<font color='red'> *</font></label>
-                                                    <select class="form-control select2" style="width: 100%;" name="msp" id="msp" >
+                                                    <select class="form-control select2" style="width: 100%;" name="msp" id="msp" required="">
                                                         <option selected="salutation" >Price below MSP</option>
                                                         <option value='YES'>YES</option>
                                                         <option value='NO'>NO</option>
@@ -243,8 +256,8 @@ include 'connection.php';
 
 
                                         <div class="form-group">
-                                            <label for="examplecphone">Mobile</label>
-                                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Dpattern=igits" placeholder="Enter Contact Person Mobile" autocomplete="off">
+                                            <label for="examplecphone">Mobile<font color='red'> *</font></label></label>
+                                        <input type="text" class="form-control" id="mobile" name="mobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Dpattern=igits" placeholder="Enter Contact Person Mobile" autocomplete="off" required="">
                                         </div>
                                         <div class="form-group">
                                             <label for="examplecphone">Home Contact</label>

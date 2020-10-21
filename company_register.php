@@ -157,8 +157,8 @@ include 'connection.php';
 
 
                                         <div class="form-group">
-                                            <label for="examplesname">Company Name</label>
-                                            <input type="text" class="form-control" name="companyname"  id="companyname" placeholder="Enter Company Name" autocomplete="off">
+                                            <label for="examplesname">Company Name<font color='red'> *</font></label></label>
+                                            <input type="text" class="form-control" name="companyname"  id="companyname" placeholder="Enter Company Name" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="examplesphone">Company Phone</label>
@@ -209,9 +209,9 @@ include 'connection.php';
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Contact Person Salutation</label>
-                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
-                                                <option >Contact Person Salutation</option>
+                                            <label>Contact Person Salutation<font color='red'> *</font></label></label>
+                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" required>
+                                                <option value=''>Contact Person Salutation</option>
                                                 <option value="Mr">Mr</option>
                                                 <option value="Mrs">Mrs</option>
                                                 <option value="Miss">Miss</option>
@@ -224,8 +224,8 @@ include 'connection.php';
 
 
                                         <div class="form-group">
-                                            <label for="examplecname">Contact Person Name</label>
-                                            <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter Contact Person Name" autocomplete="off">
+                                            <label for="examplecname">Contact Person Name<font color='red'> *</font></label></label>
+                                            <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter Contact Person Name" autocomplete="off" required>
                                         </div>
                                         
                                          <div class="row">
@@ -233,8 +233,8 @@ include 'connection.php';
                                                 <!-- select -->
 
                                                 <div class="form-group">
-                                                    <label for="examplebr">Contact Person mobile</label>
-                                                    <input type="text" class="form-control" id="cmobile" name="cmobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter mobile Number" autocomplete="off">
+                                                    <label for="examplebr">Contact Person mobile<font color='red'> *</font></label></label>
+                                                    <input type="text" class="form-control" id="cmobile" name="cmobile" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter mobile Number" autocomplete="off" required>
                                                 </div>
 
 
@@ -304,6 +304,15 @@ include 'connection.php';
                                                     $person1 = $arraySomething1['person_name'];
                                                     $person_mobile1 = $arraySomething1['person_mobile'];
                                                     $vat = $arraySomething1['vat_no'];
+                                                    
+                                                    if($fax1==0)
+                                                        $fax1 = "";
+                                                    if($vat==0)
+                                                        $vat = "";
+                                                    if($company_phone1==0)
+                                                        $company_phone1 = "";
+                                                     if($person_mobile1==0)
+                                                        $person_mobile1 = "";
 
                                                     $id1 = $id + 1000;
                                                     echo "<tr><td> <center>S" . $id1 . " </center></td> <td> &nbsp" . $company_name1 . " </td><td> &nbsp" . $company_address1 . " </td><td>" . $company_phone1 . "</td><td> <center>" . $fax1 . "</center> </td>

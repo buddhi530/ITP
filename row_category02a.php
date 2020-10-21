@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
 {
     
     
-   $brand =$_POST['brand'];
+   $brand =strtoupper($_POST['brand']);
    
    
     

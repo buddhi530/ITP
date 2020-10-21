@@ -8,17 +8,17 @@ include 'connection.php';
  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                     
-                        $companyname =$_POST['companyname'];
+                        $companyname =strtoupper($_POST['companyname']);
                         $br = $_POST['br'];
                         $vat = $_POST['vat'];
                         $com_phone = $_POST['phone'];
                          $fax = $_POST['fax'];
-                        $com_address = $_POST['address'];
+                        $com_address = strtoupper($_POST['address']);
                        
                         $com_email = $_POST['email'];
                         
                         $salutation = $_POST['salutation'];
-                        $pname = $_POST['cname'];
+                        $pname = strtoupper($_POST['cname']);
                         $pmobile = $_POST['cmobile'];
                         $country =$_POST['country'];
                        

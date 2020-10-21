@@ -149,7 +149,7 @@ include 'connection.php';
                                         <div class="form-group">
                                             <label>Vehicle Type <font color='red'> *</font></label>
 
-                                            <select class="form-control select2" style="width: 100%;" name="type" id="type">
+                                            <select class="form-control select2" style="width: 100%;" name="type" id="type" required="">
                                                 <option selected="selected"  name="type" id="type">SELECT VEHICLE TYPE</option>
                                                 <option value="LORRY">LORRY</option>
                                                 <option VALUE="BIKE">BIKE</option>
@@ -164,7 +164,7 @@ include 'connection.php';
                                                 <div class="form-group">
                                                     <label>Revenue License Date<font color='red'> *</font></label>
                                                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                        <input autocomplete="off" type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="revenue_date" id="revenue_date"/>
+                                                        <input autocomplete="off" type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="revenue_date" id="revenue_date" required=""/>
                                                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                         </div>
@@ -178,7 +178,7 @@ include 'connection.php';
 
                                                     <div class="form-group">
                                                         <label for="examplebr">Vehicle Registration Number<font color='red'> *</font></label>
-                                                        <input type="text" class="form-control" id="reg_num" name="reg_num"  placeholder="Enter Vehicle Registration Number " autocomplete="off">
+                                                        <input type="text" class="form-control" id="reg_num" name="reg_num"  placeholder="Enter Vehicle Registration Number " autocomplete="off" required="">
                                                     </div>
                                                 </div>
 
@@ -197,8 +197,8 @@ include 'connection.php';
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Driver Name <font color='red'> *</font></label>
-                                                    <select class="form-control select2" style="width: 100%;" name="dname" id="dname" >
-                                                        <option selected="" >SELECT DRIVER</option>
+                                                    <select class="form-control select2" style="width: 100%;" name="dname" id="dname" required="">
+                                                        <option value="" >SELECT DRIVER</option>
                                                         <?php
                                                         $sql1 = mysqli_query($con, "SELECT id,dname FROM driver WHERE status='1'");
                                                         while ($row = mysqli_fetch_array($sql1)) {
@@ -213,8 +213,8 @@ include 'connection.php';
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Driver Rep Name <font color='red'> *</font></label>
-                                                    <select class="form-control select2" style="width: 100%;" name="sname" id="sname" >
-                                                        <option selected="" >SELECT REP NAME</option>
+                                                    <select class="form-control select2" style="width: 100%;" name="sname" id="sname" required="">
+                                                        <option value="" >SELECT REP NAME</option>
                                                         <?php
                                                         $sql1 = mysqli_query($con, "SELECT id,rname FROM driver WHERE status='1'");
                                                         while ($row = mysqli_fetch_array($sql1)) {
@@ -239,7 +239,7 @@ include 'connection.php';
                                                 <div class="form-group">
                                                     <label>Insuarance Date<font color='red'> *</font></label>
                                                     <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                                                        <input autocomplete="off" type="text" id="insu_date" name="insu_date" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                                                        <input autocomplete="off" type="text" id="insu_date" name="insu_date" class="form-control datetimepicker-input" data-target="#reservationdate" required=""/>
                                                         <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                         </div>
@@ -325,14 +325,14 @@ include 'connection.php';
                                     }
                                     
                                     
-                                      $sql16 = "SELECT dname FROM driver WHERE  id = ' $sname1'";
+                                      $sql16 = "SELECT rname FROM driver WHERE  id = ' $sname1'";
                                     $result16 = mysqli_query($con, $sql16);
                                     while ($arraySomething1 = mysqli_fetch_array($result16)) {
-                                        $rep_name = $arraySomething1['dname'];
+                                        $rep_name = $arraySomething1['rname'];
                                     }
                                         
 //                                        $id1 = $id + 1000;
-                                    echo "<tr><td> <center>$type1</center></td><td> &nbsp" .$dname1 . " </td><td> &nbsp" . $sname1 . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
+                                    echo "<tr><td> <center>$type1</center></td><td> &nbsp" .$driver_name . " </td><td> &nbsp" . $rep_name . " </td><td>" . $revenue_date1 . "</td><td> <center>" . $insu_company1 . "</center> </td>
                                                                 <td> &nbsp" . $insu_date1 . " </td><td> &nbsp" . $reg_num1 . " </td>";
 
 

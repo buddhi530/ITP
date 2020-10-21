@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $new_stock_shop = $stock_shop + $qty;
 
-                $sql18 = "UPDATE row_item SET stock = '$new_stock_shop' WHERE id='$item'";
+                $sql18 = "UPDATE row_item SET stock_stores = '$new_stock_shop' WHERE id='$item'";
                 mysqli_query($con, $sql18);
 
                 $sql = "INSERT INTO raw_grn_items (raw_item_id,qty,price,row_grn_id,user) VALUES"

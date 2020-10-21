@@ -97,8 +97,8 @@ include 'connection.php';
 
 
 
-//                                        $id1 = $id + 1000;
-                            echo "<tr><td> <center>$invoice_id</center></td><td> &nbsp" . $pay_done . " </td><td> &nbsp" . $pay_type . " </td><td>$description</td>";
+                                       $id1 = $id + 10000;
+                            echo "<tr><td> <center>$id1</center></td><td> &nbsp" . $pay_done . " </td><td> &nbsp" . $pay_type . " </td><td>$description</td>";
 
 
 

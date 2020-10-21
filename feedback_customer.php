@@ -141,12 +141,11 @@ include 'connection.php';
                                     <!-- left column -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Delivery Note Number <font color='red'> *</font></label>
-
-                                            <select class="form-control select2" style="width: 100%;" name="innum" id ="cat1" required>
+                                            <label>Invoice Number <font color='red'> *</font></label>
+                                     <select class="form-control select2" style="width: 100%;" name="innum" id ="cat1" required>
                                                 <option value=""> SELECT INVOICE </OPTION>
                                                 <?php
-                                                $sql = "select id FROM invoice where stat = '1' AND feedback='0'";
+                                                $sql = "SELECT * FROM invoice WHERE feedback is null";
                                                 $result = mysqli_query($con, $sql);
                                                 while ($row = mysqli_fetch_array($result)) {
                                                     ?>
@@ -166,7 +165,7 @@ include 'connection.php';
                                         <div class="form-group">
                                             <label>Received Date<font color='red'> *</font></label>
                                             <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                                                <input autocomplete="off" type="text" id="re_date" name="re_date" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                                                <input autocomplete="off" type="text" id="re_date" name="re_date" class="form-control datetimepicker-input" data-target="#reservationdate" required=""/>
                                                 <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div>
@@ -184,8 +183,8 @@ include 'connection.php';
                                      <div class="form-group">
                                             <label>Payment Done <font color='red'> *</font></label>
 
-                                            <select class="form-control select2" style="width: 100%;"  name="pay_done" id="type" >
-                                                <option selected="selected"  name="pay_done" id="type">SELECT PAYMENT DONE</option>
+                                            <select class="form-control select2" style="width: 100%;"  name="pay_done" id="type" required="" >
+                                                <option value=''>SELECT PAYMENT DONE</option>
                                                 <option value="YES">YES</option>
                                                 <option value="NO">NO</option>
                                              
@@ -197,8 +196,8 @@ include 'connection.php';
  <div class="form-group">
                                             <label>Payment TYPE<font color='red'> *</font></label>
 
-                                            <select class="form-control select2" style="width: 100%;" name="pay_type"  id="type">
-                                                <option selected="selected"  name="pay_type" id="type">SELECT PAYMENT TYPE</option>
+                                            <select class="form-control select2" style="width: 100%;" name="pay_type"  id="type" required="">
+                                                <option value=''>SELECT PAYMENT TYPE</option>
                                                 <option value="CASH">CASH</option>
                                                 <option value="CHEQUE">CHEQUE</option>
                                              
@@ -266,8 +265,8 @@ include 'connection.php';
                          
 
 
-//                                        $id1 = $id + 1000;
-                            echo "<tr><td> <center>$invoice_id</center></td><td> &nbsp" . $pay_done . " </td><td> &nbsp" . $pay_type . " </td><td>$description</td>";
+                               $id1 = $id + 10000;
+                            echo "<tr><td> <center>$id1</center></td><td> &nbsp" . $pay_done . " </td><td> &nbsp" . $pay_type . " </td><td>$description</td>";
                                                               
 
 

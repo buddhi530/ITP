@@ -10,50 +10,34 @@ include 'connection.php';
 ;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
- if(isset($_POST["item_name"][0])){
+
      
-      $date = $_POST["grndate"];
+      $date = $_POST["date"];
+       $amount = $_POST["amount"];
+        $method = $_POST["method"];
+         $invoice = $_POST["invoice"];
       
-      $description = strtoupper($_POST["des"]);
      
     
-       $sql = "INSERT INTO production_grn (grn_date,description,user) VALUES"
-    . " ('$date','$description','$user')";   
+       $sql = "INSERT INTO payments (invoice_id,amount,pay_type,invoice_date,user) VALUES"
+    . " ('$invoice','$amount','$method','$date','$user')";   
     if(mysqli_query($con, $sql)){
         
-        
-        
-    $grn_last_id = mysqli_insert_id($con);
-  
-     
-     
-     for($count = 0; $count < count($_POST["item_name"]); $count++)
-       {  
-                            $item = $_POST["item_name"][$count];
-                            $qty = $_POST["qty"][$count];
-                         
-               
-                            $sql25 = "SELECT stock FROM product_item WHERE id = '$item'";
+         $sql25 = "SELECT paid_amount FROM invoice WHERE id = '$invoice'";
                                $result25 = mysqli_query($con, $sql25);
                                    while ($arraySomething25 = mysqli_fetch_array($result25)) {
-                                       $stock_shop = $arraySomething25['stock'];  
+                                       $paid_amount = $arraySomething25['paid_amount'];  
                                    }
-                            $new_stock_shop = $stock_shop + $qty;
-                            
-                            $sql18 = "UPDATE product_item SET stock = '$new_stock_shop' WHERE id='$item'";
-                            mysqli_query($con, $sql18); 
-                            
-                            
-                           
-                            
-                            
-                             $sql = "INSERT INTO production_grn_items (product_item_id,qty,production_grn_id,user) VALUES"
-                            . " ('$item','$qty','$grn_last_id','$user')";   
-                           
-                           mysqli_query($con, $sql);
+        $new_amount = $paid_amount + $amount;
+
+        $sql18 = "UPDATE invoice SET paid_amount = '$new_amount' WHERE id='$invoice'";
+        mysqli_query($con, $sql18); 
+        
+    $res_last_id = mysqli_insert_id($con);
+  
+     
                             
                             
-        }                    
      
       
         
@@ -119,7 +103,7 @@ $todaynow = date("Y-m-d h:i:sA");
         }
 
   
-                     $invoice_name = "GRN (Production to Stores)";
+                     $invoice_name = "Payment Receipt";
                      
                     
            
@@ -145,11 +129,11 @@ $todaynow = date("Y-m-d h:i:sA");
 <div class="row">
             <div class="col-md-6">
                                 <?php   
-                                $grn_no = 10000 + $grn_last_id;
+                                $grn_no = 10000 + $res_last_id;
                                 ?>
                                     <table id="example3" class="table table-bordered table-hover">
                                     <?php
-                                    echo "<tr><td width='150px'>GRN No</td><td align='right'>G".$grn_no."</td></tr>";
+                                    echo "<tr><td width='150px'>Receipt No</td><td align='right'>".$grn_no."</td></tr>";
                                    
                                     ?>
                                     </table></div>
@@ -170,68 +154,14 @@ $todaynow = date("Y-m-d h:i:sA");
             echo '<table id="example1" class="table table-bordered table-hover">';
 
              
-                       echo "<tr><th><center> * </center></th><th><center> Item </center></th><th><center> Qty</center></th>
+                       echo "<tr><th><center> * </center></th><th><center> Amount </center></th><th><center> Pay Type</center></th>
                                                    </tr></tfoot></thead><tbody>";
-                        for($count = 0; $count < count($_POST["item_name"]); $count++)
-                        {  
-                            $item = $_POST["item_name"][$count];
-                          
-                            $quantity = $_POST["qty"][$count];
-                           
-                            
-
-
-                                   $cat4 = $cat4_name="";
-                                   $cat3 = $cat3_name="";
-                                   $cat2 = $cat2_name="";
-                                   $cat1 = $cat1_name="";
-                       $sql356 = "SELECT id,cat1,cat2,cat3,cat4 FROM product_item WHERE id='$item'";
-        $result356 = mysqli_query($con, $sql356);
-        while ($arraySomething78 = mysqli_fetch_array($result356)) {
-    $cat1 = $arraySomething78['cat1'];
-    $cat2 = $arraySomething78['cat2'];
-    $cat3 = $arraySomething78['cat3'];
-    $cat4 = $arraySomething78['cat4'];
-   
-
-
-
-        $sql18 = "SELECT type FROM category_one WHERE id='$cat1' ";
-        $result18 = mysqli_query($con,$sql18);
-        while ($arraySomething18 = mysqli_fetch_array($result18)) {
-        $cat1_name = $arraySomething18['type'];
-        }
-
-        $sql2 = "SELECT brand FROM category_two WHERE id='$cat2' ";
-        $result2 = mysqli_query($con, $sql2);
-        while ($arraySomething2 = mysqli_fetch_array($result2)) {
-        $cat2_name = $arraySomething2['brand'];
-        }
-
-        $sql3 = "SELECT model FROM category_three WHERE id='$cat3' ";
-        $result3 = mysqli_query($con, $sql3);
-        while ($arraySomething3 = mysqli_fetch_array($result3)) {
-        $cat3_name = $arraySomething3['model'];
-        }
-
-
-        $sql4 = "SELECT extra FROM category_four WHERE id='$cat4' ";
-        $result4 = mysqli_query($con, $sql4);
-        while ($arraySomething4 = mysqli_fetch_array($result4)) {
-        $cat4_name = $arraySomething4['extra'];
-        }
-    
-    
-    $item_name = $cat1_name." ".$cat2_name." ".$cat3_name." ".$cat4_name;
+                       
 
                          
                          
-                         echo "<tr bgcolor='#80D8AD'><td width='1%'> </td><td>".$cat1_name." ".$cat2_name." ".$cat3_name." ".$cat4_name." </td><td align='right'>".$quantity."</td>";
+                         echo "<tr bgcolor='#80D8AD'><td width='1%'> </td><td>".number_format($amount,2)." </td><td align='right'>".$method."</td>";
 
-                        }
-                        }                
-                        
-                            
                    
                            
                     echo "</table>"   ;
@@ -267,7 +197,7 @@ $todaynow = date("Y-m-d h:i:sA");
                                                  echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
                                                  echo "<tr><td colspan='2' align='center'>................................&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>................................</td></tr>";
                                                  echo "<tr><td colspan='2' align='center'></td><td colspan='2' align='center'></td></tr>";
-                                                echo "<tr><td colspan='2' align='center'>SUPERVISOR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>MANAGER-STORES</td></tr>";
+                                                echo "<tr><td colspan='2' align='center'>CUSTOMER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td colspan='2' align='center'>CASHIER</td></tr>";
 
                                                ?>
                                            </table>     
@@ -314,10 +244,10 @@ $todaynow = date("Y-m-d h:i:sA");
     }
     
     
-    
  }
  
  
-}
+
+
     ?>
  

@@ -38,7 +38,7 @@ if($position == 1)
     
   </nav><aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="index.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
@@ -334,7 +334,7 @@ if($position == 1)
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-               Delivery Notes
+               Invoice
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">2</span>
               </p>
@@ -344,13 +344,38 @@ if($position == 1)
               <li class="nav-item">
                   <a href="sale_invoice.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>New Delivey Note</p>
+                  <p>New  Invoice</p>
                 </a>
               </li>
               
               
             </ul>
           </li>
+          
+          
+          <li class="nav-header">PAYMENTS</li>
+           
+               <li class="nav-item has-treeview">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+               Payment
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                  <a href="payment.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>New  Payment</p>
+                </a>
+              </li>
+              
+              
+            </ul>
+          </li> 
         
            
               
@@ -384,14 +409,7 @@ if($position == 1)
 
         
         
-          <li class="nav-header">ALL REPORTS</li>
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Documentation</p>
-            </a>
-          </li>
-         
+        
          
           
          

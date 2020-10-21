@@ -6,12 +6,12 @@ include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dnic = $_POST['dnic'];
-    $dname = $_POST['dname'];
+    $dname = strtoupper($_POST['dname']);
     $daddress = $_POST['daddress'];
      $dphone= $_POST['dphone'];
     $dlicence = $_POST['dlicence'];
     $rnic = $_POST['rnic'];
-    $rname = $_POST['rname'];
+    $rname = strtoupper($_POST['rname']);
     $raddress = $_POST['raddress'];
     $rphone = $_POST['rphone'];
     $rlicence = $_POST['rlicence'];
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                            echo ' <div class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h5><i class="icon fas fa-check"></i> Success !</h5>
-                  Category-01 has been Registered Successfully !
+                  Driver/Rep has been Registered Successfully !
                 </div>';
                            
                        }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo ' <div class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h5><i class="icon fas fa-check"></i> Failed !</h5>
-                   Category-01 Registration has been Failed !
+                   Driver/Rep  Registration has been Failed !
                 </div>';
                             
                         }

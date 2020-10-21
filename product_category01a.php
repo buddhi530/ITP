@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
 {
     
     
-   $type =$_POST['type'];
+   $type = strtoupper($_POST['type']);
    
    
        $sql="SELECT type FROM category_one WHERE type='$type'";

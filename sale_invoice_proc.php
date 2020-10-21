@@ -1,4 +1,8 @@
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<?php
+include 'header.php';
+include 'connection.php';
+?>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AdminLTE 3 | General Form Elements</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,15 +43,15 @@
     window.onload = function() { window.print(); }
     </script>
             <?php
-include 'connection.php';
 
-$company = 1;
-$user = 1;
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
  if(isset($_POST["item_name"][0])){
      $customer = $_POST['customer'];
      $driver = $_POST['driver'];
+     $company = 1;
      $vat = $_POST['invoice_type'];
      if(!$driver){
          $driver = 0;
@@ -144,9 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                }
                                
                            }
+                           
+                                       
         }                    
      
         if($avaiability=="YES"){
+             
+            
      
             if($price_low=="NO"){
      
@@ -267,17 +275,28 @@ $todaynow = date("Y-m-d h:i:sA");
                      $type_s = $_POST['sale_type'];
                      
                      if($type_s=="CREDIT-SALE")
-                     $invoice_name = "DELIVERY NOTE - CREDIT";
+                     $invoice_name = "INVOICE - CREDIT";
                      if($type_s=="CASH-SALE")
-                     $invoice_name = "DELIVERY NOTE - CASH";
+                     $invoice_name = "INVOICE - CASH";
                      
-                    
+//                    echo $net_amount ."<br>";
+//                     echo $type_s ."<br>";
+//                      echo $customer ."<br>";
+//                       echo $tax_percentage_id ."<br>";
+//                        echo $driver ."<br>";
+//                       echo $user ."<br>";
+//          
+//                          echo $porter ."<br>";
+//                           echo $invoicedate ."<br>";
+                           
+                         
+                      
                   
                      
-                     $sql7895 = "INSERT INTO invoice (net_amount,type,customer_id,invoice_type,tax_percentage_id,driver_id,porter_id,vehicle_id,date,user) VALUES"
-                            . " ('$net_amount','$type_s','$customer','$vat','$tax_percentage_id','$driver','$porter','$vehicle','$invoicedate','$user')";
+                     $sql7895 = "INSERT INTO invoice (invoice_amount,net_amount,type,customer_id,invoice_type,tax_percentage_id,driver_id,vehicle_id,date,user,porter_id) VALUES"
+                            . " ('$net_amount','$net_amount','$type_s','$customer','$vat','$tax_percentage_id','$driver','$vehicle','$invoicedate','$user','$porter')";
                      mysqli_query($con, $sql7895);
-                     
+                     echo mysqli_error($con);
                      
                      $delivery_last_id = mysqli_insert_id($con);
                      $delivery_last_no = 10000 + $delivery_last_id;
@@ -322,12 +341,14 @@ $todaynow = date("Y-m-d h:i:sA");
                                  
                                      <table class="table table-bordered">
                                      <?php
-                                     echo "<tr><td width='150px'>Order No</td><td align='right'>D".$delivery_last_no."</td></tr>";
+                                     if($vat_no==0)
+                                         $vat_no1 ="";
+                                     echo "<tr><td width='150px'>Invoice No</td><td align='right'>".$delivery_last_no."</td></tr>";
                                      echo "<tr><td>Date </td><td align='right'>".$invoicedate."</td></tr>";
                                      if($vat=="NON-VAT")
                                      echo "<tr><td>Sales Type </td><td align='right'>".$type_s."</td></tr>";
                                      if($vat=="VAT")
-                                     echo "<tr><td>Customer VAT # </td><td align='right'>".$vat_no."</td></tr>";
+                                     echo "<tr><td>Customer VAT # </td><td align='right'>".$vat_no1."</td></tr>";
                                      ?>
                                      </table></div>
 </div>
@@ -352,12 +373,13 @@ $todaynow = date("Y-m-d h:i:sA");
                            
                           
                                  
-                          $sql74 = "SELECT min_sale_price,cash_price,credit_price FROM product_item WHERE id = '$item'";
+                          $sql74 = "SELECT stock,min_sale_price,cash_price,credit_price FROM product_item WHERE id = '$item'";
                                $result74 = mysqli_query($con, $sql74);
                                    while ($arraySomething74 = mysqli_fetch_array($result74)) {
                                        $min_sale_price = $arraySomething74['min_sale_price'];
                                        $cash_price = $arraySomething74['cash_price'];  
                                        $credit_price = $arraySomething74['credit_price'];  
+                                       $stock_shop =  $arraySomething74['stock'];  
                                    }         
                         
                             // DISCOUNT CAL - START
@@ -423,7 +445,15 @@ $todaynow = date("Y-m-d h:i:sA");
                             // DATA INSERTIION TO INVOICE_ITEMS TABLE - START
                             $query = "INSERT INTO invoice_items (item_id,customer_id,item_name,invoice_id,unit_price,discount_per_item,min_sale_price,cash_price,credit_price,quantity,user) VALUES "
                                     . "('$item','$customer','$item_name',' $delivery_last_id','$item_charge','$discount_per_item','$min_sale_price','$cash_price','$credit_price','$quantity','$user')";
-                            mysqli_query($con, $query);
+                            if(mysqli_query($con, $query)){
+                                
+                              
+                           $new_stock_shop = $stock_shop - $quantity;
+            
+                           $sql18 = "UPDATE product_item SET stock = '$new_stock_shop' WHERE id='$item'";
+                            mysqli_query($con, $sql18); 
+                         
+                            }
                          // DATA INSERTIION TO INVOICE_ITEMS TABLE - END
                            
                             //RETRIEVE RENT CHARGE DATA - END

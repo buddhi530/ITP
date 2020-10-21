@@ -8,7 +8,7 @@ include 'connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-    $model = $_POST['model'];
+    $model = strtoupper($_POST['model']);
 
 
     $sql = "SELECT model FROM category_three WHERE model='$model'";

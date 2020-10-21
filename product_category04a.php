@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD']== 'POST')
 {
     
     
-   $extra =$_POST['extra'];
+   $extra =strtoupper($_POST['extra']);
    
    
    $sql = "insert into category_four(extra,user) values ('$extra','$user')";

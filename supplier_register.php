@@ -170,11 +170,11 @@ include 'connection.php';
                                     <div class="col-md-6">
                                     
                                         <div class="form-group">
-                                            <label for="examplesname">Supplier Name</label>
+                                            <label for="examplesname">Supplier Name<font color='red'> *</font></label>
                                             <input type="text" class="form-control" name="companyname"  id="companyname" placeholder="Enter Supplier Name" autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplesphone">Supplier Phone</label>
+                                            <label for="examplesphone">Supplier Phone<font color='red'> *</font></label>
                                             <input type="text" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Supplier Phone" autocomplete="off" >
                                         </div>
                                         <div class="form-group">
@@ -225,9 +225,9 @@ include 'connection.php';
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Salutation</label>
-                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" >
-                                                <option selected="salutation" >Contact Person Salutation</option>
+                                            <label>Salutation<font color='red'> *</font></label>
+                                            <select class="form-control select2" style="width: 100%;" name="salutation" id="salutation" required="">
+                                                <option value='' >Contact Person Salutation</option>
                                       <option value="Mr">Mr</option>
                                                 <option value="Mrs">Mrs</option>
                                                 <option value="Miss">Miss</option>
@@ -239,12 +239,12 @@ include 'connection.php';
 
 
                                         <div class="form-group">
-                                            <label for="examplecname">Contact Person Name</label>
-                                            <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter Contact Person Name" autocomplete="off">
+                                            <label for="examplecname">Contact Person Name<font color='red'> *</font></label>
+                                            <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter Contact Person Name" autocomplete="off" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="examplecphone">Contact Person Mobile</label>
-                                            <input type="text" class="form-control" id="cmobile" name="cmobile"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Contact Person Mobile" autocomplete="off">
+                                            <label for="examplecphone">Contact Person Mobile<font color='red'> *</font></label>
+                                            <input type="text" class="form-control" id="cmobile" name="cmobile"  pattern="[0-9]{10}" title="Invalid Format.Contact No consists of 10 Digits" placeholder="Enter Contact Person Mobile" autocomplete="off" required="">
                                         </div>
                                         <!--                                        <div class="form-group">
                                                                                     <label for="exampleccountry">Contact Person Country</label>
